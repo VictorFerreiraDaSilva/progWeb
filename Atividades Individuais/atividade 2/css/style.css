@@ -1,0 +1,28 @@
+*{
+    margin:0;
+}
+
+body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header{
+    background-color: cyan;
+    
+}
+
+#container{
+    background-color: tomato;
+    margin: auto 0;
+}
+
+footer{
+    margin-top: auto;
+    background-color:chartreuse;
+    height: 3vh;
+}
+footer p{
+    color: purple;
+}
