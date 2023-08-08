@@ -1,5 +1,6 @@
 *{
     margin:0;
+    font-family: 'Roboto', sans-serif;
 }
 
 body{
@@ -9,19 +10,43 @@ body{
 }
 
 header{
-    background-color: cyan;
+    background: beige;
+    padding: 16px;  
+    text-align: center;    
+    border-bottom: rgb(199, 199, 106) solid 1px;
+}
+header h1{
     
+}
+
+nav{
+    background: cyan;
+    padding: 12px;
+    text-align: center;
+    font-weight: 300;
+}
+
+nav a{
+    padding-left: 8px;
+    padding-right: 8px;    
+    border-right: rgb(199, 199, 106) solid 1px;
+    text-decoration: none;
+    font-size: 16px;
+    color: black;
 }
 
 #container{
     background-color: tomato;
-    margin: auto 0;
+    margin: auto 15%;
+    padding: 16px;
+    flex: 1 1 auto;
 }
 
 footer{
     margin-top: auto;
-    background-color:chartreuse;
-    height: 3vh;
+    padding: 1rem;
+    background-color: #efefef;
+    text-align: center;
 }
 footer p{
     color: purple;
