@@ -4,13 +4,15 @@
 }
 
 body{
+    background: white;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
 header{
-    background: beige;
+    color: white;
+    background: #272343;
     padding: 16px;  
     text-align: center;    
     border-bottom: rgb(199, 199, 106) solid 1px;
@@ -20,7 +22,7 @@ header h1{
 }
 
 nav{
-    background: cyan;
+    background: #e3f6f5;
     padding: 12px;
     text-align: center;
     font-weight: 300;
@@ -29,25 +31,40 @@ nav{
 nav a{
     padding-left: 8px;
     padding-right: 8px;    
-    border-right: rgb(199, 199, 106) solid 1px;
+    border-right: #82b1ae solid 1px;
     text-decoration: none;
     font-size: 16px;
     color: black;
 }
 
 #container{
-    background-color: tomato;
+    background-color: #ffffff;
     margin: auto 15%;
     padding: 16px;
     flex: 1 1 auto;
+    
 }
-
+#container img{
+    height: 45vh;      
+    display: block;
+    margin:auto;
+    margin-top: 3vh;
+}
+#container h2{
+    text-align: center;
+}
+#container p{
+    margin-right: 5%;
+    margin-left: 5%;
+    font-weight: 300;
+    text-align: center;
+}
 footer{
     margin-top: auto;
     padding: 1rem;
-    background-color: #efefef;
+    background-color: #bae8e8;
     text-align: center;
 }
 footer p{
-    color: purple;
+    color: #557976;
 }
