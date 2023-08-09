@@ -15,10 +15,7 @@ header{
     background: #272343;
     padding: 16px;  
     text-align: center;    
-    border-bottom: rgb(199, 199, 106) solid 1px;
-}
-header h1{
-    
+    border-bottom: #8ef6e4 solid 1px;
 }
 
 nav{
@@ -42,7 +39,7 @@ nav a{
     margin: auto 15%;
     padding: 16px;
     flex: 1 1 auto;
-    
+    text-align: center;
 }
 #container img{
     height: 45vh;      
@@ -67,4 +64,10 @@ footer{
 }
 footer p{
     color: #557976;
+}
+#topicos{
+    text-align: left;
+}
+#topicos h4{
+    font-size: 18px;
 }
