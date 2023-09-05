@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Press+Start+2P&family=Space+Grotesk&display=swap');
+
+*{
+    margin:0; 
+}
+
+/*FONTES*/
+
+.bebasNeue{
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+.pressStart{
+    font-family: 'Press Start 2P', cursive;
+}
+.spaceGrotesk{
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+/*CORES
+6C496F - roxo
+DBC630 - amarelo
+5AB72C - verde
+70D1DB - azul
+BC3D31 - vermelho
+DB86B4 - rosa
+
+1A1A2E - background color
+16213E - cor da caixa
+0F3460 - highlight cor da caixa
+*/
+
+.roxo{
+    color: #6C496F;
+}
+.amarelo{
+    color: #DBC630;
+}
+.verde{
+    color: #5AB72C;
+}
+.rosa{
+    color: #DB86B4;
+}
+.azul{
+    color: #70D1DB;
+}
+.vermelho{
+    color: #BC3D31;
+}
+
+.tituloTetris{
+    font-size: 80px;
+}
+
+/*Gerais*/
+
+#container{
+    background-color: #ffffff;
+    margin: auto 15%;
+    padding: 16px;
+    flex: 1 1 auto;
+    text-align: center;
+}
