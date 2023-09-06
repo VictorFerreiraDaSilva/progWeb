@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Press+Start+2P&family=Space+Grotesk&display=swap');
 
+:root{
+    --background-color: #1A1A2E;
+    --box-color: #16213E;
+    --highlight-box: #0F3460;
+}
+
 *{
     margin:0; 
 }
@@ -25,9 +31,6 @@ DBC630 - amarelo
 BC3D31 - vermelho
 DB86B4 - rosa
 
-1A1A2E - background color
-16213E - cor da caixa
-0F3460 - highlight cor da caixa
 */
 
 .roxo{
@@ -56,9 +59,70 @@ DB86B4 - rosa
 /*Gerais*/
 
 #container{
-    background-color: #ffffff;
-    margin: auto 15%;
+    margin: 10% 5% 0 5%;
+    /*cima, direita, baixo, esquerda */
     padding: 16px;
     flex: 1 1 auto;
     text-align: center;
+}
+
+body{
+    
+    background-color: var(--background-color);
+}
+
+.caixa_start{
+    border-style: solid;
+    border-color: var(--highlight-box);
+    border-width: 14px;
+
+    -moz-box-shadow: 0 0 5px 5px var(--highlight-box);
+    -webkit-box-shadow: 0 0 5px 5px var(--highlight-box);
+    box-shadow: 0 0 30px 30px var(--highlight-box);
+    /*https://www.css3.info/preview/box-shadow/*/
+
+    border-radius: 30px;
+
+    background-color: var(--box-color);
+    padding: 2% 2% 3px 2%;
+    width: 20%;
+    height: 20%;
+    /*cima, direita, baixo, esquerda */
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+
+    align-items: center;
+    
+}
+
+.texto{    
+    padding-top: 20px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 45px;
+    font-weight: 300;
+    color: white;
+
+}
+.input{
+    
+    background-color: white;
+    width: 200px;
+    height: 40px;
+
+    box-sizing: border-box;
+    border-radius: 30px;
+}
+
+
+.register{
+    padding-top: 10%;
+    align-items: flex-end;
+
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 25px;
+    font-weight: 150;
+    color: #70D1DB;
 }
