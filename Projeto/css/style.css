@@ -175,6 +175,7 @@ body{
 .titulo{
     display: flex;
     align-content: center;
+    justify-content: center;
     margin: auto;
 
     font-family: 'Press Start 2P', cursive;
