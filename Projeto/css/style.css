@@ -79,6 +79,7 @@ body {
     var(--background-color),
     var(--highlight-box)
   );
+  background-attachment: fixed;
 }
 
 .caixa_start {
@@ -189,6 +190,11 @@ body {
   font-size: 50px;
   position: relative;
   left: -150px;
+}
+
+.recuoNormal {
+  /*pro titulo funfar certo no index*/
+  left: 0;
 }
 
 .tela_jogo {
@@ -516,4 +522,48 @@ a {
 
 .tamanho:hover {
   color: #5ab72c;
+}
+
+.ranking_global {
+  font-family: 'Press Start 2P', cursive;
+  display: flex;
+  flex-direction: row;
+  margin: 0 5% 0 5%;
+}
+
+.rank {
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+  padding: 32px;
+  gap: 30px;
+  background-color: var(--box-color);
+  border-radius: 30px;
+  font-size: 36px;
+  color: #d9d9d9;
+  width: 100%;
+}
+
+.rank_column {
+  display: flex;
+  flex-direction: column;
+
+  flex: 1 1 0px;
+  text-align: center;
+}
+
+.rank_column p {
+  margin-bottom: 16px;
+}
+
+.t28px {
+  font-size: 28px;
+}
+
+.espacamento10px {
+  margin: 4px 0 8px 0;
+}
+
+.t36px {
+  font-size: 36px;
 }
