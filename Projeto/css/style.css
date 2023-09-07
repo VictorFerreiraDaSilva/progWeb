@@ -567,3 +567,7 @@ a {
 .t36px {
   font-size: 36px;
 }
+.blur {
+  -webkit-filter: url(#svg-blur);
+  filter: url(#svg-blur);
+}
