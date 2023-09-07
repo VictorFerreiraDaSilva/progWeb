@@ -286,3 +286,157 @@ footer{
     background-color: #0F3460;
 
 }
+
+/*PEDRO*/
+.caixa_register{
+    border-style: solid;
+    border-color: var(--highlight-box);
+    border-width: 1px;
+
+
+    border-radius: 30px;
+
+    background-color: var(--box-color);
+    padding: 5% 2% 10% 2%;
+    width: 50%;
+    height: 50%;
+    /*cima, direita, baixo, esquerda */
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+    margin-top: 3%;
+
+    align-items: center;
+}
+
+.register_titulo{
+    font-family: 'Press Start 2P', cursive;
+    font-size: 60px;
+}
+
+/* PEDRO */
+#container_register{
+    margin: 1% 5% 0 5%;
+    /*cima, direita, baixo, esquerda */
+    padding: 5%;
+    flex: 1 1 auto;
+    margin: auto;
+    text-align: center;
+}
+
+/* PEDRO */
+.input_nao_atualizar{
+    border: 2px var(--background-color);
+    background-color: #BC3D31;
+
+    box-sizing: border-box;
+    border-radius: 15px;
+}
+
+/* PEDRO */
+.botao_submeter{
+    text-decoration: none;
+    color: var(--box-color);
+    font-family: 'Press Start 2P', cursive;
+    font-size: 15px;
+    background-color: #5AB72C;
+
+    padding: 2% 3% 2% 3%;
+    margin-top: 10%;
+    border-radius: 20px;
+}
+
+.botao_submeter:hover{
+    color: #D9D9D9;
+}
+
+/* PEDRO */
+.texto_titulo_register{
+    color: #D9D9D9;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size:xx-large;
+
+    display: flex;
+    flex-direction: row;
+    gap: 200px;
+}
+
+/* PEDRO */
+.texto_registro{    
+    padding-top: 20px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 80px;
+    font-weight: 300;
+    color: white;
+
+}
+
+.registro_login{
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 28px;
+    color: #D9D9D9;
+
+    display: flex;
+    flex-direction: row;
+    gap: 200px;
+
+}
+
+/* PEDRO */
+.input_register{
+    border: 2px var(--background-color);
+    background-color: #D9D9D9;
+
+    box-sizing: border-box;
+    border-radius: 15px;
+    margin: auto;
+}
+
+.atualizar_titulo{
+    font-family: 'Press Start 2P', cursive;
+    font-size: 60px;
+}
+
+/* PEDRO */
+#input_nome{
+    width: 600px;
+    height: 40px;
+}
+
+/* PEDRO */
+#input_data{
+    width: 325px;
+    height: 40px; 
+}
+
+/* PEDRO */
+#input_cpf{
+    width: 275px;
+    height: 40px;
+}
+
+/* PEDRO */
+#input_telefone{
+    width: 275px;
+    height: 40px;
+}
+
+/* PEDRO */
+#input_email{
+    width: 325px;
+    height: 40px;
+}
+
+/* PEDRO */
+#input_usuario{
+    width: 300px;
+    height: 40px;
+}
+
+/* PEDRO */
+#input_senha{
+    width: 300px;
+    height: 40px;
+}
