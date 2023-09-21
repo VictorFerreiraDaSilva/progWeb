@@ -3,6 +3,13 @@
   <head>
     <title>Jogo da Velha</title>
     <meta charset="utf-8" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <header>
@@ -10,15 +17,24 @@
     </header>
     <div id="container">
       <div class="jogo">
-        <div class="celula" id="00">X</div>
-        <div class="celula" id="00">X</div>
-        <div class="celula" id="00">X</div>
-        <div class="celula" id="00">X</div>
-        <div class="celula" id="00">X</div>
-        <div class="celula" id="00">X</div>
-        <div class="celula" id="00">X</div>
-        <div class="celula" id="00">X</div>
-        <div class="celula" id="00">X</div>
+        <div class="tabuleiro">
+          <div class="celula" id="00"><p class="X">X</p></div>
+          <div class="celula" id="00">O</div>
+          <div class="celula" id="00">X</div>
+          <div class="celula" id="00">O</div>
+          <div class="celula" id="00">X</div>
+          <div class="celula" id="00">O</div>
+          <div class="celula" id="00">X</div>
+          <div class="celula" id="00">O</div>
+          <div class="celula" id="00">X</div>
+        </div>
+        <div class="pontuacao">
+          <h1 class="vez">Vez de: <span class="jogadorVez">XXXXXX</span></h1>
+          <h1 class="ganhador">
+            <span class="jogadorGanhou">YYYYYY</span> Ganhou!!!
+          </h1>
+          <p class="novoJogo">Novo Jogo</p>
+        </div>
       </div>
     </div>
     <footer>

@@ -1,0 +1,115 @@
+* {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  background: white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  color: white;
+  background: #272343;
+  padding: 16px;
+  text-align: center;
+  border-bottom: #8ef6e4 solid 1px;
+}
+
+#container {
+  background-color: #ffffff;
+  margin: auto 15%;
+  padding: 16px;
+  flex: 1 1 auto;
+  text-align: center;
+}
+
+footer {
+  margin-top: auto;
+  padding: 1rem;
+  background-color: #bae8e8;
+  text-align: center;
+}
+footer p {
+  color: #557976;
+}
+
+.jogo {
+  display: flex;
+  flex-direction: row;
+  margin-top: 3vh;
+}
+
+.tabuleiro {
+  /*display: flex;
+  flex-direction: row;
+  padding: 2%;
+  gap: 30px;*/
+  font-size: 16px;
+  color: black;
+  width: 50%;
+  height: 65vh;
+
+  background-color: black;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.celula {
+  background-color: white;
+  padding-top: 10%;
+  font-size: 500%;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.X {
+  text-decoration: line-through;
+}
+
+.pontuacao {
+  width: 50%;
+  height: 65vh;
+  padding: 8px;
+}
+
+.vez {
+  margin-top: 5vh;
+  height: 10vh;
+}
+
+.jogadorVez {
+  color: #00e7e7;
+}
+
+.ganhador {
+  margin-top: 10vh;
+  height: 10vh;
+}
+
+.jogadorGanhou {
+  color: #cc00b1;
+}
+
+.novoJogo {
+  font-weight: 400;
+  padding: 4px;
+  border: #272343 solid 1px;
+  border-radius: 8px;
+  width: 30%;
+  margin: auto;
+  margin-top: 20vh;
+  background: #272343;
+  color: white;
+  cursor: pointer;
+}
+
+.novoJogo:hover {
+  background-color: #bae8e8;
+  font-weight: 500;
+  color: #272343;
+  transition: 0.15s;
+}
