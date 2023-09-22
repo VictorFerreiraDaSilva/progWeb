@@ -66,7 +66,7 @@ footer p {
   cursor: pointer;
 }
 
-.X {
+.linhaCortando {
   text-decoration: line-through;
 }
 
@@ -81,17 +81,9 @@ footer p {
   height: 10vh;
 }
 
-.jogadorVez {
-  color: #00e7e7;
-}
-
 .ganhador {
   margin-top: 10vh;
   height: 10vh;
-}
-
-.jogadorGanhou {
-  color: #cc00b1;
 }
 
 .novoJogo {
@@ -112,4 +104,17 @@ footer p {
   font-weight: 500;
   color: #272343;
   transition: 0.15s;
+}
+
+.blur {
+  -webkit-filter: url(#svg-blur);
+  filter: url(#svg-blur);
+}
+
+.jogador1 {
+  color: #cc00b1;
+}
+
+.jogador2 {
+  color: #00e7e7;
 }

@@ -10,32 +10,41 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap"
       rel="stylesheet"
     />
+    <script type="text/javascript" src="js/script.js"></script>
   </head>
   <body>
     <header>
       <h1>Jogo da Velha</h1>
     </header>
-    <div id="container">
-      <div class="jogo">
-        <div class="tabuleiro">
-          <div class="celula" id="00"><p class="X">X</p></div>
-          <div class="celula" id="00">O</div>
-          <div class="celula" id="00">X</div>
-          <div class="celula" id="00">O</div>
-          <div class="celula" id="00">X</div>
-          <div class="celula" id="00">O</div>
-          <div class="celula" id="00">X</div>
-          <div class="celula" id="00">O</div>
-          <div class="celula" id="00">X</div>
-        </div>
-        <div class="pontuacao">
-          <h1 class="vez">Vez de: <span class="jogadorVez">XXXXXX</span></h1>
-          <h1 class="ganhador">
-            <span class="jogadorGanhou">YYYYYY</span> Ganhou!!!
-          </h1>
-          <p class="novoJogo">Novo Jogo</p>
+    <div id="blur">
+      <div id="container">
+        <div class="jogo">
+          <div class="tabuleiro">
+            <div class="celula" id="00" onclick="colocarMarcador(0,0)">⠀</div>
+            <div class="celula" id="01" onclick="colocarMarcador(0,1)">⠀</div>
+            <div class="celula" id="02" onclick="colocarMarcador(0,2)">⠀</div>
+            <div class="celula" id="10" onclick="colocarMarcador(1,0)">⠀</div>
+            <div class="celula" id="11" onclick="colocarMarcador(1,1)">⠀</div>
+            <div class="celula" id="12" onclick="colocarMarcador(1,2)">⠀</div>
+            <div class="celula" id="20" onclick="colocarMarcador(2,0)">⠀</div>
+            <div class="celula" id="21" onclick="colocarMarcador(2,1)">⠀</div>
+            <div class="celula" id="22" onclick="colocarMarcador(2,2)">⠀</div>
+          </div>
+          <div class="pontuacao">
+            <h1 class="vez">Vez de: <span id="jogadorVez">XXXXXX</span></h1>
+            <h1 class="ganhador">
+              <span id="jogadorGanhou">YYYYYY</span> Ganhou!!!
+            </h1>
+            <p class="novoJogo" onclick="novoJogo()">Novo Jogo</p>
+          </div>
         </div>
       </div>
+      <svg id="svg-filter" style="width: 0; height: 0">
+        <!-- PEGAMO DO SEGUINTE LINK: https://jsfiddle.net/rijokpaul/1k5x6dgm/ , só dicionar a classe blur que fica borrado -->
+        <filter id="svg-blur">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="4"></feGaussianBlur>
+        </filter>
+      </svg>
     </div>
     <footer>
       <p>© 2023 Victor Ferreira da Silva</p>
