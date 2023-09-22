@@ -31,16 +31,18 @@
             <div class="celula" id="22" onclick="colocarMarcador(2,2)">⠀</div>
           </div>
           <div class="pontuacao">
-            <h1 class="vez">Vez de: <span id="jogadorVez">XXXXXX</span></h1>
-            <h1 class="ganhador">
-              <span id="jogadorGanhou">YYYYYY</span> Ganhou!!!
-            </h1>
+            <h1 class="vez">Vez de: <span id="jogadorVez"></span></h1>
+            <h1 class="ganhador"><span id="jogadorGanhou"></span> Ganhou!!!</h1>
+            <h2 class="vitorias">
+              Vitórias de <span class="jogador1">Kleber</span>: 0 <br />
+              Vitórias de <span class="jogador2">Sadio</span>: 0
+            </h2>
             <p class="novoJogo" onclick="novoJogo()">Novo Jogo</p>
           </div>
         </div>
       </div>
       <svg id="svg-filter" style="width: 0; height: 0">
-        <!-- PEGAMO DO SEGUINTE LINK: https://jsfiddle.net/rijokpaul/1k5x6dgm/ , só dicionar a classe blur que fica borrado -->
+        <!-- PEGUEI DO SEGUINTE LINK: https://jsfiddle.net/rijokpaul/1k5x6dgm/ , só dicionar a classe blur que fica borrado -->
         <filter id="svg-blur">
           <feGaussianBlur in="SourceGraphic" stdDeviation="4"></feGaussianBlur>
         </filter>

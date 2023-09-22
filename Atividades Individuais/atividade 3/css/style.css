@@ -79,9 +79,16 @@ footer p {
 .vez {
   margin-top: 5vh;
   height: 10vh;
+  visibility: hidden;
 }
 
 .ganhador {
+  margin-top: 10vh;
+  height: 10vh;
+  visibility: hidden;
+}
+
+.vitorias {
   margin-top: 10vh;
   height: 10vh;
 }
@@ -93,7 +100,7 @@ footer p {
   border-radius: 8px;
   width: 30%;
   margin: auto;
-  margin-top: 20vh;
+  margin-top: 2vh;
   background: #272343;
   color: white;
   cursor: pointer;

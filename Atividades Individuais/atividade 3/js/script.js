@@ -6,26 +6,39 @@ let jogo = [
   [caractereInvisivel, caractereInvisivel, caractereInvisivel],
 ];
 let X = true;
+let fim = false;
+let jogadas = 0;
+let j1 = 'Kleber';
+let j2 = 'Sadio';
+let vj1 = 0;
+let vj2 = 0;
 //colocarMarcador();
 //atualizaJogo();
 
 function novoJogo() {
   limparGrid();
   document.getElementById('jogadorVez').innerHTML = '';
+  document.getElementsByClassName('vez')[0].style.visibility = 'visible';
   document.getElementById('jogadorGanhou').innerHTML = '';
   document.getElementsByClassName('ganhador')[0].style.visibility = 'hidden';
-  document.getElementById('blur').classList.add('blur');
+  atualizaJogo();
+  fim = false;
+  jogadas = 0;
 }
 
 function limparGrid() {
   for (var i = 0; i < 3; i++) {
     for (var j = 0; j < 3; j++) {
       jogo[i][j] = caractereInvisivel;
+      let celula = i.toString() + j.toString();
+      document.getElementById(celula).classList.remove('linhaCortando');
     }
   }
 }
 
 function atualizaJogo() {
+  document.getElementById('jogadorVez').innerHTML = X ? j1 : j2;
+  document.getElementById('jogadorVez').style.color = X ? '#cc00b1' : '#00e7e7';
   for (var i = 0; i < 3; i++) {
     for (var j = 0; j < 3; j++) {
       let celula = i.toString() + j.toString();
@@ -35,14 +48,22 @@ function atualizaJogo() {
 }
 
 function verificarVitoria() {
-  let ganhou = false;
   for (var i = 0; i < 3; i++) {
     if (
       jogo[i][0] != caractereInvisivel &&
       jogo[i][0] === jogo[i][1] &&
       jogo[i][0] === jogo[i][2]
     ) {
-      ganhou = true;
+      document
+        .getElementById(i.toString() + '0')
+        .classList.add('linhaCortando');
+      document
+        .getElementById(i.toString() + '1')
+        .classList.add('linhaCortando');
+      document
+        .getElementById(i.toString() + '2')
+        .classList.add('linhaCortando');
+      vitoria();
       break;
     }
     if (
@@ -50,7 +71,16 @@ function verificarVitoria() {
       jogo[0][i] === jogo[1][i] &&
       jogo[0][i] === jogo[2][i]
     ) {
-      ganhou = true;
+      document
+        .getElementById('0' + i.toString())
+        .classList.add('linhaCortando');
+      document
+        .getElementById('1' + i.toString())
+        .classList.add('linhaCortando');
+      document
+        .getElementById('2' + i.toString())
+        .classList.add('linhaCortando');
+      vitoria();
       break;
     }
   }
@@ -59,28 +89,56 @@ function verificarVitoria() {
     jogo[0][0] === jogo[1][1] &&
     jogo[0][0] === jogo[2][2]
   ) {
-    ganhou = true;
+    document.getElementById('00').classList.add('linhaCortando');
+    document.getElementById('11').classList.add('linhaCortando');
+    document.getElementById('22').classList.add('linhaCortando');
+    vitoria();
+    return;
   }
   if (
     jogo[0][2] != caractereInvisivel &&
     jogo[0][2] === jogo[1][1] &&
     jogo[0][2] === jogo[2][0]
   ) {
-    ganhou = true;
+    document.getElementById('02').classList.add('linhaCortando');
+    document.getElementById('11').classList.add('linhaCortando');
+    document.getElementById('20').classList.add('linhaCortando');
+    vitoria();
+    return;
   }
+  if (jogadas >= 9) {
+    empate();
+  }
+}
 
-  if (ganhou) {
-    console.log('Eba');
-  }
+function empate() {
+  fim = true;
+  document.getElementsByClassName('ganhador')[0].style.visibility = 'hidden';
+}
+
+function vitoria() {
+  fim = true;
+  document.getElementById('jogadorGanhou').innerHTML = X ? j1 : j2;
+  document.getElementById('jogadorGanhou').style.color = X
+    ? '#cc00b1'
+    : '#00e7e7';
+  X ? vj1++ : vj2++;
+  document.getElementsByClassName('ganhador')[0].style.visibility = 'visible';
 }
 
 function colocarMarcador(i, j) {
   if (i === undefined || j === undefined) return;
+  if (jogadas >= 9) {
+    empate();
+    return;
+  }
+  if (fim === true) return;
   if (jogo[i][j] != caractereInvisivel) {
     return;
   } else {
     let caractere = X ? 'X' : 'O';
     jogo[i][j] = caractere;
+    jogadas++;
     verificarVitoria();
     X = !X;
     atualizaJogo();
