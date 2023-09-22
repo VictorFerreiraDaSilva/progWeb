@@ -16,37 +16,42 @@
     <header>
       <h1>Jogo da Velha</h1>
     </header>
-    <div id="blur">
-      <div id="container">
-        <div class="jogo">
-          <div class="tabuleiro">
-            <div class="celula" id="00" onclick="colocarMarcador(0,0)">⠀</div>
-            <div class="celula" id="01" onclick="colocarMarcador(0,1)">⠀</div>
-            <div class="celula" id="02" onclick="colocarMarcador(0,2)">⠀</div>
-            <div class="celula" id="10" onclick="colocarMarcador(1,0)">⠀</div>
-            <div class="celula" id="11" onclick="colocarMarcador(1,1)">⠀</div>
-            <div class="celula" id="12" onclick="colocarMarcador(1,2)">⠀</div>
-            <div class="celula" id="20" onclick="colocarMarcador(2,0)">⠀</div>
-            <div class="celula" id="21" onclick="colocarMarcador(2,1)">⠀</div>
-            <div class="celula" id="22" onclick="colocarMarcador(2,2)">⠀</div>
-          </div>
-          <div class="pontuacao">
-            <h1 class="vez">Vez de: <span id="jogadorVez"></span></h1>
-            <h1 class="ganhador"><span id="jogadorGanhou"></span> Ganhou!!!</h1>
-            <h2 class="vitorias">
-              Vitórias de <span class="jogador1">Kleber</span>: 0 <br />
-              Vitórias de <span class="jogador2">Sadio</span>: 0
-            </h2>
-            <p class="novoJogo" onclick="novoJogo()">Novo Jogo</p>
-          </div>
+    <div id="jogadores">
+      <div class="nomes">
+        <label for="j1">Jogador 1 (X):</label>
+        <input type="text" id="j1" name="j1" />
+        <br /><br />
+        <label for="j2">Jogador 2 (O):</label>
+        <input type="text" id="j2" name="j2" />
+        <p class="novoJogo" onclick="iniciarJogo()">Iniciar</p>
+      </div>
+    </div>
+    <div id="container">
+      <div class="jogo">
+        <div class="tabuleiro">
+          <div class="celula" id="00" onclick="colocarMarcador(0,0)">⠀</div>
+          <div class="celula" id="01" onclick="colocarMarcador(0,1)">⠀</div>
+          <div class="celula" id="02" onclick="colocarMarcador(0,2)">⠀</div>
+          <div class="celula" id="10" onclick="colocarMarcador(1,0)">⠀</div>
+          <div class="celula" id="11" onclick="colocarMarcador(1,1)">⠀</div>
+          <div class="celula" id="12" onclick="colocarMarcador(1,2)">⠀</div>
+          <div class="celula" id="20" onclick="colocarMarcador(2,0)">⠀</div>
+          <div class="celula" id="21" onclick="colocarMarcador(2,1)">⠀</div>
+          <div class="celula" id="22" onclick="colocarMarcador(2,2)">⠀</div>
+        </div>
+        <div class="pontuacao">
+          <h1 class="vez">Vez de: <span id="jogadorVez"></span></h1>
+          <h1 class="ganhador"><span id="jogadorGanhou"></span></h1>
+          <h2 class="vitorias">
+            Vitórias de <span id="jogador1" class="jogador1">Kleber</span>:
+            <span id="vj1"></span>
+            <br />
+            Vitórias de <span id="jogador2" class="jogador2">Sadio</span>:
+            <span id="vj2"></span>
+          </h2>
+          <p class="novoJogo" onclick="novoJogo()">Novo Jogo</p>
         </div>
       </div>
-      <svg id="svg-filter" style="width: 0; height: 0">
-        <!-- PEGUEI DO SEGUINTE LINK: https://jsfiddle.net/rijokpaul/1k5x6dgm/ , só dicionar a classe blur que fica borrado -->
-        <filter id="svg-blur">
-          <feGaussianBlur in="SourceGraphic" stdDeviation="4"></feGaussianBlur>
-        </filter>
-      </svg>
     </div>
     <footer>
       <p>© 2023 Victor Ferreira da Silva</p>

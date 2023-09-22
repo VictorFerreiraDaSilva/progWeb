@@ -24,6 +24,16 @@ header {
   padding: 16px;
   flex: 1 1 auto;
   text-align: center;
+  visibility: hidden;
+}
+
+#jogadores {
+  background-color: #ffffff;
+  margin: auto 15%;
+  padding: 16px;
+  flex: 1 1 auto;
+  text-align: center;
+  margin-top: 25vh;
 }
 
 footer {
@@ -111,11 +121,6 @@ footer p {
   font-weight: 500;
   color: #272343;
   transition: 0.15s;
-}
-
-.blur {
-  -webkit-filter: url(#svg-blur);
-  filter: url(#svg-blur);
 }
 
 .jogador1 {

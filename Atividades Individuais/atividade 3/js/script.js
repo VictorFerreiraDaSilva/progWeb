@@ -12,8 +12,16 @@ let j1 = 'Kleber';
 let j2 = 'Sadio';
 let vj1 = 0;
 let vj2 = 0;
-//colocarMarcador();
-//atualizaJogo();
+
+function iniciarJogo() {
+  j1 = document.getElementById('j1').value;
+  j2 = document.getElementById('j2').value;
+  document.getElementById('jogador1').innerHTML = j1;
+  document.getElementById('jogador2').innerHTML = j2;
+  document.getElementById('jogadores').style.display = 'none';
+  document.getElementById('container').style.visibility = 'visible';
+  novoJogo();
+}
 
 function novoJogo() {
   limparGrid();
@@ -21,6 +29,8 @@ function novoJogo() {
   document.getElementsByClassName('vez')[0].style.visibility = 'visible';
   document.getElementById('jogadorGanhou').innerHTML = '';
   document.getElementsByClassName('ganhador')[0].style.visibility = 'hidden';
+  document.getElementById('vj1').innerHTML = vj1;
+  document.getElementById('vj2').innerHTML = vj2;
   atualizaJogo();
   fim = false;
   jogadas = 0;
@@ -113,12 +123,16 @@ function verificarVitoria() {
 
 function empate() {
   fim = true;
-  document.getElementsByClassName('ganhador')[0].style.visibility = 'hidden';
+  document.getElementsByClassName('ganhador')[0].style.visibility = 'visible';
+  document.getElementById('jogadorGanhou').innerHTML = 'Empate!';
+  //document.getElementsByClassName('ganhador')[0].style.visibility = 'hidden';
 }
 
 function vitoria() {
   fim = true;
-  document.getElementById('jogadorGanhou').innerHTML = X ? j1 : j2;
+  document.getElementById('jogadorGanhou').innerHTML = X
+    ? j1 + ' Ganhou!!!'
+    : j2 + ' Ganhou!!!';
   document.getElementById('jogadorGanhou').style.color = X
     ? '#cc00b1'
     : '#00e7e7';
