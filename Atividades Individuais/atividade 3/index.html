@@ -2,15 +2,15 @@
 <html lang="pt">
   <head>
     <title>Jogo da Velha</title>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap"
       rel="stylesheet"
-    />
-    <script type="text/javascript" src="js/script.js"></script>
+    >
+    <script src="js/script.js"></script>
   </head>
   <body>
     <header>
@@ -19,10 +19,10 @@
     <div id="jogadores">
       <div class="nomes">
         <label for="j1">Jogador 1 (X):</label>
-        <input type="text" id="j1" name="j1" />
-        <br /><br />
+        <input type="text" id="j1" name="j1">
+        <br><br>
         <label for="j2">Jogador 2 (O):</label>
-        <input type="text" id="j2" name="j2" />
+        <input type="text" id="j2" name="j2">
         <p class="novoJogo" onclick="iniciarJogo()">Iniciar</p>
       </div>
     </div>
@@ -41,11 +41,11 @@
         </div>
         <div class="pontuacao">
           <h1 class="vez">Vez de: <span id="jogadorVez"></span></h1>
-          <h1 class="ganhador"><span id="jogadorGanhou"></span></h1>
+          <h1 class="ganhador">⠀<span id="jogadorGanhou"></span></h1>
           <h2 class="vitorias">
             Vitórias de <span id="jogador1" class="jogador1">Kleber</span>:
             <span id="vj1"></span>
-            <br />
+            <br>
             Vitórias de <span id="jogador2" class="jogador2">Sadio</span>:
             <span id="vj2"></span>
           </h2>
