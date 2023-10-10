@@ -6,7 +6,6 @@ let cl = 10;
 
 let jogo = inicailizarMatriz(ln, cl);
 console.log(jogo);
-console.log(verificarLinhaCompleta(jogo[0]));
 
 function inicializarArray(tamanho, vazio) {
   var array = [];
@@ -49,18 +48,23 @@ function atualizaJogo() {
   for (var i = 0; i < ln; i++) {
     for (var j = 0; j < cl; j++) {
       let celula = i.toString() + '_' + j.toString();
-      document.getElementById(celula).innerHTML = jogo[i][j];
+      document.getElementById(celula).innerHTML = jogo[i][j].charAt(0);
+      document.getElementById(celula).className = '';
+      document.getElementById(celula).classList.add('celula');
+      document.getElementById(celula).classList.add(jogo[i][j]);
     }
   }
 }
 
 function limparLinhas() {
+  let contadorLinhas = 0;
   while (verificarLinhaCompleta(jogo[19])) {
     jogo.pop();
     jogo.unshift(inicializarArray(cl, 1));
+    contadorLinhas++;
   }
-
   atualizaJogo();
+  return contadorLinhas;
 }
 
 function verificarMaiorPosicaoLivre(coluna, qt = 1) {
@@ -80,10 +84,10 @@ function verificarMaiorPosicaoLivre(coluna, qt = 1) {
 function inserirPeca1(coluna) {
   if (coluna === undefined) return;
   if (coluna === null) return;
-  if (coluna < 0 || coluna > 9) return;
+  if (coluna < 0 || coluna > cl - 1) return;
   let pos = verificarMaiorPosicaoLivre(coluna);
   for (let i = 0; i < 4; i++) {
-    jogo[pos - i][coluna] = 'X';
+    jogo[pos - i][coluna] = 'laranja';
   }
   atualizaJogo();
 }
@@ -91,65 +95,81 @@ function inserirPeca1(coluna) {
 function inserirPeca2(coluna) {
   if (coluna === undefined) return;
   if (coluna === null) return;
-  if (coluna < 0 || coluna > 8) return;
+  if (coluna < 0 || coluna > cl - 2) return;
   let mais = coluna + 1;
   let pos1 = verificarMaiorPosicaoLivre(coluna, 2);
-  jogo[pos1][coluna] = 'Y';
-  jogo[pos1 - 1][coluna] = 'Y';
-  jogo[pos1][mais] = 'Y';
-  jogo[pos1 - 1][mais] = 'Y';
+  jogo[pos1][coluna] = 'vermelho';
+  jogo[pos1 - 1][coluna] = 'vermelho';
+  jogo[pos1][mais] = 'vermelho';
+  jogo[pos1 - 1][mais] = 'vermelho';
   atualizaJogo();
 }
 
 function inserirPeca3(coluna) {
   if (coluna === undefined) return;
   if (coluna === null) return;
-  if (coluna < 0 || coluna > 8) return;
+  if (coluna < 0 || coluna > cl - 2) return;
   let mais = coluna + 1;
   let pos1 = verificarMaiorPosicaoLivre(coluna, 2);
-  jogo[pos1][coluna] = 'Z';
-  jogo[pos1 - 1][coluna] = 'Z';
-  jogo[pos1 - 2][coluna] = 'Z';
-  jogo[pos1][mais] = 'Z';
+  jogo[pos1][coluna] = 'rosa';
+  jogo[pos1 - 1][coluna] = 'rosa';
+  jogo[pos1 - 2][coluna] = 'rosa';
+  jogo[pos1][mais] = 'rosa';
   atualizaJogo();
 }
 
 function inserirPeca4(coluna) {
   if (coluna === undefined) return;
   if (coluna === null) return;
-  if (coluna < 0 || coluna > 8) return;
+  if (coluna < 0 || coluna > cl - 2) return;
   let mais = coluna + 1;
   let pos1 = verificarMaiorPosicaoLivre(coluna, 2);
-  jogo[pos1][coluna] = 'A';
-  jogo[pos1][mais] = 'A';
-  jogo[pos1 - 1][mais] = 'A';
-  jogo[pos1 - 2][mais] = 'A';
+  jogo[pos1][coluna] = 'roxo';
+  jogo[pos1][mais] = 'roxo';
+  jogo[pos1 - 1][mais] = 'roxo';
+  jogo[pos1 - 2][mais] = 'roxo';
   atualizaJogo();
 }
 
 function inserirPeca5(coluna) {
   if (coluna === undefined) return;
   if (coluna === null) return;
-  if (coluna < 0 || coluna > 7) return;
+  if (coluna < 0 || coluna > cl - 3) return;
   let mais = coluna + 1;
   let pos1 = verificarMaiorPosicaoLivre(coluna, 3);
-  jogo[pos1][coluna] = 'B';
-  jogo[pos1][mais] = 'B';
-  jogo[pos1 - 1][mais] = 'B';
-  jogo[pos1][++mais] = 'B';
+  jogo[pos1][coluna] = 'amarelo';
+  jogo[pos1][mais] = 'amarelo';
+  jogo[pos1 - 1][mais] = 'amarelo';
+  jogo[pos1][++mais] = 'amarelo';
   atualizaJogo();
 }
 
 function inserirPeca6(coluna) {
   if (coluna === undefined) return;
   if (coluna === null) return;
-  if (coluna < 0 || coluna > 7) return;
+  if (coluna < 0 || coluna > cl - 3) return;
   let mais = coluna + 1;
   let pos1 = verificarMaiorPosicaoLivre(coluna, 3);
-  jogo[pos1][coluna] = 'C';
-  jogo[pos1 - 1][coluna] = 'C';
-  jogo[pos1][mais] = 'C';
-  jogo[pos1][++mais] = 'C';
-  jogo[pos1 - 1][mais] = 'C';
+  jogo[pos1][coluna] = 'verde';
+  jogo[pos1 - 1][coluna] = 'verde';
+  jogo[pos1][mais] = 'verde';
+  jogo[pos1][++mais] = 'verde';
+  jogo[pos1 - 1][mais] = 'verde';
   atualizaJogo();
+}
+
+function espelhar() {
+  jogo.forEach((linha) => {
+    linha.reverse();
+  });
+  atualizaJogo();
+}
+
+function inserirPecaEspecial(coluna) {
+  if (coluna === undefined) return;
+  if (coluna === null) return;
+  if (coluna < 0 || coluna > cl - 1) return;
+  let pos = verificarMaiorPosicaoLivre(coluna);
+  jogo[pos][coluna] = 'ciano';
+  espelhar();
 }
