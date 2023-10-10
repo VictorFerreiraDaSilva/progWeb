@@ -38,7 +38,14 @@ function completaLinha(linha) {
   atualizaJogo();
 }
 
+function perdeu() {
+  console.log('MAMOU');
+}
+
 function atualizaJogo() {
+  jogo[0].forEach((celula) => {
+    if (celula != caractereInvisivel) perdeu();
+  });
   for (var i = 0; i < ln; i++) {
     for (var j = 0; j < cl; j++) {
       let celula = i.toString() + '_' + j.toString();
@@ -56,12 +63,19 @@ function limparLinhas() {
   atualizaJogo();
 }
 
-function verificarMaiorPosicaoLivre(coluna) {
-  let l = -1;
-  jogo.forEach((linha) => {
-    if (linha[coluna] === caractereInvisivel) l++;
-  });
-  return l;
+function verificarMaiorPosicaoLivre(coluna, qt = 1) {
+  let l = [];
+  for (let i = 0; i < qt; i++) {
+    l.push(-1);
+    let mais = coluna + i;
+    mais = mais % 10;
+    for (let j = 0; j < ln; j++) {
+      if (jogo[j][mais] === caractereInvisivel) l[i]++;
+      if (jogo[j][mais] != caractereInvisivel) break;
+    }
+  }
+  l.sort((a, b) => a - b); //ordenar numeriamente e nao alfabeticamente
+  return l[0];
 }
 
 function inserirPeca1(coluna) {
@@ -69,5 +83,17 @@ function inserirPeca1(coluna) {
   for (let i = 0; i < 4; i++) {
     jogo[pos - i][coluna] = 'X';
   }
+  atualizaJogo();
+}
+
+function inserirPeca2(coluna) {
+  let mais = coluna + 1;
+  mais = mais % 10;
+  console.log(mais);
+  let pos1 = verificarMaiorPosicaoLivre(coluna, 2);
+  jogo[pos1][coluna] = 'Y';
+  jogo[pos1 - 1][coluna] = 'Y';
+  jogo[pos1][mais] = 'Y';
+  jogo[pos1 - 1][mais] = 'Y';
   atualizaJogo();
 }
