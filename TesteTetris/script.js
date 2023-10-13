@@ -6,6 +6,7 @@ let cl = 10;
 let linhasEliminadas = 0;
 let pontuacao = 0;
 let nivel = 1;
+let pecaInserida = false;
 
 let jogo = inicailizarMatriz(ln, cl);
 console.log(jogo);
@@ -13,7 +14,7 @@ console.log(jogo);
 function inicializarArray(tamanho, vazio) {
   var array = [];
   for (let i = 0; i < tamanho; i++) {
-    array[i] = vazio === 1 ? caractereInvisivel : i;
+    array[i] = vazio === 1 ? caractereInvisivel : 'vermelho';
   }
   return array;
 }
@@ -40,14 +41,16 @@ function completaLinha(linha) {
   atualizaJogo();
 }
 
-function perdeu() {
-  console.log('MAMOU');
+function verificarDerrota() {
+  for (let i = 0; i < jogo[0].length; i++) {
+    if (jogo[0][i] != caractereInvisivel) {
+      return true;
+    }
+  }
+  return false;
 }
 
 function atualizaJogo() {
-  jogo[0].forEach((celula) => {
-    if (celula != caractereInvisivel) perdeu();
-  });
   for (var i = 0; i < ln; i++) {
     for (var j = 0; j < cl; j++) {
       let celula = i.toString() + '_' + j.toString();
@@ -108,11 +111,49 @@ function tacarParaDireita(linha, coluna, qtColunas, qtLinhas = 1) {
   atualizaJogo();
 }
 
+function tacarParaEsquerda(linha, coluna, qtColunas, qtLinhas = 1) {
+  let contadorErros = 0;
+  for (let i = 0; i < qtLinhas; i++) {
+    if (jogo[linha - i][coluna - qtColunas + 1] != caractereInvisivel)
+      contadorErros++;
+  }
+
+  if (contadorErros === 0) {
+    for (let j = 0; j < qtLinhas; j++)
+      for (let i = qtColunas; i > 0; i--) {
+        let aux = jogo[linha - j][coluna - i + 1];
+        jogo[linha - j][coluna - i + 1] = jogo[linha - j][coluna - i + 2];
+        jogo[linha - j][coluna - i + 2] = aux;
+      }
+  }
+  atualizaJogo();
+}
+
+function tacarParaBaixo(linha, coluna, qtColunas, qtLinhas = 1) {
+  let contadorErros = 0;
+  for (let i = 0; i < qtColunas; i++) {
+    if (jogo[linha + i + qtLinhas][coluna] != caractereInvisivel)
+      contadorErros++;
+  }
+  if (contadorErros === 0) {
+    for (let j = 0; j < qtColunas; j++)
+      for (let i = qtLinhas - 1; i >= 0; i--) {
+        let aux = jogo[linha + i][coluna + j];
+        jogo[linha + i][coluna + j] = jogo[linha + i + 1][coluna + j];
+        jogo[linha + i + 1][coluna + j] = aux;
+      }
+  } else {
+    pecaInserida = true;
+  }
+  atualizaJogo();
+}
+
 function inserirPeca1(coluna) {
   if (coluna === undefined) return;
   if (coluna === null) return;
   if (coluna < 0 || coluna > cl - 1) return;
-  let pos = verificarMaiorPosicaoLivre(coluna);
+  //let pos = verificarMaiorPosicaoLivre(coluna);
+  let pos = 3; //altura da peça - 1
   for (let i = 0; i < 4; i++) {
     jogo[pos - i][coluna] = 'laranja';
   }
@@ -124,11 +165,12 @@ function inserirPeca2(coluna) {
   if (coluna === null) return;
   if (coluna < 0 || coluna > cl - 2) return;
   let mais = coluna + 1;
-  let pos1 = verificarMaiorPosicaoLivre(coluna, 2);
-  jogo[pos1][coluna] = 'vermelho';
-  jogo[pos1 - 1][coluna] = 'vermelho';
-  jogo[pos1][mais] = 'vermelho';
-  jogo[pos1 - 1][mais] = 'vermelho';
+  //let pos1 = verificarMaiorPosicaoLivre(coluna, 2);
+  let pos = 1; //altura da peça - 1
+  jogo[pos][coluna] = 'vermelho';
+  jogo[pos - 1][coluna] = 'vermelho';
+  jogo[pos][mais] = 'vermelho';
+  jogo[pos - 1][mais] = 'vermelho';
   atualizaJogo();
 }
 
@@ -137,11 +179,12 @@ function inserirPeca3(coluna) {
   if (coluna === null) return;
   if (coluna < 0 || coluna > cl - 2) return;
   let mais = coluna + 1;
-  let pos1 = verificarMaiorPosicaoLivre(coluna, 2);
-  jogo[pos1][coluna] = 'rosa';
-  jogo[pos1 - 1][coluna] = 'rosa';
-  jogo[pos1 - 2][coluna] = 'rosa';
-  jogo[pos1][mais] = 'rosa';
+  //let pos1 = verificarMaiorPosicaoLivre(coluna, 2);
+  let pos = 2; //altura da peça - 1
+  jogo[pos][coluna] = 'rosa';
+  jogo[pos - 1][coluna] = 'rosa';
+  jogo[pos - 2][coluna] = 'rosa';
+  jogo[pos][mais] = 'rosa';
   atualizaJogo();
 }
 
@@ -150,11 +193,12 @@ function inserirPeca4(coluna) {
   if (coluna === null) return;
   if (coluna < 0 || coluna > cl - 2) return;
   let mais = coluna + 1;
-  let pos1 = verificarMaiorPosicaoLivre(coluna, 2);
-  jogo[pos1][coluna] = 'roxo';
-  jogo[pos1][mais] = 'roxo';
-  jogo[pos1 - 1][mais] = 'roxo';
-  jogo[pos1 - 2][mais] = 'roxo';
+  //let pos1 = verificarMaiorPosicaoLivre(coluna, 2);
+  let pos = 2; //altura da peça - 1
+  jogo[pos][coluna] = 'roxo';
+  jogo[pos][mais] = 'roxo';
+  jogo[pos - 1][mais] = 'roxo';
+  jogo[pos - 2][mais] = 'roxo';
   atualizaJogo();
 }
 
@@ -163,11 +207,12 @@ function inserirPeca5(coluna) {
   if (coluna === null) return;
   if (coluna < 0 || coluna > cl - 3) return;
   let mais = coluna + 1;
-  let pos1 = verificarMaiorPosicaoLivre(coluna, 3);
-  jogo[pos1][coluna] = 'amarelo';
-  jogo[pos1][mais] = 'amarelo';
-  jogo[pos1 - 1][mais] = 'amarelo';
-  jogo[pos1][++mais] = 'amarelo';
+  //let pos1 = verificarMaiorPosicaoLivre(coluna, 3);
+  let pos = 1; //altura da peça - 1
+  jogo[pos][coluna] = 'amarelo';
+  jogo[pos][mais] = 'amarelo';
+  jogo[pos - 1][mais] = 'amarelo';
+  jogo[pos][++mais] = 'amarelo';
   atualizaJogo();
 }
 
@@ -176,12 +221,13 @@ function inserirPeca6(coluna) {
   if (coluna === null) return;
   if (coluna < 0 || coluna > cl - 3) return;
   let mais = coluna + 1;
-  let pos1 = verificarMaiorPosicaoLivre(coluna, 3);
-  jogo[pos1][coluna] = 'verde';
-  jogo[pos1 - 1][coluna] = 'verde';
-  jogo[pos1][mais] = 'verde';
-  jogo[pos1][++mais] = 'verde';
-  jogo[pos1 - 1][mais] = 'verde';
+  //let pos1 = verificarMaiorPosicaoLivre(coluna, 3);
+  let pos = 1; //altura da peça - 1
+  jogo[pos][coluna] = 'verde';
+  jogo[pos - 1][coluna] = 'verde';
+  jogo[pos][mais] = 'verde';
+  jogo[pos][++mais] = 'verde';
+  jogo[pos - 1][mais] = 'verde';
   atualizaJogo();
 }
 
@@ -196,7 +242,60 @@ function inserirPecaEspecial(coluna) {
   if (coluna === undefined) return;
   if (coluna === null) return;
   if (coluna < 0 || coluna > cl - 1) return;
-  let pos = verificarMaiorPosicaoLivre(coluna);
+  //let pos = verificarMaiorPosicaoLivre(coluna);
+  let pos = 0; //altura da peça - 1
   jogo[pos][coluna] = 'ciano';
-  espelhar();
+  //espelhar();
+  atualizaJogo();
+}
+
+function inserirPeca() {
+  let peca = Math.floor(Math.random() * 8);
+
+  switch (peca) {
+    case 1:
+      inserirPeca1();
+      break;
+    case 2:
+      inserirPeca2();
+      break;
+    case 3:
+      inserirPeca3();
+      break;
+    case 4:
+      inserirPeca4();
+      break;
+    case 5:
+      inserirPeca5();
+      break;
+    case 6:
+      inserirPeca6();
+      break;
+    case 7:
+      inserirPecaEspecial();
+      break;
+  }
+  if (verificarDerrota()) perdeu();
+}
+
+function perdeu() {
+  console.log('MAMOU');
+}
+
+function iniciarJogo() {
+  linhasEliminadas = 0;
+  pontuacao = 0;
+  nivel = 1;
+  pecaInserida = false;
+  while (verificarDerrota() === false) {
+    inserirPeca();
+    while (pecaInserida === false) {
+      //controlar coisas
+      pecaInserida = true;
+      limparLinhasEGerarPontuacao();
+    }
+
+    break;
+  }
+  perdeu();
 }
