@@ -56,7 +56,7 @@ function atualizaJogo() {
   }
 }
 
-function limparLinhas() {
+function limparLinhasEGerarPontuacao() {
   let contadorLinhas = 0;
   while (verificarLinhaCompleta(jogo[19])) {
     jogo.pop();
@@ -64,7 +64,10 @@ function limparLinhas() {
     contadorLinhas++;
   }
   atualizaJogo();
-  return contadorLinhas;
+  let pontuacao = 0;
+  for (let i = 0; i < contadorLinhas; i++) pontuacao += 10;
+  pontuacao *= contadorLinhas;
+  return pontuacao;
 }
 
 function verificarMaiorPosicaoLivre(coluna, qt = 1) {
