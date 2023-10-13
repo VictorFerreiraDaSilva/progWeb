@@ -92,7 +92,7 @@ function verificarMaiorPosicaoLivre(coluna, qt = 1) {
   return l[0];
 }
 
-function tacarParaDireita(linha, coluna, qtColunas, qtLinhas = 1) {
+function tacarParaDireita(linha, coluna, qtColunas, qtLinhas) {
   let contadorErros = 0;
   for (let i = 0; i < qtLinhas; i++) {
     if (jogo[linha + i][coluna + qtColunas] != caractereInvisivel)
@@ -111,7 +111,7 @@ function tacarParaDireita(linha, coluna, qtColunas, qtLinhas = 1) {
   atualizaJogo();
 }
 
-function tacarParaEsquerda(linha, coluna, qtColunas, qtLinhas = 1) {
+function tacarParaEsquerda(linha, coluna, qtColunas, qtLinhas) {
   let contadorErros = 0;
   for (let i = 0; i < qtLinhas; i++) {
     if (jogo[linha - i][coluna - qtColunas + 1] != caractereInvisivel)
@@ -129,7 +129,13 @@ function tacarParaEsquerda(linha, coluna, qtColunas, qtLinhas = 1) {
   atualizaJogo();
 }
 
-function tacarParaBaixo(linha, coluna, qtColunas, qtLinhas = 1) {
+function tacarParaBaixo(
+  linha,
+  coluna,
+  qtColunas,
+  qtLinhas,
+  pecaEspecial = false
+) {
   let contadorErros = 0;
   for (let i = 0; i < qtColunas; i++) {
     if (jogo[linha + i + qtLinhas][coluna] != caractereInvisivel)
@@ -144,6 +150,7 @@ function tacarParaBaixo(linha, coluna, qtColunas, qtLinhas = 1) {
       }
   } else {
     pecaInserida = true;
+    if (pecaEspecial) espelhar();
   }
   atualizaJogo();
 }
@@ -251,6 +258,7 @@ function inserirPecaEspecial(coluna) {
 
 function inserirPeca() {
   let peca = Math.floor(Math.random() * 8);
+  if (verificarDerrota()) perdeu();
 
   switch (peca) {
     case 1:
@@ -275,7 +283,6 @@ function inserirPeca() {
       inserirPecaEspecial();
       break;
   }
-  if (verificarDerrota()) perdeu();
 }
 
 function perdeu() {
@@ -292,8 +299,8 @@ function iniciarJogo() {
     while (pecaInserida === false) {
       //controlar coisas
       pecaInserida = true;
-      limparLinhasEGerarPontuacao();
     }
+    limparLinhasEGerarPontuacao();
 
     break;
   }
