@@ -89,28 +89,24 @@ function verificarMaiorPosicaoLivre(coluna, qt = 1) {
   return l[0];
 }
 
-/*function tacarParaDireita(linha, colunaIncial, qtColunas) {
-  for (let i = 0; i < qtColunas; i++) {
-    jogo[linha].splice();
+function tacarParaDireita(linha, coluna, qtColunas, qtLinhas = 1) {
+  let contadorErros = 0;
+  for (let i = 0; i < qtLinhas; i++) {
+    if (jogo[linha + i][coluna + qtColunas] != caractereInvisivel)
+      contadorErros++;
   }
-  for (let i = linhaInicial; i < linhaInicial + qtLinhas; i++) {
-    for (let j = 0; j < qtColunas; j++) {
-      jogo[i].pop();
-      jogo[i].unshift(caractereInvisivel);
-    }
+
+  if (contadorErros === 0) {
+    for (let j = 0; j < qtLinhas; j++)
+      for (let i = qtColunas; i > 0; i--) {
+        let aux = jogo[linha + j][coluna + i];
+        jogo[linha + j][coluna + i] = jogo[linha + j][coluna + i - 1];
+        jogo[linha + j][coluna + i - 1] = aux;
+      }
   }
+
   atualizaJogo();
 }
-
-function tacarParaEsquerda(linhaInicial, qtLinhas, qtColunas) {
-  for (let i = linhaInicial; i < linhaInicial + qtLinhas; i++) {
-    for (let j = 0; j < qtColunas; j++) {
-      jogo[i].shift();
-      jogo[i].push(caractereInvisivel);
-    }
-  }
-  atualizaJogo();
-}*/
 
 function inserirPeca1(coluna) {
   if (coluna === undefined) return;
