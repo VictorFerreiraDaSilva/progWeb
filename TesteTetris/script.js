@@ -3,6 +3,9 @@ const caractereInvisivel = '⠀';
 
 let ln = 20;
 let cl = 10;
+let linhasEliminadas = 0;
+let pontuacao = 0;
+let nivel = 1;
 
 let jogo = inicailizarMatriz(ln, cl);
 console.log(jogo);
@@ -64,10 +67,12 @@ function limparLinhasEGerarPontuacao() {
     contadorLinhas++;
   }
   atualizaJogo();
-  let pontuacao = 0;
-  for (let i = 0; i < contadorLinhas; i++) pontuacao += 10;
-  pontuacao *= contadorLinhas;
-  return pontuacao;
+  let p = 0;
+  for (let i = 0; i < contadorLinhas; i++) p += 10;
+  p *= contadorLinhas;
+  pontuacao += p;
+  linhasEliminadas += contadorLinhas;
+  nivel = Math.floor(pontuacao / 300 + 1);
 }
 
 function verificarMaiorPosicaoLivre(coluna, qt = 1) {
@@ -83,6 +88,29 @@ function verificarMaiorPosicaoLivre(coluna, qt = 1) {
   l.sort((a, b) => a - b); //ordenar numeriamente e nao alfabeticamente
   return l[0];
 }
+
+/*function tacarParaDireita(linha, colunaIncial, qtColunas) {
+  for (let i = 0; i < qtColunas; i++) {
+    jogo[linha].splice();
+  }
+  for (let i = linhaInicial; i < linhaInicial + qtLinhas; i++) {
+    for (let j = 0; j < qtColunas; j++) {
+      jogo[i].pop();
+      jogo[i].unshift(caractereInvisivel);
+    }
+  }
+  atualizaJogo();
+}
+
+function tacarParaEsquerda(linhaInicial, qtLinhas, qtColunas) {
+  for (let i = linhaInicial; i < linhaInicial + qtLinhas; i++) {
+    for (let j = 0; j < qtColunas; j++) {
+      jogo[i].shift();
+      jogo[i].push(caractereInvisivel);
+    }
+  }
+  atualizaJogo();
+}*/
 
 function inserirPeca1(coluna) {
   if (coluna === undefined) return;
