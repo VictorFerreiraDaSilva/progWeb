@@ -1,4 +1,117 @@
 'use strict';
+
+class Coordenada {
+  constructor(linha, coluna) {
+    this.linha = linha;
+    this.coluna = coluna;
+  }
+  getLinha() {
+    return this.linha;
+  }
+  getColuna() {
+    return this.coluna;
+  }
+}
+
+class Direcoes {
+  constructor(pecasEsquerda, pecasDireita, pecasCima, pecasBaixo) {
+    this.pecasEsquerda = pecasEsquerda;
+    this.pecasDireita = pecasDireita;
+    this.pecasCima = pecasCima;
+    this.pecasBaixo = pecasBaixo;
+  }
+  getEsquerda() {
+    return this.pecasEsquerda;
+  }
+  getDireita() {
+    return this.pecasDireita;
+  }
+  getCima() {
+    return this.pecasCima;
+  }
+  getBaixo() {
+    return this.pecasBaixo;
+  }
+}
+
+class Peca {
+  constructor(pontoCentral, cor, direcoes) {
+    this.pontoCentral = pontoCentral;
+    this.cor = cor;
+    this.direcoes = direcoes;
+    this.coordenadas = [];
+  }
+  pontoCentral() {
+    return this.pontoCentral;
+  }
+  adicionarCoordenada(c) {
+    this.coordenadas.push(c);
+  }
+  apagarPeca(grid) {
+    this.coordenadas.forEach((coo) => {
+      grid[coo.getLinha()][coo.getColuna()] = '⠀';
+    });
+    this.coordenadas = [];
+  }
+  construirPeca(grid) {
+    grid[this.pontoCentral.getLinha()][this.pontoCentral.getColuna()] =
+      this.cor;
+    this.coordenadas.push(
+      new Coordenada(
+        this.pontoCentral.getLinha(),
+        this.pontoCentral.getColuna()
+      )
+    );
+    for (let i = 1; i < this.direcoes.getDireita() + 1; i++) {
+      grid[this.pontoCentral.getLinha()][this.pontoCentral.getColuna() + i] =
+        this.cor;
+      this.coordenadas.push(
+        new Coordenada(
+          this.pontoCentral.getLinha(),
+          this.pontoCentral.getColuna() + i
+        )
+      );
+    }
+    for (let i = 1; i < this.direcoes.getBaixo() + 1; i++) {
+      grid[this.pontoCentral.getLinha() + i][this.pontoCentral.getColuna()] =
+        this.cor;
+      this.coordenadas.push(
+        new Coordenada(
+          this.pontoCentral.getLinha() + i,
+          this.pontoCentral.getColuna()
+        )
+      );
+    }
+    for (let i = 1; i < this.direcoes.getEsquerda() + 1; i++) {
+      grid[this.pontoCentral.getLinha()][this.pontoCentral.getColuna() - i] =
+        this.cor;
+      this.coordenadas.push(
+        new Coordenada(
+          this.pontoCentral.getLinha(),
+          this.pontoCentral.getColuna() - i
+        )
+      );
+    }
+    for (let i = 1; i < this.direcoes.getCima() + 1; i++) {
+      grid[this.pontoCentral.getLinha() - i][this.pontoCentral.getColuna()] =
+        this.cor;
+      this.coordenadas.push(
+        new Coordenada(
+          this.pontoCentral.getLinha() - i,
+          this.pontoCentral.getColuna()
+        )
+      );
+    }
+  }
+  rotacionar() {
+    let aux = this.direcoes.pecasDireita;
+    this.direcoes.pecasDireita = this.direcoes.getCima();
+    this.direcoes.pecasCima = this.direcoes.getEsquerda();
+    this.direcoes.pecasEsquerda = this.direcoes.getBaixo();
+    this.direcoes.pecasBaixo = aux;
+  }
+}
+
 const caractereInvisivel = '⠀';
 
 let ln = 20;
@@ -7,6 +120,7 @@ let linhasEliminadas = 0;
 let pontuacao = 0;
 let nivel = 1;
 let pecaInserida = false;
+let pecaAtual;
 
 let jogo = inicailizarMatriz(ln, cl);
 console.log(jogo);
@@ -64,10 +178,12 @@ function atualizaJogo() {
 
 function limparLinhasEGerarPontuacao() {
   let contadorLinhas = 0;
-  while (verificarLinhaCompleta(jogo[19])) {
-    jogo.pop();
-    jogo.unshift(inicializarArray(cl, 1));
-    contadorLinhas++;
+  for (let i = 0; i < ln; i++) {
+    if (verificarLinhaCompleta(jogo[i])) {
+      contadorLinhas++;
+      jogo.splice(i, 1);
+      jogo.unshift(inicializarArray(cl, 1));
+    }
   }
   atualizaJogo();
   let p = 0;
@@ -78,166 +194,6 @@ function limparLinhasEGerarPontuacao() {
   nivel = Math.floor(pontuacao / 300 + 1);
 }
 
-function verificarMaiorPosicaoLivre(coluna, qt = 1) {
-  let l = [];
-  for (let i = 0; i < qt; i++) {
-    l.push(-1);
-    let mais = coluna + i;
-    for (let j = 0; j < ln; j++) {
-      if (jogo[j][mais] === caractereInvisivel) l[i]++;
-      if (jogo[j][mais] != caractereInvisivel) break;
-    }
-  }
-  l.sort((a, b) => a - b); //ordenar numeriamente e nao alfabeticamente
-  return l[0];
-}
-
-function tacarParaDireita(linha, coluna, qtColunas, qtLinhas) {
-  let contadorErros = 0;
-  for (let i = 0; i < qtLinhas; i++) {
-    if (jogo[linha + i][coluna + qtColunas] != caractereInvisivel)
-      contadorErros++;
-  }
-
-  if (contadorErros === 0) {
-    for (let j = 0; j < qtLinhas; j++)
-      for (let i = qtColunas; i > 0; i--) {
-        let aux = jogo[linha + j][coluna + i];
-        jogo[linha + j][coluna + i] = jogo[linha + j][coluna + i - 1];
-        jogo[linha + j][coluna + i - 1] = aux;
-      }
-  }
-
-  atualizaJogo();
-}
-
-function tacarParaEsquerda(linha, coluna, qtColunas, qtLinhas) {
-  let contadorErros = 0;
-  for (let i = 0; i < qtLinhas; i++) {
-    if (jogo[linha - i][coluna - qtColunas + 1] != caractereInvisivel)
-      contadorErros++;
-  }
-
-  if (contadorErros === 0) {
-    for (let j = 0; j < qtLinhas; j++)
-      for (let i = qtColunas; i > 0; i--) {
-        let aux = jogo[linha - j][coluna - i + 1];
-        jogo[linha - j][coluna - i + 1] = jogo[linha - j][coluna - i + 2];
-        jogo[linha - j][coluna - i + 2] = aux;
-      }
-  }
-  atualizaJogo();
-}
-
-function tacarParaBaixo(
-  linha,
-  coluna,
-  qtColunas,
-  qtLinhas,
-  pecaEspecial = false
-) {
-  let contadorErros = 0;
-  for (let i = 0; i < qtColunas; i++) {
-    if (jogo[linha + i + qtLinhas][coluna] != caractereInvisivel)
-      contadorErros++;
-  }
-  if (contadorErros === 0) {
-    for (let j = 0; j < qtColunas; j++)
-      for (let i = qtLinhas - 1; i >= 0; i--) {
-        let aux = jogo[linha + i][coluna + j];
-        jogo[linha + i][coluna + j] = jogo[linha + i + 1][coluna + j];
-        jogo[linha + i + 1][coluna + j] = aux;
-      }
-  } else {
-    pecaInserida = true;
-    if (pecaEspecial) espelhar();
-  }
-  atualizaJogo();
-}
-
-function inserirPeca1(coluna) {
-  if (coluna === undefined) return;
-  if (coluna === null) return;
-  if (coluna < 0 || coluna > cl - 1) return;
-  //let pos = verificarMaiorPosicaoLivre(coluna);
-  let pos = 3; //altura da peça - 1
-  for (let i = 0; i < 4; i++) {
-    jogo[pos - i][coluna] = 'laranja';
-  }
-  atualizaJogo();
-}
-
-function inserirPeca2(coluna) {
-  if (coluna === undefined) return;
-  if (coluna === null) return;
-  if (coluna < 0 || coluna > cl - 2) return;
-  let mais = coluna + 1;
-  //let pos1 = verificarMaiorPosicaoLivre(coluna, 2);
-  let pos = 1; //altura da peça - 1
-  jogo[pos][coluna] = 'vermelho';
-  jogo[pos - 1][coluna] = 'vermelho';
-  jogo[pos][mais] = 'vermelho';
-  jogo[pos - 1][mais] = 'vermelho';
-  atualizaJogo();
-}
-
-function inserirPeca3(coluna) {
-  if (coluna === undefined) return;
-  if (coluna === null) return;
-  if (coluna < 0 || coluna > cl - 2) return;
-  let mais = coluna + 1;
-  //let pos1 = verificarMaiorPosicaoLivre(coluna, 2);
-  let pos = 2; //altura da peça - 1
-  jogo[pos][coluna] = 'rosa';
-  jogo[pos - 1][coluna] = 'rosa';
-  jogo[pos - 2][coluna] = 'rosa';
-  jogo[pos][mais] = 'rosa';
-  atualizaJogo();
-}
-
-function inserirPeca4(coluna) {
-  if (coluna === undefined) return;
-  if (coluna === null) return;
-  if (coluna < 0 || coluna > cl - 2) return;
-  let mais = coluna + 1;
-  //let pos1 = verificarMaiorPosicaoLivre(coluna, 2);
-  let pos = 2; //altura da peça - 1
-  jogo[pos][coluna] = 'roxo';
-  jogo[pos][mais] = 'roxo';
-  jogo[pos - 1][mais] = 'roxo';
-  jogo[pos - 2][mais] = 'roxo';
-  atualizaJogo();
-}
-
-function inserirPeca5(coluna) {
-  if (coluna === undefined) return;
-  if (coluna === null) return;
-  if (coluna < 0 || coluna > cl - 3) return;
-  let mais = coluna + 1;
-  //let pos1 = verificarMaiorPosicaoLivre(coluna, 3);
-  let pos = 1; //altura da peça - 1
-  jogo[pos][coluna] = 'amarelo';
-  jogo[pos][mais] = 'amarelo';
-  jogo[pos - 1][mais] = 'amarelo';
-  jogo[pos][++mais] = 'amarelo';
-  atualizaJogo();
-}
-
-function inserirPeca6(coluna) {
-  if (coluna === undefined) return;
-  if (coluna === null) return;
-  if (coluna < 0 || coluna > cl - 3) return;
-  let mais = coluna + 1;
-  //let pos1 = verificarMaiorPosicaoLivre(coluna, 3);
-  let pos = 1; //altura da peça - 1
-  jogo[pos][coluna] = 'verde';
-  jogo[pos - 1][coluna] = 'verde';
-  jogo[pos][mais] = 'verde';
-  jogo[pos][++mais] = 'verde';
-  jogo[pos - 1][mais] = 'verde';
-  atualizaJogo();
-}
-
 function espelhar() {
   jogo.forEach((linha) => {
     linha.reverse();
@@ -245,64 +201,102 @@ function espelhar() {
   atualizaJogo();
 }
 
-function inserirPecaEspecial(coluna) {
-  if (coluna === undefined) return;
-  if (coluna === null) return;
-  if (coluna < 0 || coluna > cl - 1) return;
-  //let pos = verificarMaiorPosicaoLivre(coluna);
-  let pos = 0; //altura da peça - 1
-  jogo[pos][coluna] = 'ciano';
-  //espelhar();
-  atualizaJogo();
-}
-
-function inserirPeca() {
-  let peca = Math.floor(Math.random() * 8);
-  if (verificarDerrota()) perdeu();
-
-  switch (peca) {
-    case 1:
-      inserirPeca1();
-      break;
-    case 2:
-      inserirPeca2();
-      break;
-    case 3:
-      inserirPeca3();
-      break;
-    case 4:
-      inserirPeca4();
-      break;
-    case 5:
-      inserirPeca5();
-      break;
-    case 6:
-      inserirPeca6();
-      break;
-    case 7:
-      inserirPecaEspecial();
-      break;
-  }
-}
-
 function perdeu() {
   console.log('MAMOU');
 }
 
-function iniciarJogo() {
-  linhasEliminadas = 0;
-  pontuacao = 0;
-  nivel = 1;
-  pecaInserida = false;
-  while (verificarDerrota() === false) {
-    inserirPeca();
-    while (pecaInserida === false) {
-      //controlar coisas
+function peca() {
+  let p = new Coordenada(5, 5);
+  let dir = new Direcoes(1, 1, 1, 0);
+  let pec = new Peca(p, 'verde', dir);
+  pecaAtual = pec;
+  pecaAtual.construirPeca(jogo);
+  atualizaJogo();
+}
+
+function roda() {
+  pecaAtual.apagarPeca(jogo);
+  pecaAtual.rotacionar();
+  pecaAtual.construirPeca(jogo);
+  atualizaJogo();
+}
+
+function tacarParaDireita() {
+  if (
+    jogo[pecaAtual.pontoCentral.getLinha()][
+      pecaAtual.pontoCentral.getColuna() + pecaAtual.direcoes.getDireita() + 1
+    ] === caractereInvisivel
+  ) {
+    pecaAtual.pontoCentral.coluna++;
+    pecaAtual.apagarPeca(jogo);
+    pecaAtual.construirPeca(jogo);
+    atualizaJogo();
+  }
+}
+
+function tacarParaEsquerda() {
+  if (
+    jogo[pecaAtual.pontoCentral.getLinha()][
+      pecaAtual.pontoCentral.getColuna() - pecaAtual.direcoes.getEsquerda() - 1
+    ] === caractereInvisivel
+  ) {
+    pecaAtual.pontoCentral.coluna--;
+    pecaAtual.apagarPeca(jogo);
+    pecaAtual.construirPeca(jogo);
+    atualizaJogo();
+  }
+}
+
+function tacarParaCima() {
+  if (
+    jogo[pecaAtual.pontoCentral.getLinha() - pecaAtual.direcoes.getCima() - 1][
+      pecaAtual.pontoCentral.getColuna()
+    ] === caractereInvisivel
+  ) {
+    pecaAtual.pontoCentral.linha--;
+    pecaAtual.apagarPeca(jogo);
+    pecaAtual.construirPeca(jogo);
+    atualizaJogo();
+  }
+}
+
+function incluiCoordenada(cords, linha, coluna) {
+  let tem = false;
+  cords.forEach((co) => {
+    if (co.getLinha() === linha && co.getColuna() === coluna) {
+      tem = true;
+    }
+  });
+  return tem;
+}
+
+function tacarParaBaixo() {
+  try {
+    let contadorErros = 0;
+    let coordenadasDaBase = [];
+    let linhaBaixoPeca = 0;
+    pecaAtual.coordenadas.forEach((c) => {
+      if (
+        !incluiCoordenada(
+          pecaAtual.coordenadas,
+          c.getLinha() + 1,
+          c.getColuna()
+        )
+      ) {
+        if (jogo[c.getLinha() + 1][c.getColuna()] != caractereInvisivel) {
+          contadorErros++;
+        }
+      }
+    });
+    if (contadorErros === 0) {
+      pecaAtual.pontoCentral.linha++;
+      pecaAtual.apagarPeca(jogo);
+      pecaAtual.construirPeca(jogo);
+      atualizaJogo();
+    } else {
       pecaInserida = true;
     }
-    limparLinhasEGerarPontuacao();
-
-    break;
+  } catch (error) {
+    pecaInserida = true;
   }
-  perdeu();
 }
