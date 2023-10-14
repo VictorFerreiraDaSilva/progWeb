@@ -14,11 +14,24 @@ class Coordenada {
 }
 
 class Direcoes {
-  constructor(pecasEsquerda, pecasDireita, pecasCima, pecasBaixo) {
+  constructor(
+    pecasEsquerda,
+    pecasDireita,
+    pecasCima,
+    pecasBaixo,
+    pecasDiagonalES,
+    pecasDiagonalEI,
+    pecasDiagonalDS,
+    pecasDiagonalDI
+  ) {
     this.pecasEsquerda = pecasEsquerda;
     this.pecasDireita = pecasDireita;
     this.pecasCima = pecasCima;
     this.pecasBaixo = pecasBaixo;
+    this.pecasDiagonalES = pecasDiagonalES;
+    this.pecasDiagonalEI = pecasDiagonalEI;
+    this.pecasDiagonalDS = pecasDiagonalDS;
+    this.pecasDiagonalDI = pecasDiagonalDI;
   }
   getEsquerda() {
     return this.pecasEsquerda;
@@ -31,6 +44,18 @@ class Direcoes {
   }
   getBaixo() {
     return this.pecasBaixo;
+  }
+  getES() {
+    return this.pecasDiagonalES;
+  }
+  getEI() {
+    return this.pecasDiagonalEI;
+  }
+  getDS() {
+    return this.pecasDiagonalDS;
+  }
+  getDI() {
+    return this.pecasDiagonalDI;
   }
 }
 
@@ -49,13 +74,12 @@ class Peca {
   }
   apagarPeca(grid) {
     this.coordenadas.forEach((coo) => {
-      grid[coo.getLinha()][coo.getColuna()] = '⠀';
+      if (coo != undefined && coo != null)
+        grid[coo.getLinha()][coo.getColuna()] = '⠀';
     });
     this.coordenadas = [];
   }
   construirPeca(grid) {
-    grid[this.pontoCentral.getLinha()][this.pontoCentral.getColuna()] =
-      this.cor;
     this.coordenadas.push(
       new Coordenada(
         this.pontoCentral.getLinha(),
@@ -63,8 +87,6 @@ class Peca {
       )
     );
     for (let i = 1; i < this.direcoes.getDireita() + 1; i++) {
-      grid[this.pontoCentral.getLinha()][this.pontoCentral.getColuna() + i] =
-        this.cor;
       this.coordenadas.push(
         new Coordenada(
           this.pontoCentral.getLinha(),
@@ -73,8 +95,6 @@ class Peca {
       );
     }
     for (let i = 1; i < this.direcoes.getBaixo() + 1; i++) {
-      grid[this.pontoCentral.getLinha() + i][this.pontoCentral.getColuna()] =
-        this.cor;
       this.coordenadas.push(
         new Coordenada(
           this.pontoCentral.getLinha() + i,
@@ -83,8 +103,6 @@ class Peca {
       );
     }
     for (let i = 1; i < this.direcoes.getEsquerda() + 1; i++) {
-      grid[this.pontoCentral.getLinha()][this.pontoCentral.getColuna() - i] =
-        this.cor;
       this.coordenadas.push(
         new Coordenada(
           this.pontoCentral.getLinha(),
@@ -93,8 +111,6 @@ class Peca {
       );
     }
     for (let i = 1; i < this.direcoes.getCima() + 1; i++) {
-      grid[this.pontoCentral.getLinha() - i][this.pontoCentral.getColuna()] =
-        this.cor;
       this.coordenadas.push(
         new Coordenada(
           this.pontoCentral.getLinha() - i,
@@ -102,6 +118,42 @@ class Peca {
         )
       );
     }
+    for (let i = 1; i < this.direcoes.getES() + 1; i++) {
+      this.coordenadas.push(
+        new Coordenada(
+          this.pontoCentral.getLinha() - i,
+          this.pontoCentral.getColuna() - i
+        )
+      );
+    }
+    for (let i = 1; i < this.direcoes.getEI() + 1; i++) {
+      this.coordenadas.push(
+        new Coordenada(
+          this.pontoCentral.getLinha() + i,
+          this.pontoCentral.getColuna() - i
+        )
+      );
+    }
+    for (let i = 1; i < this.direcoes.getDS() + 1; i++) {
+      this.coordenadas.push(
+        new Coordenada(
+          this.pontoCentral.getLinha() - i,
+          this.pontoCentral.getColuna() + i
+        )
+      );
+    }
+    for (let i = 1; i < this.direcoes.getDI() + 1; i++) {
+      this.coordenadas.push(
+        new Coordenada(
+          this.pontoCentral.getLinha() + i,
+          this.pontoCentral.getColuna() + i
+        )
+      );
+    }
+    this.coordenadas.forEach((c) => {
+      if (c != undefined && c != null)
+        grid[c.getLinha()][c.getColuna()] = this.cor;
+    });
   }
   rotacionar() {
     let aux = this.direcoes.pecasDireita;
@@ -112,6 +164,24 @@ class Peca {
   }
 }
 
+function peca1() {
+  let p = new Coordenada(0, 5);
+  let dir = new Direcoes(0, 0, 0, 3, 0, 0, 0, 0);
+  let pec = new Peca(p, 'roxo', dir);
+  pecaAtual = pec;
+  pecaAtual.construirPeca(jogo);
+  atualizaJogo();
+}
+function peca2() {
+  let p = new Coordenada(0, 5);
+  let dir = new Direcoes(0, 1, 0, 1, 0, 0, 0, 1);
+  let pec = new Peca(p, 'amarelo', dir);
+  pec.adicionarCoordenada();
+  pecaAtual = pec;
+  pecaAtual.construirPeca(jogo);
+  atualizaJogo();
+}
+
 const caractereInvisivel = '⠀';
 
 let ln = 20;
@@ -120,6 +190,7 @@ let linhasEliminadas = 0;
 let pontuacao = 0;
 let nivel = 1;
 let pecaInserida = false;
+let pecaEspecial = false;
 let pecaAtual;
 
 let jogo = inicailizarMatriz(ln, cl);
@@ -263,9 +334,10 @@ function tacarParaCima() {
 function incluiCoordenada(cords, linha, coluna) {
   let tem = false;
   cords.forEach((co) => {
-    if (co.getLinha() === linha && co.getColuna() === coluna) {
-      tem = true;
-    }
+    if (co != undefined && co != null)
+      if (co.getLinha() === linha && co.getColuna() === coluna) {
+        tem = true;
+      }
   });
   return tem;
 }
@@ -276,17 +348,18 @@ function tacarParaBaixo() {
     let coordenadasDaBase = [];
     let linhaBaixoPeca = 0;
     pecaAtual.coordenadas.forEach((c) => {
-      if (
-        !incluiCoordenada(
-          pecaAtual.coordenadas,
-          c.getLinha() + 1,
-          c.getColuna()
-        )
-      ) {
-        if (jogo[c.getLinha() + 1][c.getColuna()] != caractereInvisivel) {
-          contadorErros++;
+      if (c != undefined && c != null)
+        if (
+          !incluiCoordenada(
+            pecaAtual.coordenadas,
+            c.getLinha() + 1,
+            c.getColuna()
+          )
+        ) {
+          if (jogo[c.getLinha() + 1][c.getColuna()] != caractereInvisivel) {
+            contadorErros++;
+          }
         }
-      }
     });
     if (contadorErros === 0) {
       pecaAtual.pontoCentral.linha++;
@@ -297,6 +370,7 @@ function tacarParaBaixo() {
       pecaInserida = true;
     }
   } catch (error) {
+    console.log(error);
     pecaInserida = true;
   }
 }
