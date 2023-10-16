@@ -216,6 +216,11 @@ class Peca {
     this.direcoes.pecasCima = this.direcoes.getEsquerda();
     this.direcoes.pecasEsquerda = this.direcoes.getBaixo();
     this.direcoes.pecasBaixo = aux;
+    aux = this.direcoes.pecasDiagonalDS;
+    this.direcoes.pecasDiagonalDS = this.direcoes.pecasDiagonalES;
+    this.direcoes.pecasDiagonalES = this.direcoes.pecasDiagonalEI;
+    this.direcoes.pecasDiagonalEI = this.direcoes.pecasDiagonalDI;
+    this.direcoes.pecasDiagonalDI = aux;
   }
 }
 
@@ -248,9 +253,8 @@ let pecaInserida = false;
 let pecaEspecial = false;
 let pecaAtual;
 //RIAN
-let velocidade = 1000;
+let velocidade = 7000;
 let dropStart = Date.now();
-//
 
 let jogo = inicailizarMatriz(ln, cl);
 console.log(jogo);
@@ -337,13 +341,13 @@ function espelhar() {
 }
 
 function perdeu() {
-  console.log('MAMOU');
+  window.location.href = 'gameover.html';
 }
 
 function peca() {
-  let p = new Coordenada(5, 5);
+  let p = new Coordenada(1, 5);
   let dir = new Direcoes(1, 1, 1, 0);
-  let pec = new Peca(p, 'verde', dir);
+  let pec = new Peca(p, 'verdeQ', dir);
   pecaAtual = pec;
   pecaAtual.construirPeca(jogo);
   atualizaJogo();
@@ -407,6 +411,9 @@ function incluiCoordenada(cords, linha, coluna) {
 }
 
 function tacarParaBaixo() {
+  if (pecaInserida) {
+    return;
+  }
   try {
     let contadorErros = 0;
     let coordenadasDaBase = [];
@@ -430,26 +437,19 @@ function tacarParaBaixo() {
       pecaAtual.apagarPeca(jogo);
       pecaAtual.construirPeca(jogo);
       atualizaJogo();
+      return 0;
     } else {
       pecaInserida = true;
+      return 1;
     }
   } catch (error) {
     console.log(error);
     pecaInserida = true;
+    return 1;
   }
 }
 
 // RIAN
-function queda() {
-  let now = Date.now();
-  let delta = now - dropStart;
-  if (delta > velocidade) {
-    tacarParaBaixo();
-    dropStart = Date.now();
-  }
-  requestAnimationFrame(queda);
-}
-
 function controles(event) {
   const movimentos = {
     ArrowLeft() {
@@ -473,29 +473,66 @@ function controles(event) {
   movimentar();
 }
 
-function iniciarJogo() {
-  linhasEliminadas = 0;
-  pontuacao = 0;
-  nivel = 1;
-  pecaInserida = false;
-  peca();
-  tacarParaBaixo();
-  while (verificarDerrota() === false) {
-    pecaAtual.construirPeca();
-    while (pecaInserida === false) {
-      pecaInserida === true;
-    }
-    limparLinhasEGerarPontuacao();
-    break;
+const timer = (seconds) => {
+  let time = seconds * 1000;
+  return new Promise((res) => setTimeout(res, time));
+};
+
+async function queda() {
+  while (pecaInserida === false) {
+    tacarParaBaixo();
+    atualizaJogo();
+    await timer(1);
   }
+  pecaInserida = false;
+}
+
+async function iniciarJogo() {
+  do {
+    peca();
+    await queda();
+  } while (verificarDerrota() === false);
+  // linhasEliminadas = 0;
+  // pontuacao = 0;
+  // nivel = 1;
+  // pecaInserida = false;
+  // peca();
+  // while(verificarDerrota() === false) {
+  //   queda();
+  //   queda();
+  //   queda();
+  //   pecaInserida = false;
+  //   limparLinhasEGerarPontuacao();
+  //   exibir();
+  // }
+  window.location.href = 'gameover.html';
+}
+
+function exibir() {
+  console.log(nivel, pontuacao, linhasEliminadas, pecaInserida);
 }
 
 document.addEventListener('keydown', controles);
 
 // window.addEventListener('load', iniciarJogo);
 
-const startButton = document.getElementById('start-button');
-startButton.addEventListener('click', function () {
+const botaoIniciar = document.getElementById('botao_iniciar');
+botaoIniciar.addEventListener('click', function () {
   iniciarJogo();
-  startButton.style.display = 'none';
+  botaoIniciar.style.display = 'none';
+});
+
+function sumirBotao() {
+  const botao = document.getElementById('botao_iniciar');
+  botao.remove();
+}
+
+const disappearButton = document.getElementById('botao_iniciar');
+disappearButton.addEventListener('click', sumirBotao);
+
+window.addEventListener('keydown', function (e) {
+  // Verificar se a tecla pressionada é uma seta do teclado (esquerda, direita, cima, baixo)
+  if ([37, 38, 39, 40].includes(e.keyCode)) {
+    e.preventDefault();
+  }
 });
