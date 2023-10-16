@@ -777,3 +777,32 @@ input::placeholder {
   margin-bottom: 20%;
   margin-top: 20%;
 }
+
+.roxoQ {
+  color: #6c496f;
+  background-color: #6c496f;
+}
+.amareloQ {
+  color: #dbc630;
+  background-color: #dbc630;
+}
+.verdeQ {
+  color: #5ab72c;
+  background-color: #5ab72c;
+}
+.rosaQ {
+  color: #db86b4;
+  background-color: #db86b4;
+}
+.laranjaQ {
+  color: #ff5e00;
+  background-color: #ff5e00;
+}
+.vermelhoQ {
+  color: #bc3d31;
+  background-color: #bc3d31;
+}
+.cianoQ {
+  color: #00e5ff;
+  background-color: #00e5ff;
+}
