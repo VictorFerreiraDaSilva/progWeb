@@ -1,4 +1,37 @@
 'use strict';
+//localStorage
+const caractereInvisivel = '⠀';
+
+let ln = 20;
+let cl = 10;
+let linhasEliminadas = 0;
+let pontuacao = 0;
+let nivel = 1;
+let pecaInserida = false;
+let pecaEspecial = false;
+let pecaAtual;
+
+criarTabuleiro();
+
+function criarTabuleiro() {
+  let tamanhoCelula = '24px';
+  document.getElementById('tabuleiroDinamico').style.gridTemplateColumns =
+    'repeat(' + cl + ', 1fr)';
+  let divs = '';
+  for (let i = 0; i < ln; i++)
+    for (let j = 0; j < cl; j++) {
+      divs += '<div class="celula" id="' + i + '_' + j + '">⠀</div>';
+    }
+  document.getElementById('tabuleiroDinamico').innerHTML = divs;
+  if (cl == 10) {
+    tamanhoCelula = '48px';
+  }
+  var celulas = document.getElementsByClassName('celula');
+  for (let i = 0; i < celulas.length; i++) {
+    celulas[i].style.width = tamanhoCelula;
+    celulas[i].style.height = tamanhoCelula;
+  }
+}
 
 function armazenarDados() {
   var nomeUsuario = document.getElementById('nome').value;
@@ -223,17 +256,6 @@ class Peca {
     this.direcoes.pecasDiagonalDI = aux;
   }
 }
-
-const caractereInvisivel = '⠀';
-
-let ln = 20;
-let cl = 10;
-let linhasEliminadas = 0;
-let pontuacao = 0;
-let nivel = 1;
-let pecaInserida = false;
-let pecaEspecial = false;
-let pecaAtual;
 
 function peca1() {
   let p = new Coordenada(0, 5);
@@ -513,7 +535,8 @@ function controles(event) {
 }
 
 const timer = (seconds) => {
-  let time = seconds * 1300 - nivel * 300;
+  let time = seconds * 1100 - nivel * 100;
+  if (time <= 0) time = 10;
   return new Promise((res) => setTimeout(res, time));
 };
 
