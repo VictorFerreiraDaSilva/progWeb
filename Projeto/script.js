@@ -248,7 +248,7 @@ let pecaInserida = false;
 let pecaEspecial = false;
 let pecaAtual;
 //RIAN
-let velocidade = 1000;
+let velocidade = 7000;
 let dropStart = Date.now();
 //
 
@@ -341,7 +341,7 @@ function perdeu() {
 }
 
 function peca() {
-  let p = new Coordenada(5, 5);
+  let p = new Coordenada(1, 5);
   let dir = new Direcoes(1, 1, 1, 0);
   let pec = new Peca(p, 'verde', dir);
   pecaAtual = pec;
@@ -407,6 +407,9 @@ function incluiCoordenada(cords, linha, coluna) {
 }
 
 function tacarParaBaixo() {
+  if(pecaInserida){
+    return;
+  }
   try {
     let contadorErros = 0;
     let coordenadasDaBase = [];
@@ -430,26 +433,19 @@ function tacarParaBaixo() {
       pecaAtual.apagarPeca(jogo);
       pecaAtual.construirPeca(jogo);
       atualizaJogo();
+      return 0;
     } else {
       pecaInserida = true;
+      return 1;
     }
   } catch (error) {
     console.log(error);
     pecaInserida = true;
+    return 1;
   }
 }
 
 // RIAN
-function queda() {
-  let now = Date.now();
-  let delta = now - dropStart;
-  if(delta > velocidade) {
-    tacarParaBaixo();
-    dropStart = Date.now();
-  }
-  requestAnimationFrame(queda);
-}
-
 function controles(event) {
   const movimentos = {
     ArrowLeft() {
@@ -473,21 +469,45 @@ function controles(event) {
   movimentar();
 }
 
-function iniciarJogo() {
-  linhasEliminadas = 0;
-  pontuacao = 0;
-  nivel = 1;
-  pecaInserida = false;
-  peca();
-  queda();
-  while(verificarDerrota() === false) {
-    construirPeca();
-    while(pecaInserida === false) {
-      pecaInserida === true;
-    }
-    limparLinhasEGerarPontuacao();
-    break;
+const timer = (seconds) =>  {
+  let time = seconds * 1000
+  return new Promise(res => setTimeout(res, time))
+}
+
+async function queda2() {
+  
+  while(pecaInserida === false){
+    tacarParaBaixo();
+    atualizaJogo();
+    await timer(1);
   }
+  pecaInserida = false;
+}
+
+async function iniciarJogo() {
+  
+  do{
+    peca();
+    await queda2();
+  }while(verificarDerrota() === false);
+  // linhasEliminadas = 0;
+  // pontuacao = 0;
+  // nivel = 1;
+  // pecaInserida = false;
+  // peca();
+  // while(verificarDerrota() === false) {
+  //   queda();
+  //   queda();
+  //   queda();
+  //   pecaInserida = false;
+  //   limparLinhasEGerarPontuacao();
+  //   exibir();
+  // }
+  window.location.href = 'gameover.html'; 
+}
+
+function exibir(){
+  console.log(nivel, pontuacao, linhasEliminadas, pecaInserida);
 }
 
 
@@ -498,7 +518,7 @@ document.addEventListener("keydown", controles);
 const botaoIniciar = document.getElementById("botao_iniciar");
 botaoIniciar.addEventListener("click", function () {
     iniciarJogo();
-    startButton.style.display = "none";
+    botaoIniciar.style.display = "none";
 });
 
 function sumirBotao() {
