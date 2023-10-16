@@ -224,6 +224,51 @@ class Peca {
   }
 }
 
+function peca1() {
+  let p = new Coordenada(0, 5);
+  let dir = new Direcoes(0, 0, 0, 3, 0, 0, 0, 0);
+  let pec = new Peca(p, 'roxoQ', dir);
+  pecaAtual = pec;
+  pecaAtual.construirPeca(jogo);
+  atualizaJogo();
+}
+function peca2() {
+  let p = new Coordenada(0, 5);
+  let dir = new Direcoes(0, 1, 0, 1, 0, 0, 0, 1);
+  let pec = new Peca(p, 'amareloQ', dir);
+  pec.adicionarCoordenada();
+  pecaAtual = pec;
+  pecaAtual.construirPeca(jogo);
+  atualizaJogo();
+}
+
+function peca3() {
+  let p = new Coordenada(2, 5);
+  let dir = new Direcoes(0, 1, 2, 0, 0, 0, 0, 0);
+  let pec = new Peca(p, 'rosaQ', dir);
+  pecaAtual = pec;
+  pecaAtual.construirPeca(jogo);
+  atualizaJogo();
+}
+
+function peca4() {
+  let p = new Coordenada(2, 5);
+  let dir = new Direcoes(1, 0, 2, 0, 0, 0, 0, 0);
+  let pec = new Peca(p, 'laranjaQ', dir);
+  pecaAtual = pec;
+  pecaAtual.construirPeca(jogo);
+  atualizaJogo();
+}
+
+function peca5() {
+  let p = new Coordenada(1, 5);
+  let dir = new Direcoes(1, 1, 0, 0, 1, 0, 1, 0);
+  let pec = new Peca(p, 'vermelhoQ', dir);
+  pecaAtual = pec;
+  pecaAtual.construirPeca(jogo);
+  atualizaJogo();
+}
+
 const caractereInvisivel = '⠀';
 
 let ln = 20;
