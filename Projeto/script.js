@@ -513,7 +513,7 @@ function controles(event) {
 }
 
 const timer = (seconds) => {
-  let time = seconds * 1000;
+  let time = seconds * 1300 - nivel * 300;
   return new Promise((res) => setTimeout(res, time));
 };
 
