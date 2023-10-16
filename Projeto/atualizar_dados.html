@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Atualizar dados</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="script.js"></script>
 </head>
 <body>
     <section class="caixa_register">
@@ -18,7 +19,7 @@
         <br>
 
         <p class="texto_titulo_register">NOME COMPLETO</p>
-        <input class="input_register" id="input_nome">
+        <input class="input_register" id="input_nome" type="text"></input>
 
         <br>
 
@@ -28,8 +29,8 @@
         </div>
 
         <div>
-            <input  class="input_nao_atualizar, input_register" id="input_data" readonly=""> &nbsp;<input class="input_nao_atualizar, input_register"
-                id="input_cpf" readonly=""></div>
+            <input  class="input_nao_atualizar" class="input_register" id="input_data" readonly="true" placeholder="Valor imutável"> &nbsp</input><input class="input_nao_atualizar" class="input_register" placeholder="Valor imutável"
+                id="input_cpf" readonly="true"></input></div>
 
         <br>
 
@@ -39,8 +40,8 @@
             
         </div>
         <div>
-            <input class="input_register" id="input_telefone">
-            <input class="input_register" id="input_email">
+            <input class="input_register" id="input_telefone"> </input>
+            <input class="input_register"id="input_email"></input>
         </div>
 
         <br>
@@ -54,8 +55,8 @@
             <p>USUÁRIO</p>
             <P>SENHA</P>
         </div>
-        <div><input class="input_nao_atualizar, input_register" id="input_usuario" readonly=""><input class="input_register"
-                id="input_senha"></div>
+        <div><input class="input_nao_atualizar" class="input_register" id="input_usuario" readonly="true" placeholder="Valor imutável"></input> <input class="input_register"
+                id="input_senha"></input></div>
 
         <a class="botao_submeter" href="index.html">
             <h1>SUBMETER</h1>

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registre-se</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="script.js"></script>
 </head>
 <body>
     <section class="caixa_register">
@@ -16,11 +17,10 @@
         </div>
 
         <h1 class="texto_registro">DADOS PESSOAIS</h1>
-
         <br>
 
         <p class="texto_titulo_register">NOME COMPLETO</p>
-        <input class="input_register" id="input_nome">
+        <input class="input_register" id="input_nome" placeholder="Insira seu nome aqui"></input>
 
         <br>
 
@@ -28,8 +28,8 @@
             <p class="texto_titulo_register"><span>DATA DE NASC.</span><span>CPF</span></p>
         </div>
         <div>
-            <input class="input_register" id="input_data"> &nbsp;<input class="input_register"
-                id="input_cpf"></div>
+            <input class="input_register" id="input_data" type="date"></input><input class="input_register"
+                id="input_cpf" placeholder="123.456.789-10"></input></div>
 
         <br>
 
@@ -38,8 +38,8 @@
             <p>E-MAIL</p>
             
         </div>
-        <div><input class="input_register" id="input_telefone"><input class="input_register"
-                id="input_email"></div>
+        <div><input class="input_register" id="input_telefone" placeholder="(XX) 91234-5678"> </input><input class="input_register"
+                id="input_email" placeholder="seu@email.aqui"></input></div>
 
         <br>
         <br>
@@ -52,10 +52,10 @@
             <p>USUÁRIO</p>
             <P>SENHA</P>
         </div>
-        <div><input class="input_register" id="input_usuario"><input class="input_register"
-                id="input_senha"></div>
+        <div><input class="input_register" id="input_usuario"></input> <input class="input_register"
+                id="input_senha" type="password"></input></div>
 
-        <a class="botao_submeter" href="index.html">
+        <a class="botao_submeter" onclick="validaRegistro()">
             <h1>SUBMETER</h1>
         </a>
     </section>

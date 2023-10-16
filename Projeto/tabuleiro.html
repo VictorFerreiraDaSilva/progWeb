@@ -1,51 +1,51 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tabuleiro</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="script.js"></script>
+  </head>
+  <body>
     <header>
-        <section class="icones_header">
-            <a class="icone" href="resume.html">
-                <img src="/Projeto/assets/menu.png" alt="resume">
-            </a>
-            <a class="icone" href="ranking_global.html">
-                <img src="/Projeto/assets/trophy-01.png" alt="ranking">
-            </a>
-            <a class="icone" href="atualizar_dados.html">
-                <img src="/Projeto/assets/user-circle.png" alt="dados">
-            </a>
-            <a class="icone" href="index.html">
-                <img src="/Projeto/assets/user-minus-02.png" alt="index">
-            </a>
-            <p class="titulo"><span class="roxo">T</span><span class="amarelo">E</span><span class="verde">T</span><span class="rosa">R</span><span class="azul">I</span><span class="vermelho">S</span></p>
-        </section>
+      <section class="icones_header">
+        <a class="icone" href="resume.html">
+          <img src="assets/menu.png" />
+        </a>
+        <a class="icone" href="ranking_global.html">
+          <img src="assets/trophy-01.png" />
+        </a>
+        <a class="icone" href="atualizar_dados.html">
+          <img src="assets/user-circle.png" />
+        </a>
+        <a class="icone" href="index.html">
+          <img src="assets/user-minus-02.png" />
+        </a>
+        <p class="titulo">
+          <span class="roxo">T</span><span class="amarelo">E</span
+          ><span class="verde">T</span><span class="rosa">R</span
+          ><span class="azul">I</span><span class="vermelho">S</span>
+        </p>
+      </section>
     </header>
 
     <h1 class="titulo_tabuleiro">ESCOLHA O TABULEIRO</h1>
     <section class="tabuleiro_row">
-        <div class="tabuleiro_div">
-            <div class="tabuleiro_pequeno"></div>
-        <a href="jogo.html">
-            <h1 class="tamanho"> 10 X 20</h1>
+      <div class="tabuleiro_div">
+          <a href="jogo_10x20.html"><img src="assets/peca_amarela.png" class="image">
+          <h2 class="tamanho">10 X 20</h2>
         </a>
-
-        </div>
-        <div class="tabuleiro_div">
-            <div class="tabuleiro_grande"></div>
-            <a href="jogo.html">
-                <h1 class="tamanho">22 X 44</h1>
-            </a> 
-
-        </div>
+      </div>
+      <div class="tabuleiro_div">
+            <a href="jogo_22x44.html"><img src="assets/peca_verde.png" class="image">
+          <h2 class="tamanho">22 X 44</h2>
+        </a>
+      </div>
     </section>
 
     <footer>
-        USUÁRIO: USERNAME
+      <div id="nomeUsuario">⠀</div>
     </footer>
-    
-</body>
+  </body>
 </html>

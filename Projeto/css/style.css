@@ -51,9 +51,16 @@ DB86B4 - rosa
 .vermelho {
   color: #bc3d31;
 }
-
+.laranja {
+  color: #ff5e00;
+  background-color: #ff5e00;
+}
 .branco {
   color: #ffffff;
+}
+.ciano {
+  color: #00e5ff;
+  background-color: #00e5ff;
 }
 
 .tituloTetris {
@@ -160,6 +167,22 @@ body {
 
 .botao_jogar:hover {
   color: #d9d9d9;
+}
+
+.botao_jogar2 {
+  text-decoration: none;
+  color: var(--box-color);
+  font-family: 'Press Start 2P', cursive;
+  font-size: 15px;
+  background-color: #5ab72c;
+
+  padding: 4%;
+  margin-top: 10%;
+  border-radius: 15px;
+}
+
+#botao2_texto {
+  color: red;
 }
 
 /*JOGO.HTML CSS */
@@ -436,6 +459,7 @@ footer {
 #input_data {
   width: 325px;
   height: 40px;
+  justify-content: center;
 }
 
 /* PEDRO */
@@ -473,7 +497,6 @@ footer {
   font-family: 'Press Start 2P', cursive;
   font-size: 35px;
   color: #d9d9d9;
-
   display: flex;
   justify-content: center;
 }
@@ -574,14 +597,14 @@ a {
 
 /*RESUME.HTML*/
 
-.resume_janela{
+.resume_janela {
   -moz-box-shadow: 0 0 5px 5px var(--highlight-box);
   -webkit-box-shadow: 0 0 5px 5px var(--highlight-box);
   box-shadow: 0 0 20px 20px var(--highlight-box);
   /*https://www.css3.info/preview/box-shadow/*/
 
   margin: 5% 25% 5% 25%;
-   /*cima, direita, baixo, esquerda */
+  /*cima, direita, baixo, esquerda */
   background-color: var(--box-color);
   border-radius: 30px;
   padding: 3%;
@@ -590,27 +613,26 @@ a {
   flex-direction: column;
   align-items: center;
   gap: 25px;
-
 }
 
-.botao_resume{
+.botao_resume {
   color: black;
   text-decoration: none;
 
   font-family: 'Press Start 2P', cursive;
   font-size: 25px;
-  
+
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 30px;
-  
+
   padding: 4%;
   width: 350px;
   background-color: #70d1db;
 }
 
-.botao_sair{
+.botao_sair {
   text-decoration: none;
   font-family: 'Press Start 2P', cursive;
   font-size: 25px;
@@ -625,31 +647,30 @@ a {
   background-color: #bc3d31;
 }
 
-.botao_resume:hover{
+.botao_resume:hover {
   color: #d9d9d9;
 }
 
-.botao_sair:hover{
+.botao_sair:hover {
   color: var(--background-color);
 }
 
-.resume_titulo{
+.resume_titulo {
   font-family: 'Press Start 2P', cursive;
   font-size: 60px;
 
   padding: 5%;
   color: #bc3d31;
-
 }
 
-.gameover_janela{
+.gameover_janela {
   -moz-box-shadow: 0 0 5px 5px #bc3d31;
   -webkit-box-shadow: 0 0 5px 5px #bc3d31;
   box-shadow: 0 0 30px 30px #bc3d31;
   /*https://www.css3.info/preview/box-shadow/*/
 
   margin: 10% 25% 5% 25%;
-   /*cima, direita, baixo, esquerda */
+  /*cima, direita, baixo, esquerda */
   background-color: var(--box-color);
   border-radius: 30px;
   padding: 3%;
@@ -660,7 +681,7 @@ a {
   gap: 25px;
 }
 
-.gameover{
+.gameover {
   font-family: 'Press Start 2P', cursive;
   font-size: 55px;
 
@@ -671,3 +692,104 @@ a {
   flex-direction: row;
 }
 
+/* JOGO */
+
+.celula {
+  background-color: white;
+  width: 100%;
+  font-size: 100%;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.tabuleiro {
+  font-size: 16px;
+  color: black;
+  width: 100%;
+  height: 90vh;
+  margin: auto;
+  background-color: rgb(0, 212, 212);
+  display: grid;
+  gap: 2px;
+  grid-template-columns: repeat(10, 1fr);
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+#start-button {
+  background-color: #5ab72c;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 15px;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  margin-left: 35%;
+  margin-top: 16px;
+  border-radius: 8px;
+}
+
+#start-button:hover {
+  color: white;
+}
+
+.jogo_victor {
+  display: flex;
+  flex-direction: row;
+  background-color: red;
+  width: 80%;
+  margin: auto;
+  border: 2px solid black;
+}
+
+#container_jogo {
+  margin: auto;
+  padding: 4px;
+  text-align: center;
+}
+
+body_jogo {
+  margin-bottom: 20%;
+  background: linear-gradient(
+    45deg,
+    var(--highlight-box),
+    var(--background-color),
+    var(--background-color),
+    var(--highlight-box)
+  );
+  background-attachment: fixed;
+}
+
+/* Seletor para a data */
+input[type='date'] {
+  font-size: 16px;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+/* Seletor para a seta do calendário no campo de data (alguns navegadores) */
+input[type='date']::-webkit-inner-spin-button,
+input[type='date']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Seletor para a data no campo de data (alguns navegadores) */
+input[type='date']::-webkit-datetime-edit {
+  font-size: 16px; /* Tamanho da fonte */
+}
+
+/* Estilize o placeholder para o campo de entrada */
+input::placeholder {
+  font-size: 16px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-style: normal;
+  color: #999; /* Cor do placeholder */
+}
+
+#input_nome::placeholder {
+  font-style: italic;
+}
+
+.image {
+  margin-bottom: 20%;
+  margin-top: 20%;
+}
