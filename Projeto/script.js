@@ -511,7 +511,6 @@ async function queda() {
 }
 
 async function iniciarJogo() {
-  
   do{
     let numero = Math.floor(Math.random() * 7) + 1;
     switch(numero){
