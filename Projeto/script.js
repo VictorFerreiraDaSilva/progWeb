@@ -222,7 +222,7 @@ class Peca {
 function peca1() {
   let p = new Coordenada(0, 5);
   let dir = new Direcoes(0, 0, 0, 3, 0, 0, 0, 0);
-  let pec = new Peca(p, 'roxo', dir);
+  let pec = new Peca(p, 'roxoQ', dir);
   pecaAtual = pec;
   pecaAtual.construirPeca(jogo);
   atualizaJogo();
@@ -230,7 +230,7 @@ function peca1() {
 function peca2() {
   let p = new Coordenada(0, 5);
   let dir = new Direcoes(0, 1, 0, 1, 0, 0, 0, 1);
-  let pec = new Peca(p, 'amarelo', dir);
+  let pec = new Peca(p, 'amareloQ', dir);
   pec.adicionarCoordenada();
   pecaAtual = pec;
   pecaAtual.construirPeca(jogo);
