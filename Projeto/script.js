@@ -1,55 +1,55 @@
-"use strict";
+'use strict';
 
 function armazenarDados() {
-  var nomeUsuario = document.getElementById("nome").value;
-  var senhaUsuario = document.getElementById("senha").value;
+  var nomeUsuario = document.getElementById('nome').value;
+  var senhaUsuario = document.getElementById('senha').value;
 
   // Verifica se os campos estão preenchidos
-  if (nomeUsuario === "" || senhaUsuario === "") {
-    alert("Por favor, preencha todos os campos.");
+  if (nomeUsuario === '' || senhaUsuario === '') {
+    alert('Por favor, preencha todos os campos.');
     return; // Evita continuar se algum campo estiver em branco
   }
 
   // Armazena os valores no localStorage
-  localStorage.setItem("nomeUsuario", nomeUsuario);
-  localStorage.setItem("senhaUsuario", senhaUsuario);
+  localStorage.setItem('nomeUsuario', nomeUsuario);
+  localStorage.setItem('senhaUsuario', senhaUsuario);
 
   // Redireciona para a página "tabuleiro.html"
-  window.location.href = "tabuleiro.html";
+  window.location.href = 'tabuleiro.html';
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-  var nomeUsuario = localStorage.getItem("nomeUsuario");
+document.addEventListener('DOMContentLoaded', function () {
+  var nomeUsuario = localStorage.getItem('nomeUsuario');
   //var senhaUsuario = localStorage.getItem("senhaUsuario");
 
   // Exibe os valores onde desejado na página
-  document.getElementById("nomeUsuario").innerText = nomeUsuario + " JOGANDO";
+  document.getElementById('nomeUsuario').innerText = nomeUsuario + ' JOGANDO';
   //document.getElementById("senhaUsuario").innerText = "Senha: " + senhaUsuario;
 });
 
 function validaRegistro() {
-  var nome = document.getElementById("input_nome").value;
-  var cpf = document.getElementById("input_cpf").value;
-  var telefone = document.getElementById("input_telefone").value;
+  var nome = document.getElementById('input_nome').value;
+  var cpf = document.getElementById('input_cpf').value;
+  var telefone = document.getElementById('input_telefone').value;
 
   // Verifica se os campos estão preenchidos
-  if (nome === "" || cpf === "" || telefone === "") {
-    alert("Por favor, preencha todos os campos.");
+  if (nome === '' || cpf === '' || telefone === '') {
+    alert('Por favor, preencha todos os campos.');
     return; // Evita continuar se algum campo estiver em branco
   }
   let validado = validarEmail();
-  if (validado) window.location.href = "index.html";
+  if (validado) window.location.href = 'index.html';
 }
 
 function validarEmail() {
-  var emailInput = document.getElementById("input_email");
+  var emailInput = document.getElementById('input_email');
   var email = emailInput.value;
 
   // Expressão regular para validar o formato do e-mail
   var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   if (!emailPattern.test(email)) {
-    alert("Por favor, insira um endereço de e-mail válido.");
+    alert('Por favor, insira um endereço de e-mail válido.');
     return false;
   }
   return true;
@@ -323,8 +323,8 @@ function limparLinhasEGerarPontuacao() {
   linhasEliminadas += contadorLinhas;
   nivel = Math.floor(pontuacao / 300 + 1);
   //RIAN
-  if(velocidade > 100) {
-    velocidade = velocidade - ((nivel-1) * 100);
+  if (velocidade > 100) {
+    velocidade = velocidade - (nivel - 1) * 100;
   }
   //
 }
@@ -443,7 +443,7 @@ function tacarParaBaixo() {
 function queda() {
   let now = Date.now();
   let delta = now - dropStart;
-  if(delta > velocidade) {
+  if (delta > velocidade) {
     tacarParaBaixo();
     dropStart = Date.now();
   }
@@ -467,7 +467,7 @@ function controles(event) {
     ArrowDown() {
       tacarParaBaixo();
     },
-  }
+  };
 
   const movimentar = movimentos[event.code];
   movimentar();
@@ -480,9 +480,9 @@ function iniciarJogo() {
   pecaInserida = false;
   peca();
   tacarParaBaixo();
-  while(verificarDerrota() === false) {
-    construirPeca();
-    while(pecaInserida === false) {
+  while (verificarDerrota() === false) {
+    pecaAtual.construirPeca();
+    while (pecaInserida === false) {
       pecaInserida === true;
     }
     limparLinhasEGerarPontuacao();
@@ -490,13 +490,12 @@ function iniciarJogo() {
   }
 }
 
-
-document.addEventListener("keydown", controles);
+document.addEventListener('keydown', controles);
 
 // window.addEventListener('load', iniciarJogo);
 
-const startButton = document.getElementById("start-button");
-startButton.addEventListener("click", function () {
-    iniciarJogo();
-    startButton.style.display = "none";
+const startButton = document.getElementById('start-button');
+startButton.addEventListener('click', function () {
+  iniciarJogo();
+  startButton.style.display = 'none';
 });

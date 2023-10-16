@@ -696,7 +696,7 @@ a {
 
 .celula {
   background-color: white;
-  width: 100%;
+  width: 70px;
   font-size: 100%;
   font-weight: bold;
   cursor: pointer;
@@ -792,4 +792,33 @@ input::placeholder {
 .image {
   margin-bottom: 20%;
   margin-top: 20%;
+}
+
+.roxo {
+  color: #6c496f;
+  background-color: #6c496f;
+}
+.amarelo {
+  color: #dbc630;
+  background-color: #dbc630;
+}
+.verde {
+  color: #5ab72c;
+  background-color: #5ab72c;
+}
+.rosa {
+  color: #db86b4;
+  background-color: #db86b4;
+}
+.laranja {
+  color: #ff5e00;
+  background-color: #ff5e00;
+}
+.vermelho {
+  color: #bc3d31;
+  background-color: #bc3d31;
+}
+.ciano {
+  color: #00e5ff;
+  background-color: #00e5ff;
 }
