@@ -479,7 +479,7 @@ function iniciarJogo() {
   nivel = 1;
   pecaInserida = false;
   peca();
-  tacarParaBaixo();
+  queda();
   while(verificarDerrota() === false) {
     construirPeca();
     while(pecaInserida === false) {
@@ -495,16 +495,16 @@ document.addEventListener("keydown", controles);
 
 // window.addEventListener('load', iniciarJogo);
 
-const startButton = document.getElementById("start-button");
-startButton.addEventListener("click", function () {
+const botaoIniciar = document.getElementById("botao_iniciar");
+botaoIniciar.addEventListener("click", function () {
     iniciarJogo();
     startButton.style.display = "none";
 });
 
-function makeButtonDisappear() {
-  const button = document.getElementById("start-button");
-  button.remove();
+function sumirBotao() {
+  const botao = document.getElementById("botao_iniciar");
+  botao.remove();
 }
 
-const disappearButton = document.getElementById("start-button");
-disappearButton.addEventListener("click", makeButtonDisappear);
+const disappearButton = document.getElementById("botao_iniciar");
+disappearButton.addEventListener("click", sumirBotao);
