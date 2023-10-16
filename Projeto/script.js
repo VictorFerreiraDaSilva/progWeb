@@ -546,7 +546,6 @@ async function iniciarJogo() {
   // pontuacao = 0;
   // nivel = 1;
   // pecaInserida = false;
-  // peca();
   // while(verificarDerrota() === false) {
   //   queda();
   //   queda();
