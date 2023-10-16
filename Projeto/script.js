@@ -255,7 +255,16 @@ function peca4(){
   atualizaJogo();
 }
 
-function peca5(){
+function peca5() {
+  let p = new Coordenada(1, 5);
+  let dir = new Direcoes(1, 1, 1, 0);
+  let pec = new Peca(p, 'verdeQ', dir);
+  pecaAtual = pec;
+  pecaAtual.construirPeca(jogo);
+  atualizaJogo();
+}
+
+function peca6(){
   let p = new Coordenada(1, 5);
   let dir = new Direcoes(1, 1, 0, 0, 1, 0, 1, 0);
   let pec = new Peca(p, 'vermelhoQ', dir);
@@ -364,15 +373,6 @@ function espelhar() {
 
 function perdeu() {
   window.location.href = 'gameover.html';
-}
-
-function peca() {
-  let p = new Coordenada(1, 5);
-  let dir = new Direcoes(1, 1, 1, 0);
-  let pec = new Peca(p, 'verdeQ', dir);
-  pecaAtual = pec;
-  pecaAtual.construirPeca(jogo);
-  atualizaJogo();
 }
 
 function roda() {
@@ -513,7 +513,33 @@ async function queda() {
 async function iniciarJogo() {
   
   do{
-    peca5();
+    let numero = Math.floor(Math.random() * 7) + 1;
+    switch(numero){
+      case 1:
+        peca1();
+        break;
+
+      case 2:
+        peca2();
+        break;
+
+      case 3:
+        peca3();
+        break;
+
+      case 4:
+        peca4();
+        break; 
+      
+      case 5:
+        peca5();
+        break;
+      
+      case 6:
+        peca6();
+        break;
+    }
+
     await queda();
   }while(verificarDerrota() === false);
   // linhasEliminadas = 0;
@@ -556,7 +582,7 @@ const disappearButton = document.getElementById("botao_iniciar");
 disappearButton.addEventListener("click", sumirBotao);
 
 window.addEventListener("keydown", function (e) {
-  // Verificar se a tecla pressionada é uma seta do teclado (esquerda, direita, cima, baixo)
+  //(esquerda, direita, cima, baixo)
   if ([37, 38, 39, 40].includes(e.keyCode)) {
       e.preventDefault();
   }
