@@ -250,7 +250,6 @@ let pecaAtual;
 //RIAN
 let velocidade = 7000;
 let dropStart = Date.now();
-//
 
 let jogo = inicailizarMatriz(ln, cl);
 console.log(jogo);
@@ -337,7 +336,7 @@ function espelhar() {
 }
 
 function perdeu() {
-  console.log('MAMOU');
+  window.location.href = 'gameover.html';
 }
 
 function peca() {
@@ -474,7 +473,7 @@ const timer = (seconds) =>  {
   return new Promise(res => setTimeout(res, time))
 }
 
-async function queda2() {
+async function queda() {
   
   while(pecaInserida === false){
     tacarParaBaixo();
@@ -488,7 +487,7 @@ async function iniciarJogo() {
   
   do{
     peca();
-    await queda2();
+    await queda();
   }while(verificarDerrota() === false);
   // linhasEliminadas = 0;
   // pontuacao = 0;
