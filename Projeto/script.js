@@ -224,6 +224,17 @@ class Peca {
   }
 }
 
+const caractereInvisivel = '⠀';
+
+let ln = 20;
+let cl = 10;
+let linhasEliminadas = 0;
+let pontuacao = 0;
+let nivel = 1;
+let pecaInserida = false;
+let pecaEspecial = false;
+let pecaAtual;
+
 function peca1() {
   let p = new Coordenada(0, 5);
   let dir = new Direcoes(0, 0, 0, 3, 0, 0, 0, 0);
@@ -242,16 +253,43 @@ function peca2() {
   atualizaJogo();
 }
 
-const caractereInvisivel = '⠀';
+function peca3() {
+  let p = new Coordenada(2, 5);
+  let dir = new Direcoes(0, 1, 2, 0, 0, 0, 0, 0);
+  let pec = new Peca(p, 'rosaQ', dir);
+  pecaAtual = pec;
+  pecaAtual.construirPeca(jogo);
+  atualizaJogo();
+}
 
-let ln = 20;
-let cl = 10;
-let linhasEliminadas = 0;
-let pontuacao = 0;
-let nivel = 1;
-let pecaInserida = false;
-let pecaEspecial = false;
-let pecaAtual;
+function peca4() {
+  let p = new Coordenada(2, 5);
+  let dir = new Direcoes(1, 0, 2, 0, 0, 0, 0, 0);
+  let pec = new Peca(p, 'laranjaQ', dir);
+  pecaAtual = pec;
+  pecaAtual.construirPeca(jogo);
+  atualizaJogo();
+}
+
+function peca5() {
+  let p = new Coordenada(1, 5);
+  let dir = new Direcoes(1, 1, 0, 0, 1, 0, 1, 0);
+  let pec = new Peca(p, 'vermelhoQ', dir);
+  pecaAtual = pec;
+  pecaAtual.construirPeca(jogo);
+  atualizaJogo();
+}
+
+function pecaE() {
+  let p = new Coordenada(0, 5);
+  let dir = new Direcoes(0, 0, 0, 0, 0, 0, 0, 0);
+  let pec = new Peca(p, 'cianoQ', dir);
+  pecaAtual = pec;
+  pecaEspecial = true;
+  pecaAtual.construirPeca(jogo);
+  atualizaJogo();
+}
+
 //RIAN
 let velocidade = 7000;
 let dropStart = Date.now();
@@ -440,11 +478,12 @@ function tacarParaBaixo() {
       return 0;
     } else {
       pecaInserida = true;
+      if (pecaEspecial) espelhar();
       return 1;
     }
   } catch (error) {
-    console.log(error);
     pecaInserida = true;
+    if (pecaEspecial) espelhar();
     return 1;
   }
 }
@@ -480,36 +519,27 @@ const timer = (seconds) => {
 
 async function queda() {
   while (pecaInserida === false) {
+    await timer(1);
     tacarParaBaixo();
     atualizaJogo();
-    await timer(1);
   }
   pecaInserida = false;
 }
 
 async function iniciarJogo() {
+  linhasEliminadas = 0;
+  pontuacao = 0;
+  nivel = 1;
+  pecaInserida = false;
+  pecaEspecial = false;
   do {
     peca();
     await queda();
+    pecaInserida = false;
+    pecaEspecial = false;
+    limparLinhasEGerarPontuacao();
   } while (verificarDerrota() === false);
-  // linhasEliminadas = 0;
-  // pontuacao = 0;
-  // nivel = 1;
-  // pecaInserida = false;
-  // peca();
-  // while(verificarDerrota() === false) {
-  //   queda();
-  //   queda();
-  //   queda();
-  //   pecaInserida = false;
-  //   limparLinhasEGerarPontuacao();
-  //   exibir();
-  // }
   window.location.href = 'gameover.html';
-}
-
-function exibir() {
-  console.log(nivel, pontuacao, linhasEliminadas, pecaInserida);
 }
 
 document.addEventListener('keydown', controles);
