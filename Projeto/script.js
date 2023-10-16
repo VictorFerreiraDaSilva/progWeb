@@ -500,3 +500,11 @@ startButton.addEventListener("click", function () {
     iniciarJogo();
     startButton.style.display = "none";
 });
+
+function makeButtonDisappear() {
+  const button = document.getElementById("start-button");
+  button.remove();
+}
+
+const disappearButton = document.getElementById("start-button");
+disappearButton.addEventListener("click", makeButtonDisappear);
