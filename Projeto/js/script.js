@@ -27,7 +27,7 @@ function criarTabuleiro() {
     }
   document.getElementById('tabuleiroDinamico').innerHTML = divs;
   if (cl == 10) {
-    tamanhoCelula = '1.7rem';
+    tamanhoCelula = '1.9rem';
   }
   var celulas = document.getElementsByClassName('celula');
   for (let i = 0; i < celulas.length; i++) {

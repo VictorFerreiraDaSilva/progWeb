@@ -209,7 +209,8 @@ body {
 
   display: flex;
   flex-direction: row;
-  margin: 0 5% 0 20%;
+
+  margin: 0 5% 0 23%;
   /*cima, direita, baixo, esquerda */
 
   gap: 125px;
@@ -237,7 +238,7 @@ body {
   padding: 5%;
 
   background-color: var(--box-color);
-  border-radius: 30px;
+  border-radius: 15px;
   width: 100%;
 }
 
@@ -278,7 +279,7 @@ body {
   gap: 30px;
 
   background-color: var(--box-color);
-  border-radius: 30px;
+  border-radius: 15px;
 
   font-size: 1.2rem;
   color: #d9d9d9;
@@ -695,13 +696,13 @@ a {
   font-size: 16px;
   color: black;
   width: 100%;
-  background-color: #546594;
+  background-color: #5465942c;
   display: grid;
   gap: 1.5px;
   margin-top: 5%;
-  /*margin-bottom: 5%;
-  border-radius: 5px;*/
-  border: 3px #546594 solid;
+  /*margin-bottom: 5%;*/
+  border-radius: 5px;
+  border: 3px #70d1db solid;
 }
 
 #botao_iniciar {
@@ -711,13 +712,13 @@ a {
   padding: 15px 20px;
   border: none;
   cursor: pointer;
-  margin: 0 20% 0 20%;
+  margin: 0 22% 0 30%;
   margin-top: 16px;
   border-radius: 8px;
 }
 
 #botao_iniciar:hover {
-  color: white;
+  color: #d9d9d9;
 }
 
 .jogo_victor {
