@@ -2,8 +2,8 @@
 //localStorage
 const caractereInvisivel = '⠀';
 
-let ln = 20;
-let cl = 10;
+let ln = localStorage.getItem('ln');
+let cl = localStorage.getItem('cl');
 let linhasEliminadas = 0;
 let pontuacao = 0;
 let nivel = 1;

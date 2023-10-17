@@ -700,6 +700,10 @@ a {
   margin-bottom: 5%;
 }
 
+.tabuleiro_div a {
+  cursor: pointer;
+}
+
 #tabuleiroDinamico {
   font-size: 16px;
   color: black;
