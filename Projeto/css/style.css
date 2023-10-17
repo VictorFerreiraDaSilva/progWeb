@@ -209,7 +209,7 @@ body {
 
   display: flex;
   flex-direction: row;
-  margin: 0 5% 0 10%;
+  margin: 0 5% 0 20%;
   /*cima, direita, baixo, esquerda */
 
   gap: 125px;
@@ -245,7 +245,7 @@ body {
   display: flex;
   justify-content: center;
 
-  font-size: 35px;
+  font-size: 1.6rem;
   color: #d9d9d9;
 }
 
@@ -253,19 +253,19 @@ body {
   display: flex;
   justify-content: center;
 
-  font-size: 35px;
+  font-size: 2rem;
   color: #bc3d31;
 }
 
 .est {
-  font-size: 20px;
+  font-size: 1.2rem;
   color: #d9d9d9;
 }
 
 .ranking {
   display: flex;
   justify-content: center;
-  padding-top: 100px;
+  padding-top: 20px;
   margin-left: 10%;
   font-size: 30px;
 }
@@ -280,7 +280,7 @@ body {
   background-color: var(--box-color);
   border-radius: 30px;
 
-  font-size: 16px;
+  font-size: 1.2rem;
   color: #d9d9d9;
   width: 100%;
 }
@@ -288,7 +288,7 @@ body {
 .ranking_pessoal_column {
   display: flex;
   flex-direction: column;
-  font-size: 16px;
+  font-size: 1.2rem;
   flex: 1 1 0px;
   text-align: center;
 }
@@ -680,10 +680,11 @@ a {
 
 .celula {
   background-color: var(--background-color);
-  width: 32px;
+  width: auto;
   font-size: 100%;
   font-weight: bold;
   cursor: pointer;
+
 }
 
 .tabuleiro_div a {
@@ -696,20 +697,21 @@ a {
   width: 100%;
   background-color: #546594;
   display: grid;
-  gap: 2px;
+  gap: 1.5px;
   margin-top: 5%;
-  margin-bottom: 5%;
-  border-radius: 12px;
+  /*margin-bottom: 5%;
+  border-radius: 5px;*/
+  border: 3px #546594 solid;
 }
 
 #botao_iniciar {
   background-color: #5ab72c;
-  font-family: 'Press Start 2P', cursive;
-  font-size: 15px;
-  padding: 10px 20px;
+  font-family: 'Press Start 2P', sans-serif;
+  font-size: 20px;
+  padding: 15px 20px;
   border: none;
   cursor: pointer;
-  margin-left: 35%;
+  margin: 0 20% 0 20%;
   margin-top: 16px;
   border-radius: 8px;
 }
@@ -728,8 +730,8 @@ a {
 }
 
 #container_jogo {
-  padding: 4px;
-  text-align: center;
+  display: flex;
+  align-items: center;
 }
 
 body_jogo {

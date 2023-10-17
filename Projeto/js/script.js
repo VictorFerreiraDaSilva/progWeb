@@ -17,7 +17,7 @@ document.getElementById('nivel').innerHTML = nivel;
 criarTabuleiro();
 
 function criarTabuleiro() {
-  let tamanhoCelula = '24px';
+  let tamanhoCelula = '0.9rem';
   document.getElementById('tabuleiroDinamico').style.gridTemplateColumns =
     'repeat(' + cl + ', 1fr)';
   let divs = '';
@@ -27,7 +27,7 @@ function criarTabuleiro() {
     }
   document.getElementById('tabuleiroDinamico').innerHTML = divs;
   if (cl == 10) {
-    tamanhoCelula = '48px';
+    tamanhoCelula = '1.7rem';
   }
   var celulas = document.getElementsByClassName('celula');
   for (let i = 0; i < celulas.length; i++) {
