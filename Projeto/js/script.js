@@ -36,9 +36,10 @@ function criarTabuleiro() {
   }
   document.getElementById('0_0').style.borderTopLeftRadius = '12px';
   document.getElementById('0_' + (cl - 1)).style.borderTopRightRadius = '12px';
-  document.getElementById(ln - 1 + '_0').style.borderTopLeftRadius = '12px';
-  document.getElementById(ln - 1 + '_' + (cl - 1)).style.borderTopLeftRadius =
-    '12px';
+  document.getElementById(ln - 1 + '_0').style.borderBottomLeftRadius = '12px';
+  document.getElementById(
+    ln - 1 + '_' + (cl - 1)
+  ).style.borderBottomRightRadius = '12px';
 }
 
 function armazenarDados() {
