@@ -409,9 +409,16 @@ function limparLinhasEGerarPontuacao() {
   document.getElementById('nivel').innerHTML = nivel;
 }
 
+const partialReverse = (arr = [], num = 0) => {
+  const partialArr = arr.slice(0, num);
+  partialArr.reverse();
+  arr.splice(0, num, ...partialArr);
+};
+
 function espelhar() {
   jogo.forEach((linha) => {
-    linha.reverse();
+    //linha.reverse();
+    partialReverse(linha, cl);
   });
   atualizaJogo();
 }
