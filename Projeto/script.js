@@ -10,6 +10,9 @@ let nivel = 1;
 let pecaInserida = false;
 let pecaEspecial = false;
 let pecaAtual;
+document.getElementById('linhasEliminadas').innerHTML = linhasEliminadas;
+document.getElementById('pontuacao').innerHTML = pontuacao;
+document.getElementById('nivel').innerHTML = nivel;
 
 criarTabuleiro();
 
@@ -395,11 +398,9 @@ function limparLinhasEGerarPontuacao() {
   pontuacao += p;
   linhasEliminadas += contadorLinhas;
   nivel = Math.floor(pontuacao / 300 + 1);
-  //RIAN
-  if (velocidade > 100) {
-    velocidade = velocidade - (nivel - 1) * 100;
-  }
-  //
+  document.getElementById('linhasEliminadas').innerHTML = linhasEliminadas;
+  document.getElementById('pontuacao').innerHTML = pontuacao;
+  document.getElementById('nivel').innerHTML = nivel;
 }
 
 function espelhar() {
@@ -616,5 +617,30 @@ window.addEventListener('keydown', function (e) {
   //(esquerda, direita, cima, baixo)
   if ([37, 38, 39, 40].includes(e.keyCode)) {
     e.preventDefault();
+  }
+});
+
+let tempoDecorrido = 0;
+let cronometroEmExecucao = false;
+let intervalID;
+
+let tempoElement = document.getElementById('tempo');
+let iniciarButton = document.getElementById('botao_iniciar');
+
+function atualizarCronometro() {
+  tempoDecorrido++;
+  const segundos = tempoDecorrido % 60;
+  const minutos = Math.floor((tempoDecorrido / 60) % 60);
+
+  const formatoTempo = `${minutos.toString().padStart(2, '0')}:${segundos
+    .toString()
+    .padStart(2, '0')}`;
+  tempoElement.textContent = formatoTempo;
+}
+
+iniciarButton.addEventListener('click', () => {
+  if (!cronometroEmExecucao) {
+    intervalID = setInterval(atualizarCronometro, 1000);
+    cronometroEmExecucao = true;
   }
 });
