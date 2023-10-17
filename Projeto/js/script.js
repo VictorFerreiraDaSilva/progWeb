@@ -34,6 +34,11 @@ function criarTabuleiro() {
     celulas[i].style.width = tamanhoCelula;
     celulas[i].style.height = tamanhoCelula;
   }
+  document.getElementById('0_0').style.borderTopLeftRadius = '12px';
+  document.getElementById('0_' + (cl - 1)).style.borderTopRightRadius = '12px';
+  document.getElementById(ln - 1 + '_0').style.borderTopLeftRadius = '12px';
+  document.getElementById(ln - 1 + '_' + (cl - 1)).style.borderTopLeftRadius =
+    '12px';
 }
 
 function armazenarDados() {
