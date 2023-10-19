@@ -210,7 +210,7 @@ body {
   display: flex;
   flex-direction: row;
 
-  margin: 0 5% 0 23%;
+  margin: 0 5% 0 10%;
   /*cima, direita, baixo, esquerda */
 
   gap: 125px;
@@ -705,16 +705,43 @@ a {
   border: 3px #70d1db solid;
 }
 
-#botao_iniciar {
+.div_inipause{
+  display: flex;
+  flex-direction: row;
+  width: auto;
+}
+
+#botao_pause{
   background-color: #5ab72c;
   font-family: 'Press Start 2P', sans-serif;
   font-size: 20px;
   padding: 15px 20px;
   border: none;
   cursor: pointer;
-  margin: 0 22% 0 30%;
-  margin-top: 16px;
+  margin: 5%;
   border-radius: 8px;
+
+  display: flex;
+  flex-direction: row;
+}
+
+#botao_pause:hover {
+  color: #bc3d31;
+}
+
+#botao_iniciar {
+
+  background-color: #5ab72c;
+  font-family: 'Press Start 2P', sans-serif;
+  font-size: 20px;
+  padding: 15px 20px;
+  border: none;
+  cursor: pointer;
+  margin: 5%;
+  border-radius: 8px;
+
+  display: flex;
+  flex-direction: row;
 }
 
 #botao_iniciar:hover {
@@ -809,4 +836,28 @@ input::placeholder {
 .cianoQ {
   color: #00e5ff;
   background-color: #00e5ff;
+}
+
+.prox_peca_botoes{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.peca_titulo{
+  /*nao consigo alinhar*/
+  text-align: center;
+  font-size: 30px;
+
+  gap: 10px;
+}
+
+.quadrado_peca{
+  width: 250px;
+  background: var(--box-color);
+  margin: 8%;
+  padding: 10%;
+
+  border-radius: 15px;
 }
