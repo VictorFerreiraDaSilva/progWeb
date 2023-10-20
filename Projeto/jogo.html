@@ -7,7 +7,23 @@
     <title>TETRIS</title>
   </head>
   <body class="jogobody">
-    <div class="blure">
+    <div class="gameover_janela" id="gameover">
+      <div class="gameover">
+        <p class="gameover">
+          <span class="roxo">G</span><span class="amarelo">A</span
+          ><span class="verde">M</span><span class="azul">E</span>
+        </p>
+        <p class="gameover">
+          <span class="vermelho">O</span><span class="roxo">V</span
+          ><span class="roxo">E</span><span class="amarelo">R</span>
+        </p>
+      </div>
+      <a onclick="iniciarJogo()"
+        ><div class="botao_resume">NOVA PARTIDA</div></a
+      >
+      <a href="index.html"><div class="botao_sair">SAIR DO JOGO</div></a>
+    </div>
+    <div>
       <header>
         <div class="icones_header">
           <a class="icone" href="resume.html">
@@ -30,7 +46,7 @@
         </div>
       </header>
 
-      <section class="tela_jogo">
+      <section class="tela_jogo" id="jogo">
         <div class="estat_rank">
           <h1 class="estatistica">
             <span class="roxo">E</span><span class="amarelo">S</span
@@ -138,7 +154,6 @@
           </div>
         </section>
       </section>
-      <div class="blur"></div>
     </div>
     <footer><div id="nomeUsuario">⠀</div></footer>
     <script src="js/script.js"></script>
