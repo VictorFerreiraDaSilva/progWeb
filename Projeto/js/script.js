@@ -10,6 +10,7 @@ let nivel = 1;
 let pecaInserida = false;
 let pecaEspecial = false;
 let pecaAtual;
+let proximaPeca = 0;
 document.getElementById('linhasEliminadas').innerHTML = linhasEliminadas;
 document.getElementById('pontuacao').innerHTML = pontuacao;
 document.getElementById('nivel').innerHTML = nivel;
@@ -219,7 +220,6 @@ class Peca {
         this.pontoCentral.linha -= errosBaixo;
         erros++;
       }
-      console.log(erros);
     } while (erros != 0);
 
     this.coordenadas.push(
@@ -381,7 +381,6 @@ let velocidade = 7000;
 let dropStart = Date.now();
 
 let jogo = inicailizarMatriz(ln, cl);
-console.log(jogo);
 
 function inicializarArray(tamanho, vazio) {
   var array = [];
@@ -594,6 +593,35 @@ function controles(event) {
   movimentar();
 }
 
+function exibirProximaPeca() {
+  let src = '';
+  switch (proximaPeca) {
+    case 1:
+      src = 'peca_roxa.png';
+      break;
+    case 2:
+      src = 'peca_amarela.png';
+      break;
+    case 3:
+      src = 'peca_rosa.png';
+      break;
+    case 4:
+      src = 'peca_laranja.png';
+      break;
+    case 5:
+      src = 'peca_verde.png';
+      break;
+    case 6:
+      src = 'peca_vermelha.png';
+      break;
+    case 7:
+      src = 'especial.png';
+      break;
+  }
+  document.getElementById('proximaPeca').src = '/Projeto/assets/' + src;
+  document.getElementById('proximaPeca').style.height = '250px';
+}
+
 const timer = (seconds) => {
   let time = seconds * 1100 - nivel * 100;
   if (time <= 0) time = 10;
@@ -615,8 +643,11 @@ async function iniciarJogo() {
   nivel = 1;
   pecaInserida = false;
   pecaEspecial = false;
+  proximaPeca = Math.floor(Math.random() * 8) + 1;
   do {
-    let numero = Math.floor(Math.random() * 8) + 1;
+    let numero = proximaPeca;
+    proximaPeca = Math.floor(Math.random() * 8) + 1;
+    exibirProximaPeca();
     switch (numero) {
       case 1:
         peca1();
