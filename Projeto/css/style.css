@@ -578,6 +578,7 @@ a {
 .blur {
   -webkit-filter: url(#svg-blur);
   filter: url(#svg-blur);
+  pointer-events: none;
 }
 
 /*RESUME.HTML*/
@@ -666,6 +667,7 @@ a {
   gap: 25px;
   position: fixed;
   width: 40%;
+  z-index: 9;
 }
 
 .gameover {

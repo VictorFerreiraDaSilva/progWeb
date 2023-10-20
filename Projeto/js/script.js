@@ -468,10 +468,6 @@ function espelhar() {
   atualizaJogo();
 }
 
-function perdeu() {
-  window.location.href = 'gameover.html';
-}
-
 function roda() {
   pecaAtual.apagarPeca(jogo);
   pecaAtual.rotacionar();
@@ -652,6 +648,7 @@ async function queda() {
 
 async function iniciarJogo() {
   document.getElementById('gameover').style.display = 'none';
+  document.getElementById('jogo').classList.remove('blur');
   jogo = inicailizarMatriz(ln, cl);
   atualizaJogo();
   limparLinhasEGerarPontuacao();
@@ -700,6 +697,7 @@ async function iniciarJogo() {
 
 function gameover() {
   document.getElementById('gameover').style.display = 'flex';
+  document.getElementById('jogo').classList.add('blur');
 }
 
 document.addEventListener('keydown', controles);
