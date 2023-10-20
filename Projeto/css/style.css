@@ -528,9 +528,11 @@ a {
   color: #d9d9d9;
 }
 
-.tamanho:hover {
+
+.tabuleiro_div a .tamanho:hover{
   color: #5ab72c;
 }
+
 
 .ranking_global {
   font-family: 'Press Start 2P', cursive;
@@ -695,6 +697,7 @@ a {
 .tabuleiro_div a {
   cursor: pointer;
 }
+
 
 #tabuleiroDinamico {
   font-size: 16px;
