@@ -846,15 +846,15 @@ input::placeholder {
   /*nao consigo alinhar*/
   text-align: center;
   font-size: 30px;
-
+  margin-left: 17%;
   gap: 10px;
+  margin-bottom: 16px;
 }
 
 .quadrado_peca {
   width: 250px;
   background: var(--box-color);
-  margin: 8%;
   padding: 10%;
-
+  text-align: center;
   border-radius: 15px;
 }

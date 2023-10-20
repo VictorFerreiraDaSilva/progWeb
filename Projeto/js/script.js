@@ -643,36 +643,30 @@ async function iniciarJogo() {
   nivel = 1;
   pecaInserida = false;
   pecaEspecial = false;
-  proximaPeca = Math.floor(Math.random() * 8) + 1;
+  proximaPeca = Math.floor(Math.random() * 7) + 1;
   do {
     let numero = proximaPeca;
-    proximaPeca = Math.floor(Math.random() * 8) + 1;
+    proximaPeca = Math.floor(Math.random() * 7) + 1;
     exibirProximaPeca();
     switch (numero) {
       case 1:
         peca1();
         break;
-
       case 2:
         peca2();
         break;
-
       case 3:
         peca3();
         break;
-
       case 4:
         peca4();
         break;
-
       case 5:
         peca5();
         break;
-
       case 6:
         peca6();
         break;
-
       case 7:
         pecaE();
         break;
