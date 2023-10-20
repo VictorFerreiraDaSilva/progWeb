@@ -10,6 +10,7 @@ let nivel = 1;
 let pecaInserida = false;
 let pecaEspecial = false;
 let pecaAtual;
+let proximaPeca = 0;
 document.getElementById('linhasEliminadas').innerHTML = linhasEliminadas;
 document.getElementById('pontuacao').innerHTML = pontuacao;
 document.getElementById('nivel').innerHTML = nivel;
@@ -177,6 +178,50 @@ class Peca {
     this.coordenadas = [];
   }
   construirPeca(grid) {
+    let errosDireita = 0;
+    let errosEsquerda = 0;
+    let errosCima = 0;
+    let errosBaixo = 0;
+    let erros = 0;
+    do {
+      errosDireita = 0;
+      errosEsquerda = 0;
+      errosCima = 0;
+      errosBaixo = 0;
+      erros = 0;
+      let linhaCentral = this.pontoCentral.getLinha();
+      let colunaCentral = this.pontoCentral.getColuna();
+      if (linhaCentral - this.direcoes.getCima() < 0) errosCima++;
+      if (linhaCentral + this.direcoes.getBaixo() > ln - 1) errosBaixo++;
+      if (colunaCentral - this.direcoes.getEsquerda() < 0) errosEsquerda++;
+      if (colunaCentral + this.direcoes.getDireita() > cl - 1) errosDireita++;
+      if (linhaCentral - this.direcoes.getES() < 0) errosCima++;
+      if (colunaCentral - this.direcoes.getES() < 0) errosEsquerda++;
+      if (linhaCentral - this.direcoes.getDS() < 0) errosCima++;
+      if (colunaCentral + this.direcoes.getDS() > cl - 1) errosDireita++;
+      if (linhaCentral + this.direcoes.getEI() > ln - 1) errosBaixo++;
+      if (colunaCentral - this.direcoes.getEI() < 0) errosEsquerda++;
+      if (linhaCentral + this.direcoes.getDI() > ln - 1) errosBaixo++;
+      if (colunaCentral + this.direcoes.getDI() > cl - 1) errosDireita++;
+
+      if (errosDireita > 0) {
+        this.pontoCentral.coluna -= errosDireita;
+        erros++;
+      }
+      if (errosEsquerda > 0) {
+        this.pontoCentral.coluna += errosEsquerda;
+        erros++;
+      }
+      if (errosCima > 0) {
+        this.pontoCentral.linha += errosCima;
+        erros++;
+      }
+      if (errosBaixo > 0) {
+        this.pontoCentral.linha -= errosBaixo;
+        erros++;
+      }
+    } while (erros != 0);
+
     this.coordenadas.push(
       new Coordenada(
         this.pontoCentral.getLinha(),
@@ -247,6 +292,7 @@ class Peca {
         )
       );
     }
+
     this.coordenadas.forEach((c) => {
       if (c != undefined && c != null)
         grid[c.getLinha()][c.getColuna()] = this.cor;
@@ -335,7 +381,6 @@ let velocidade = 7000;
 let dropStart = Date.now();
 
 let jogo = inicailizarMatriz(ln, cl);
-console.log(jogo);
 
 function inicializarArray(tamanho, vazio) {
   var array = [];
@@ -548,6 +593,35 @@ function controles(event) {
   movimentar();
 }
 
+function exibirProximaPeca() {
+  let src = '';
+  switch (proximaPeca) {
+    case 1:
+      src = 'peca_roxa.png';
+      break;
+    case 2:
+      src = 'peca_amarela.png';
+      break;
+    case 3:
+      src = 'peca_rosa.png';
+      break;
+    case 4:
+      src = 'peca_laranja.png';
+      break;
+    case 5:
+      src = 'peca_verde.png';
+      break;
+    case 6:
+      src = 'peca_vermelha.png';
+      break;
+    case 7:
+      src = 'especial.png';
+      break;
+  }
+  document.getElementById('proximaPeca').src = '/Projeto/assets/' + src;
+  document.getElementById('proximaPeca').style.height = '250px';
+}
+
 const timer = (seconds) => {
   let time = seconds * 1100 - nivel * 100;
   if (time <= 0) time = 10;
@@ -569,33 +643,30 @@ async function iniciarJogo() {
   nivel = 1;
   pecaInserida = false;
   pecaEspecial = false;
+  proximaPeca = Math.floor(Math.random() * 7) + 1;
   do {
-    let numero = Math.floor(Math.random() * 8) + 1;
+    let numero = proximaPeca;
+    proximaPeca = Math.floor(Math.random() * 7) + 1;
+    exibirProximaPeca();
     switch (numero) {
       case 1:
         peca1();
         break;
-
       case 2:
         peca2();
         break;
-
       case 3:
         peca3();
         break;
-
       case 4:
         peca4();
         break;
-
       case 5:
         peca5();
         break;
-
       case 6:
         peca6();
         break;
-
       case 7:
         pecaE();
         break;
