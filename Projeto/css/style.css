@@ -685,7 +685,6 @@ a {
   font-size: 100%;
   font-weight: bold;
   cursor: pointer;
-
 }
 
 .tabuleiro_div a {
@@ -705,13 +704,13 @@ a {
   border: 3px #70d1db solid;
 }
 
-.div_inipause{
+.div_inipause {
   display: flex;
   flex-direction: row;
   width: auto;
 }
 
-#botao_pause{
+#botao_pause {
   background-color: #5ab72c;
   font-family: 'Press Start 2P', sans-serif;
   font-size: 20px;
@@ -730,7 +729,6 @@ a {
 }
 
 #botao_iniciar {
-
   background-color: #5ab72c;
   font-family: 'Press Start 2P', sans-serif;
   font-size: 20px;
@@ -838,26 +836,25 @@ input::placeholder {
   background-color: #00e5ff;
 }
 
-.prox_peca_botoes{
+.prox_peca_botoes {
   display: flex;
   flex-direction: column;
   align-items: center;
-
 }
 
-.peca_titulo{
+.peca_titulo {
   /*nao consigo alinhar*/
   text-align: center;
   font-size: 30px;
-
+  margin-left: 17%;
   gap: 10px;
+  margin-bottom: 16px;
 }
 
-.quadrado_peca{
+.quadrado_peca {
   width: 250px;
   background: var(--box-color);
-  margin: 8%;
   padding: 10%;
-
+  text-align: center;
   border-radius: 15px;
 }
