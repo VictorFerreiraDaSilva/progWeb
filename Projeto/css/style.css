@@ -578,6 +578,7 @@ a {
 .blur {
   -webkit-filter: url(#svg-blur);
   filter: url(#svg-blur);
+  pointer-events: none;
 }
 
 /*RESUME.HTML*/
@@ -660,10 +661,13 @@ a {
   border-radius: 30px;
   padding: 3%;
 
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
   gap: 25px;
+  position: fixed;
+  width: 40%;
+  z-index: 9;
 }
 
 .gameover {

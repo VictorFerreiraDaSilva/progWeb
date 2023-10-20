@@ -11,6 +11,8 @@ let pecaInserida = false;
 let pecaEspecial = false;
 let pecaAtual;
 let proximaPeca = 0;
+let pausado = false;
+let jogo = inicailizarMatriz(ln, cl);
 document.getElementById('linhasEliminadas').innerHTML = linhasEliminadas;
 document.getElementById('pontuacao').innerHTML = pontuacao;
 document.getElementById('nivel').innerHTML = nivel;
@@ -380,8 +382,6 @@ function pecaE() {
 let velocidade = 7000;
 let dropStart = Date.now();
 
-let jogo = inicailizarMatriz(ln, cl);
-
 function inicializarArray(tamanho, vazio) {
   var array = [];
   for (let i = 0; i < tamanho; i++) {
@@ -466,10 +466,6 @@ function espelhar() {
     partialReverse(linha, cl);
   });
   atualizaJogo();
-}
-
-function perdeu() {
-  window.location.href = 'gameover.html';
 }
 
 function roda() {
@@ -622,14 +618,27 @@ function exibirProximaPeca() {
   document.getElementById('proximaPeca').style.height = '250px';
 }
 
+function pausar() {
+  pausado = !pausado;
+}
+
 const timer = (seconds) => {
   let time = seconds * 1100 - nivel * 100;
   if (time <= 0) time = 10;
   return new Promise((res) => setTimeout(res, time));
 };
 
+const timerPausa = (seconds) => {
+  let time = seconds * 1000;
+  if (time <= 0) time = 10;
+  return new Promise((res) => setTimeout(res, time));
+};
+
 async function queda() {
   while (pecaInserida === false) {
+    while (pausado) {
+      await timerPausa(0.5);
+    }
     await timer(1);
     tacarParaBaixo();
     atualizaJogo();
@@ -638,6 +647,13 @@ async function queda() {
 }
 
 async function iniciarJogo() {
+  document.getElementById('gameover').style.display = 'none';
+  document.getElementById('jogo').classList.remove('blur');
+  jogo = inicailizarMatriz(ln, cl);
+  atualizaJogo();
+  limparLinhasEGerarPontuacao();
+  tempoDecorrido = 0;
+  pausado = false;
   linhasEliminadas = 0;
   pontuacao = 0;
   nivel = 1;
@@ -676,7 +692,12 @@ async function iniciarJogo() {
     pecaEspecial = false;
     limparLinhasEGerarPontuacao();
   } while (verificarDerrota() === false);
-  window.location.href = 'gameover.html';
+  gameover();
+}
+
+function gameover() {
+  document.getElementById('gameover').style.display = 'flex';
+  document.getElementById('jogo').classList.add('blur');
 }
 
 document.addEventListener('keydown', controles);
@@ -686,16 +707,16 @@ document.addEventListener('keydown', controles);
 const botaoIniciar = document.getElementById('botao_iniciar');
 botaoIniciar.addEventListener('click', function () {
   iniciarJogo();
-  botaoIniciar.style.display = 'none';
+  //botaoIniciar.style.display = 'none';
 });
 
-function sumirBotao() {
+/*function sumirBotao() {
   const botao = document.getElementById('botao_iniciar');
   botao.remove();
-}
+}*/
 
-const disappearButton = document.getElementById('botao_iniciar');
-disappearButton.addEventListener('click', sumirBotao);
+/*const disappearButton = document.getElementById('botao_iniciar');
+disappearButton.addEventListener('click', sumirBotao);*/
 
 window.addEventListener('keydown', function (e) {
   //(esquerda, direita, cima, baixo)
