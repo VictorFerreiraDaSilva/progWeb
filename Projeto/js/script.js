@@ -11,6 +11,7 @@ let pecaInserida = false;
 let pecaEspecial = false;
 let pecaAtual;
 let proximaPeca = 0;
+let pausado = false;
 document.getElementById('linhasEliminadas').innerHTML = linhasEliminadas;
 document.getElementById('pontuacao').innerHTML = pontuacao;
 document.getElementById('nivel').innerHTML = nivel;
@@ -622,14 +623,29 @@ function exibirProximaPeca() {
   document.getElementById('proximaPeca').style.height = '250px';
 }
 
+function pausar() {
+  pausado = !pausado;
+  console.log(pausado);
+}
+
 const timer = (seconds) => {
   let time = seconds * 1100 - nivel * 100;
   if (time <= 0) time = 10;
   return new Promise((res) => setTimeout(res, time));
 };
 
+const timerPausa = (seconds) => {
+  let time = seconds * 1000;
+  if (time <= 0) time = 10;
+  return new Promise((res) => setTimeout(res, time));
+};
+
 async function queda() {
   while (pecaInserida === false) {
+    while (pausado) {
+      await timerPausa(0.5);
+      console.log(pausado);
+    }
     await timer(1);
     tacarParaBaixo();
     atualizaJogo();
