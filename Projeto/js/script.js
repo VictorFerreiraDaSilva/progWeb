@@ -177,6 +177,51 @@ class Peca {
     this.coordenadas = [];
   }
   construirPeca(grid) {
+    let errosDireita = 0;
+    let errosEsquerda = 0;
+    let errosCima = 0;
+    let errosBaixo = 0;
+    let erros = 0;
+    do {
+      errosDireita = 0;
+      errosEsquerda = 0;
+      errosCima = 0;
+      errosBaixo = 0;
+      erros = 0;
+      let linhaCentral = this.pontoCentral.getLinha();
+      let colunaCentral = this.pontoCentral.getColuna();
+      if (linhaCentral - this.direcoes.getCima() < 0) errosCima++;
+      if (linhaCentral + this.direcoes.getBaixo() > ln - 1) errosBaixo++;
+      if (colunaCentral - this.direcoes.getEsquerda() < 0) errosEsquerda++;
+      if (colunaCentral + this.direcoes.getDireita() > cl - 1) errosDireita++;
+      if (linhaCentral - this.direcoes.getES() < 0) errosCima++;
+      if (colunaCentral - this.direcoes.getES() < 0) errosEsquerda++;
+      if (linhaCentral - this.direcoes.getDS() < 0) errosCima++;
+      if (colunaCentral + this.direcoes.getDS() > cl - 1) errosDireita++;
+      if (linhaCentral + this.direcoes.getEI() > ln - 1) errosBaixo++;
+      if (colunaCentral - this.direcoes.getEI() < 0) errosEsquerda++;
+      if (linhaCentral + this.direcoes.getDI() > ln - 1) errosBaixo++;
+      if (colunaCentral + this.direcoes.getDI() > cl - 1) errosDireita++;
+
+      if (errosDireita > 0) {
+        this.pontoCentral.coluna -= errosDireita;
+        erros++;
+      }
+      if (errosEsquerda > 0) {
+        this.pontoCentral.coluna += errosEsquerda;
+        erros++;
+      }
+      if (errosCima > 0) {
+        this.pontoCentral.linha += errosCima;
+        erros++;
+      }
+      if (errosBaixo > 0) {
+        this.pontoCentral.linha -= errosBaixo;
+        erros++;
+      }
+      console.log(erros);
+    } while (erros != 0);
+
     this.coordenadas.push(
       new Coordenada(
         this.pontoCentral.getLinha(),
@@ -247,6 +292,7 @@ class Peca {
         )
       );
     }
+
     this.coordenadas.forEach((c) => {
       if (c != undefined && c != null)
         grid[c.getLinha()][c.getColuna()] = this.cor;
