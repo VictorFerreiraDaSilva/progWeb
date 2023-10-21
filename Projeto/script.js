@@ -575,7 +575,7 @@ async function iniciarJogo() {
 
 document.addEventListener('keydown', controles);
 
-// window.addEventListener('load', iniciarJogo);
+// Botão Iniciar e Função Sumir
 
 const botaoIniciar = document.getElementById('botao_iniciar');
 botaoIniciar.addEventListener('click', function () {
@@ -598,6 +598,7 @@ window.addEventListener('keydown', function (e) {
   }
 });
 
+//Cronômetro
 let tempoDecorrido = 0;
   let cronometroEmExecucao = false;
   let intervalID;
