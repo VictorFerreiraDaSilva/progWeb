@@ -700,6 +700,7 @@ async function iniciarJogo() {
 }
 
 function gameover() {
+  cronometroEmExecucao = false;
   registrarPontuacaoDoJogador();
   document.getElementById("gameover").style.display = "flex";
   document.getElementById("jogo").classList.add("blur");
