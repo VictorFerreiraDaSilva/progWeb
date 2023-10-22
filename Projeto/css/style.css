@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Press+Start+2P&family=Space+Grotesk&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Press+Start+2P&family=Space+Grotesk&display=swap");
 
 :root {
   --background-color: #1a1a2e;
@@ -13,14 +13,14 @@
 /*FONTES*/
 
 .bebasNeue {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: "Bebas Neue", sans-serif;
 }
 
 .pressStart {
-  font-family: 'Press Start 2P', cursive;
+  font-family: "Press Start 2P", cursive;
 }
 .spaceGrotesk {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: "Space Grotesk", sans-serif;
 }
 
 /*CORES
@@ -117,7 +117,7 @@ body {
 
 .texto {
   padding-top: 20px;
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: "Bebas Neue", sans-serif;
   font-size: 45px;
   font-weight: 300;
   color: white;
@@ -138,7 +138,7 @@ body {
   padding-top: 10%;
   align-items: center;
 
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: "Space Grotesk", sans-serif;
   font-size: 12px;
   font-weight: 150;
   color: #d9d9d9;
@@ -151,12 +151,13 @@ body {
 
 .link-registro:hover {
   color: #bc3d31;
+  cursor: pointer;
 }
 
 .botao_jogar {
   text-decoration: none;
   color: var(--box-color);
-  font-family: 'Press Start 2P', cursive;
+  font-family: "Press Start 2P", cursive;
   font-size: 15px;
   background-color: #5ab72c;
 
@@ -167,6 +168,7 @@ body {
 
 .botao_jogar:hover {
   color: #d9d9d9;
+  cursor: pointer;
 }
 
 /*JOGO.HTML CSS */
@@ -193,7 +195,7 @@ body {
   justify-content: center;
   margin: auto;
 
-  font-family: 'Press Start 2P', cursive;
+  font-family: "Press Start 2P", cursive;
   font-size: 50px;
   position: relative;
   left: -150px;
@@ -205,7 +207,7 @@ body {
 }
 
 .tela_jogo {
-  font-family: 'Press Start 2P', cursive;
+  font-family: "Press Start 2P", cursive;
 
   display: flex;
   flex-direction: row;
@@ -309,7 +311,7 @@ body {
 }
 
 footer {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: "Bebas Neue", sans-serif;
   font-size: 30px;
   color: #545f71;
 
@@ -349,7 +351,7 @@ footer {
 }
 
 .register_titulo {
-  font-family: 'Press Start 2P', cursive;
+  font-family: "Press Start 2P", cursive;
   font-size: 60px;
 }
 
@@ -376,7 +378,7 @@ footer {
 .botao_submeter {
   text-decoration: none;
   color: var(--box-color);
-  font-family: 'Press Start 2P', cursive;
+  font-family: "Press Start 2P", cursive;
   font-size: 15px;
   background-color: #5ab72c;
 
@@ -387,12 +389,13 @@ footer {
 
 .botao_submeter:hover {
   color: #d9d9d9;
+  cursor: pointer;
 }
 
 /* PEDRO */
 .texto_titulo_register {
   color: #d9d9d9;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: "Space Grotesk", sans-serif;
   font-size: xx-large;
 
   display: flex;
@@ -403,14 +406,14 @@ footer {
 /* PEDRO */
 .texto_registro {
   padding-top: 20px;
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: "Bebas Neue", sans-serif;
   font-size: 80px;
   font-weight: 300;
   color: white;
 }
 
 .registro_login {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: "Space Grotesk", sans-serif;
   font-size: 28px;
   color: #d9d9d9;
 
@@ -430,7 +433,7 @@ footer {
 }
 
 .atualizar_titulo {
-  font-family: 'Press Start 2P', cursive;
+  font-family: "Press Start 2P", cursive;
   font-size: 60px;
 }
 
@@ -479,7 +482,7 @@ footer {
 
 /*TABULEIRO.HMTL*/
 .titulo_tabuleiro {
-  font-family: 'Press Start 2P', cursive;
+  font-family: "Press Start 2P", cursive;
   font-size: 35px;
   color: #d9d9d9;
   display: flex;
@@ -487,7 +490,7 @@ footer {
 }
 
 .tabuleiro_row {
-  font-family: 'Press Start 2P', cursive;
+  font-family: "Press Start 2P", cursive;
   font-size: 20px;
   color: #d9d9d9;
 
@@ -528,14 +531,13 @@ a {
   color: #d9d9d9;
 }
 
-
-.tabuleiro_div a .tamanho:hover{
+.tabuleiro_div a .tamanho:hover {
   color: #5ab72c;
+  cursor: pointer;
 }
 
-
 .ranking_global {
-  font-family: 'Press Start 2P', cursive;
+  font-family: "Press Start 2P", cursive;
   display: flex;
   flex-direction: row;
   margin: 0 5% 0 5%;
@@ -597,7 +599,6 @@ a {
   border-radius: 15px;
   padding: 2% 2% 4% 2%;
 
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -608,7 +609,7 @@ a {
   color: black;
   text-decoration: none;
 
-  font-family: 'Press Start 2P', cursive;
+  font-family: "Press Start 2P", cursive;
   font-size: 25px;
 
   display: flex;
@@ -623,7 +624,7 @@ a {
 
 .botao_sair {
   text-decoration: none;
-  font-family: 'Press Start 2P', cursive;
+  font-family: "Press Start 2P", cursive;
   font-size: 25px;
   color: #d9d9d9;
 
@@ -638,14 +639,16 @@ a {
 
 .botao_resume:hover {
   color: #d9d9d9;
+  cursor: pointer;
 }
 
 .botao_sair:hover {
   color: var(--background-color);
+  cursor: pointer;
 }
 
 .resume_titulo {
-  font-family: 'Press Start 2P', cursive;
+  font-family: "Press Start 2P", cursive;
   font-size: 60px;
 
   padding: 5%;
@@ -674,7 +677,7 @@ a {
 }
 
 .gameover {
-  font-family: 'Press Start 2P', cursive;
+  font-family: "Press Start 2P", cursive;
   font-size: 55px;
 
   padding: 2%;
@@ -698,7 +701,6 @@ a {
   cursor: pointer;
 }
 
-
 #tabuleiroDinamico {
   font-size: 16px;
   color: black;
@@ -720,7 +722,7 @@ a {
 
 #botao_pause {
   background-color: #5ab72c;
-  font-family: 'Press Start 2P', sans-serif;
+  font-family: "Press Start 2P", sans-serif;
   font-size: 20px;
   padding: 15px 20px;
   border: none;
@@ -734,11 +736,12 @@ a {
 
 #botao_pause:hover {
   color: #bc3d31;
+  cursor: pointer;
 }
 
 #botao_iniciar {
   background-color: #5ab72c;
-  font-family: 'Press Start 2P', sans-serif;
+  font-family: "Press Start 2P", sans-serif;
   font-size: 20px;
   padding: 15px 20px;
   border: none;
@@ -752,6 +755,7 @@ a {
 
 #botao_iniciar:hover {
   color: #d9d9d9;
+  cursor: pointer;
 }
 
 .jogo_victor {
@@ -781,27 +785,27 @@ body_jogo {
 }
 
 /* Seletor para a data */
-input[type='date'] {
+input[type="date"] {
   font-size: 16px;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: "Space Grotesk", sans-serif;
 }
 
 /* Seletor para a seta do calendário no campo de data (alguns navegadores) */
-input[type='date']::-webkit-inner-spin-button,
-input[type='date']::-webkit-outer-spin-button {
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
 /* Seletor para a data no campo de data (alguns navegadores) */
-input[type='date']::-webkit-datetime-edit {
+input[type="date"]::-webkit-datetime-edit {
   font-size: 16px; /* Tamanho da fonte */
 }
 
 /* Estilize o placeholder para o campo de entrada */
 input::placeholder {
   font-size: 16px;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: "Space Grotesk", sans-serif;
   font-style: normal;
   color: #999; /* Cor do placeholder */
 }
