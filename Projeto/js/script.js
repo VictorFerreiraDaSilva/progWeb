@@ -616,6 +616,7 @@ function exibirProximaPeca() {
   }
   document.getElementById('proximaPeca').src = 'assets/' + src;
   document.getElementById('proximaPeca').style.height = '250px';
+  
 }
 
 function pausar() {
@@ -702,12 +703,9 @@ function gameover() {
 
 document.addEventListener('keydown', controles);
 
-// window.addEventListener('load', iniciarJogo);
-
 const botaoIniciar = document.getElementById('botao_iniciar');
 botaoIniciar.addEventListener('click', function () {
   iniciarJogo();
-  //botaoIniciar.style.display = 'none';
 });
 
 /*function sumirBotao() {
