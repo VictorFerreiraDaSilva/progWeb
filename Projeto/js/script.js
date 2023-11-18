@@ -733,14 +733,16 @@ let tempoElement = document.getElementById('tempo');
 let iniciarButton = document.getElementById('botao_iniciar');
 
 function atualizarCronometro() {
-  tempoDecorrido++;
-  const segundos = tempoDecorrido % 60;
-  const minutos = Math.floor((tempoDecorrido / 60) % 60);
+  if (!pausado) {
+    tempoDecorrido++;
+    const segundos = tempoDecorrido % 60;
+    const minutos = Math.floor((tempoDecorrido / 60) % 60);
 
-  const formatoTempo = `${minutos.toString().padStart(2, '0')}:${segundos
-    .toString()
-    .padStart(2, '0')}`;
-  tempoElement.textContent = formatoTempo;
+    const formatoTempo = `${minutos.toString().padStart(2, '0')}:${segundos
+      .toString()
+      .padStart(2, '0')}`;
+    tempoElement.textContent = formatoTempo;
+  }
 }
 
 iniciarButton.addEventListener('click', () => {
