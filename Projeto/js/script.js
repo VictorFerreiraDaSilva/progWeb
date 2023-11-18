@@ -16,6 +16,9 @@ let jogo = inicailizarMatriz(ln, cl);
 document.getElementById('linhasEliminadas').innerHTML = linhasEliminadas;
 document.getElementById('pontuacao').innerHTML = pontuacao;
 document.getElementById('nivel').innerHTML = nivel;
+const usuario = localStorage.getItem('nomeUsuario');
+const ranking = [];
+const historico = [];
 
 criarTabuleiro();
 
@@ -619,6 +622,7 @@ function exibirProximaPeca() {
 }
 
 function pausar() {
+  cronometroEmExecucao = !cronometroEmExecucao;
   pausado = !pausado;
 }
 
@@ -696,8 +700,13 @@ async function iniciarJogo() {
 }
 
 function gameover() {
+  cronometroEmExecucao = false;
+  registrarPontuacaoDoJogador();
   document.getElementById('gameover').style.display = 'flex';
   document.getElementById('jogo').classList.add('blur');
+  salvarDadosLocais(historico, ranking);
+  //preencherRanking();
+  preencherHistorico();
 }
 
 document.addEventListener('keydown', controles);
@@ -751,3 +760,91 @@ iniciarButton.addEventListener('click', () => {
     cronometroEmExecucao = true;
   }
 });
+
+// Função para registrar a pontuação do jogador
+function registrarPontuacaoDoJogador() {
+  const dataAtual = new Date();
+  const dia = dataAtual.getDate();
+  const mes = dataAtual.getMonth() + 1; // Mês começa em 0 (janeiro é 0, fevereiro é 1, etc.)
+  const ano = dataAtual.getFullYear();
+  const dataFormatada = `${dia}/${mes}/${ano}`;
+
+  ranking.push({
+    usuario: usuario,
+    data: dataFormatada,
+    pontos: pontuacao,
+    nivel: nivel,
+    tempo: tempoDecorrido,
+  });
+
+  historico.unshift({
+    usuario: usuario,
+    data: dataFormatada,
+    pontos: pontuacao,
+    nivel: nivel,
+    tempo: tempoDecorrido,
+  });
+
+  ordenarRankingPorPontuacao(ranking);
+}
+
+function ordenarRankingPorPontuacao(ranking) {
+  if (ranking.length > 1) ranking.sort((a, b) => b.pontos - a.pontos);
+}
+
+function preencherRanking() {
+  let rank = carregarDadosRanking();
+  ordenarRankingPorPontuacao(rank);
+  const numeroDeUsuarios = 14; // Número total de usuários no seu ranking
+
+  for (let i = 1; i <= numeroDeUsuarios; i++) {
+    const elementoUsuarios = document.getElementById(`rankinguser${i}`);
+    const elementoData = document.getElementById(`rankingdata${i}`);
+    const elementoPontos = document.getElementById(`rankingpontos${i}`);
+    const elementoNivel = document.getElementById(`rankingnivel${i}`);
+    const elementoTempo = document.getElementById(`rankingtempo${i}`);
+
+    //if (elementoPontos) {
+    // Verifique se o elemento com o ID existe
+    elementoUsuarios.textContent = rank[i - 1].usuario;
+    elementoData.textContent = rank[i - 1].data;
+    elementoPontos.textContent = rank[i - 1].pontos;
+    elementoNivel.textContent = rank[i - 1].nivel;
+    elementoTempo.textContent = rank[i - 1].tempo;
+    //elementoPontos.textContent = "teste";
+    //}
+  }
+}
+
+function preencherHistorico() {
+  const numeroDePartidas = 5; // Número total de usuários no seu ranking
+
+  for (let i = 1; i <= numeroDePartidas; i++) {
+    const elementoPontos = document.getElementById(`pontos${i}`);
+    const elementoNivel = document.getElementById(`nivel${i}`);
+    const elementoTempo = document.getElementById(`tempo${i}`);
+
+    //if (elementoPontos) {
+    // Verifique se o elemento com o ID existe
+    elementoPontos.textContent = historico[i - 1].pontos;
+    elementoNivel.textContent = historico[i - 1].nivel;
+    elementoTempo.textContent = historico[i - 1].tempo;
+    //elementoPontos.textContent = "teste";
+    //}
+  }
+}
+
+// Função para carregar o histórico e ranking do Armazenamento Local
+function carregarDadosRanking() {
+  const rankingArmazenado = localStorage.getItem('ranking');
+
+  const ranking = rankingArmazenado ? JSON.parse(rankingArmazenado) : [];
+
+  return ranking;
+}
+
+// Função para salvar o histórico e ranking no Armazenamento Local
+function salvarDadosLocais() {
+  localStorage.setItem('historico', JSON.stringify(historico));
+  localStorage.setItem('ranking', JSON.stringify(ranking));
+}
