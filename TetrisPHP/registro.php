@@ -1,0 +1,87 @@
+<?php
+  session_start()
+?>
+
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registre-se</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/script.js"></script>
+  </head>
+  <body>
+  <form action="index.php" method="post">
+    <section class="caixa_register">
+      <div id="container_register">
+        <p class="register_titulo">
+          <span class="roxo">R</span><span class="amarelo">E</span
+          ><span class="verde">G</span><span class="azul">I</span
+          ><span class="vermelho">S</span><span class="roxo">T</span
+          ><span class="rosa">R</span><span class="amarelo">E</span
+          ><span class="verde">-</span><span class="azul">S</span
+          ><span class="vermelho">E</span>
+        </p>
+      </div>
+
+      <h1 class="texto_registro">DADOS PESSOAIS</h1>
+      <br/>
+
+      <p class="texto_titulo_register">NOME COMPLETO</p>
+      <input class="input_register" id="input_nome" placeholder="Insira seu nome aqui" type="text" name="nome_completo"/>
+
+      <br/>
+
+      <div id="row">
+        <p class="texto_titulo_register">
+          <span>DATA DE NASC.</span><span>CPF</span>
+        </p>
+      </div>
+      <div>
+        <input class="input_register" id="input_data" type="date" /><input
+          class="input_register"
+          id="input_cpf"
+          placeholder="123.456.789-10"
+        />
+      </div>
+
+      <br />
+
+      <div class="texto_titulo_register">
+        <p>TELEFONE</p>
+        <p>E-MAIL</p>
+      </div>
+      <div>
+        <input
+          class="input_register"
+          id="input_telefone"
+          placeholder="(XX) 91234-5678"
+        /><input
+          class="input_register"
+          id="input_email"
+          placeholder="seu@email.aqui"
+        />
+      </div>
+
+      <br />
+      <br />
+
+      <h1 class="texto_registro">CONTA</h1>
+
+      <br />
+
+      <div class="registro_login">
+        <p>USUÁRIO</p>
+        <p>SENHA</p>
+      </div>
+      <div>
+        <input class="input_register" id="input_usuario" type="text" name="usuario"/>
+        <input class="input_register" id="input_senha" type="password" name="senha"/>
+      </div>      
+      <input type="submit" name="submeter" value="SUBMETER" class="botao_submeter">
+    </section>
+    </form>
+  </body>
+</html>
+

@@ -1,0 +1,876 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Press+Start+2P&family=Space+Grotesk&display=swap');
+
+:root {
+  --background-color: #1a1a2e;
+  --box-color: #16213e;
+  --highlight-box: #0f3460;
+}
+
+* {
+  margin: 0;
+}
+
+/*FONTES*/
+
+.bebasNeue {
+  font-family: 'Bebas Neue', sans-serif;
+}
+
+.pressStart {
+  font-family: 'Press Start 2P', cursive;
+}
+.spaceGrotesk {
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+/*CORES
+6C496F - roxo
+DBC630 - amarelo
+5AB72C - verde
+70D1DB - azul
+BC3D31 - vermelho
+DB86B4 - rosa
+
+*/
+
+.roxo {
+  color: #6c496f;
+}
+.amarelo {
+  color: #dbc630;
+}
+.verde {
+  color: #5ab72c;
+}
+.rosa {
+  color: #db86b4;
+}
+.azul {
+  color: #70d1db;
+}
+.vermelho {
+  color: #bc3d31;
+}
+.laranja {
+  color: #ff5e00;
+  background-color: #ff5e00;
+}
+.branco {
+  color: #ffffff;
+}
+.ciano {
+  color: #00e5ff;
+  background-color: #00e5ff;
+}
+
+.tituloTetris {
+  font-size: 80px;
+}
+
+/*Gerais*/
+
+.container {
+  margin: 10% 5% 0 5%;
+  /*cima, direita, baixo, esquerda */
+  padding: 16px;
+  flex: 1 1 auto;
+  text-align: center;
+}
+
+body {
+  margin-bottom: 20%;
+  background: linear-gradient(
+    45deg,
+    var(--highlight-box),
+    var(--background-color),
+    var(--background-color),
+    var(--highlight-box)
+  );
+  background-attachment: fixed;
+}
+
+.caixa_start {
+  border-style: solid;
+  border-color: var(--highlight-box);
+  border-width: 14px;
+
+  -moz-box-shadow: 0 0 5px 5px var(--highlight-box);
+  -webkit-box-shadow: 0 0 5px 5px var(--highlight-box);
+  box-shadow: 0 0 20px 20px var(--highlight-box);
+  /*https://www.css3.info/preview/box-shadow/*/
+
+  border-radius: 30px;
+
+  background-color: var(--box-color);
+  padding: 2% 2% 3px 2%;
+  width: 20%;
+  height: 20%;
+  /*cima, direita, baixo, esquerda */
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+
+  align-items: center;
+}
+
+.texto {
+  padding-top: 20px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 45px;
+  font-weight: 300;
+  color: white;
+}
+.input {
+  border: 2px var(--background-color);
+  background-color: #d9d9d9;
+  width: 200px;
+  height: 40px;
+
+  box-sizing: border-box;
+  border-radius: 15px;
+}
+
+.register {
+  display: flex;
+  flex-direction: column;
+  padding-top: 10%;
+  align-items: center;
+
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  font-weight: 150;
+  color: #d9d9d9;
+}
+
+.link-registro {
+  text-decoration: none;
+  color: #d9d9d9;
+}
+
+.link-registro:hover {
+  color: #bc3d31;
+  cursor: pointer;
+}
+
+.botao_jogar {
+  text-decoration: none;
+  color: var(--box-color);
+  font-family: 'Press Start 2P', cursive;
+  font-size: 15px;
+  background-color: #5ab72c;
+
+  padding: 4%;
+  margin-top: 10%;
+  border-radius: 15px;
+}
+
+.botao_jogar:hover {
+  color: #d9d9d9;
+  cursor: pointer;
+}
+
+/*JOGO.HTML CSS */
+.jogobody {
+  width: auto;
+}
+
+.icones_header {
+  margin: 2%;
+
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+.icone {
+  width: 4%;
+  height: 4%;
+}
+
+.titulo {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  margin: auto;
+
+  font-family: 'Press Start 2P', cursive;
+  font-size: 50px;
+  position: relative;
+  left: -150px;
+}
+
+.recuoNormal {
+  /*pro titulo funfar certo no index*/
+  left: 0;
+}
+
+.tela_jogo {
+  font-family: 'Press Start 2P', cursive;
+
+  display: flex;
+  flex-direction: row;
+
+  margin: 0 5% 0 10%;
+  /*cima, direita, baixo, esquerda */
+
+  gap: 125px;
+}
+
+.estat_rank {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.estatistica {
+  display: flex;
+  justify-content: center;
+  margin-left: 10%;
+  font-size: 30px;
+}
+
+.estat {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+
+  padding: 5%;
+
+  background-color: var(--box-color);
+  border-radius: 15px;
+  width: 100%;
+}
+
+.tempo {
+  display: flex;
+  justify-content: center;
+
+  font-size: 1.6rem;
+  color: #d9d9d9;
+}
+
+.tempo_num {
+  display: flex;
+  justify-content: center;
+
+  font-size: 2rem;
+  color: #bc3d31;
+}
+
+.est {
+  font-size: 1.2rem;
+  color: #d9d9d9;
+}
+
+.ranking {
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+  margin-left: 10%;
+  font-size: 30px;
+}
+
+.ranking_pessoal {
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+  padding: 5%;
+  gap: 30px;
+
+  background-color: var(--box-color);
+  border-radius: 15px;
+
+  font-size: 1.2rem;
+  color: #d9d9d9;
+  width: 100%;
+}
+
+.ranking_pessoal_column {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.2rem;
+  flex: 1 1 0px;
+  text-align: center;
+}
+
+.espacamento8px {
+  margin-bottom: 8px;
+}
+
+.ranking_pessoal_column p {
+  margin-bottom: 4px;
+}
+
+.jogo {
+  border-radius: 30px;
+  width: 80%;
+  background-color: var(--box-color);
+}
+
+footer {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 30px;
+  color: #545f71;
+
+  display: flex;
+  justify-content: center;
+
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;
+  padding: 0.5%;
+
+  background-color: #0f3460;
+}
+
+/*PEDRO*/
+.caixa_register {
+  border-style: solid;
+  border-color: var(--highlight-box);
+  border-width: 1px;
+
+  border-radius: 30px;
+
+  background-color: var(--box-color);
+  padding: 5% 2% 10% 2%;
+  width: 50%;
+  height: 50%;
+  /*cima, direita, baixo, esquerda */
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  margin-top: 3%;
+
+  align-items: center;
+}
+
+.register_titulo {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 60px;
+}
+
+/* PEDRO */
+#container_register {
+  margin: 1% 5% 0 5%;
+  /*cima, direita, baixo, esquerda */
+  padding: 5%;
+  flex: 1 1 auto;
+  margin: auto;
+  text-align: center;
+}
+
+/* PEDRO */
+.input_nao_atualizar {
+  border: 2px var(--background-color);
+  background-color: #bc3d31;
+
+  box-sizing: border-box;
+  border-radius: 15px;
+}
+
+/* PEDRO */
+.botao_submeter {
+  text-decoration: none;
+  color: var(--box-color);
+  font-family: 'Press Start 2P', cursive;
+  font-size: 15px;
+  background-color: #5ab72c;
+
+  padding: 2% 3% 2% 3%;
+  margin-top: 10%;
+  border-radius: 20px;
+}
+
+.botao_submeter:hover {
+  color: #d9d9d9;
+  cursor: pointer;
+}
+
+/* PEDRO */
+.texto_titulo_register {
+  color: #d9d9d9;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: xx-large;
+
+  display: flex;
+  flex-direction: row;
+  gap: 200px;
+}
+
+/* PEDRO */
+.texto_registro {
+  padding-top: 20px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 80px;
+  font-weight: 300;
+  color: white;
+}
+
+.registro_login {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 28px;
+  color: #d9d9d9;
+
+  display: flex;
+  flex-direction: row;
+  gap: 200px;
+}
+
+/* PEDRO */
+.input_register {
+  border: 2px var(--background-color);
+  background-color: #d9d9d9;
+
+  box-sizing: border-box;
+  border-radius: 15px;
+  margin: auto;
+}
+
+.atualizar_titulo {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 60px;
+}
+
+/* PEDRO */
+#input_nome {
+  width: 600px;
+  height: 40px;
+}
+
+/* PEDRO */
+#input_data {
+  width: 325px;
+  height: 40px;
+  justify-content: center;
+}
+
+/* PEDRO */
+#input_cpf {
+  width: 275px;
+  height: 40px;
+}
+
+/* PEDRO */
+#input_telefone {
+  width: 275px;
+  height: 40px;
+}
+
+/* PEDRO */
+#input_email {
+  width: 325px;
+  height: 40px;
+}
+
+/* PEDRO */
+#input_usuario {
+  width: 300px;
+  height: 40px;
+}
+
+/* PEDRO */
+#input_senha {
+  width: 300px;
+  height: 40px;
+}
+
+/*TABULEIRO.HMTL*/
+.titulo_tabuleiro {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 35px;
+  color: #d9d9d9;
+  display: flex;
+  justify-content: center;
+}
+
+.tabuleiro_row {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 20px;
+  color: #d9d9d9;
+
+  margin: 5% 10% 0 10%;
+  /*cima, direita, baixo, esquerda */
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 15%;
+}
+
+a {
+  text-decoration: none;
+}
+
+.tabuleiro_pequeno {
+  background-color: var(--box-color);
+  width: 430px;
+  height: 600px;
+
+  border-radius: 30px;
+}
+
+.tabuleiro_grande {
+  background-color: var(--box-color);
+  width: 600px;
+  height: 800px;
+
+  border-radius: 30px;
+}
+
+.tamanho {
+  padding: 5%;
+  text-align: center;
+
+  color: #d9d9d9;
+}
+
+.tabuleiro_div a .tamanho:hover {
+  color: #5ab72c;
+  cursor: pointer;
+}
+
+.ranking_global {
+  font-family: 'Press Start 2P', cursive;
+  display: flex;
+  flex-direction: row;
+  margin: 0 5% 0 5%;
+}
+
+.rank {
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+  padding: 32px;
+  gap: 30px;
+  background-color: var(--box-color);
+  border-radius: 30px;
+  font-size: 36px;
+  color: #d9d9d9;
+  width: 100%;
+}
+
+.rank_column {
+  display: flex;
+  flex-direction: column;
+
+  flex: 1 1 0px;
+  text-align: center;
+}
+
+.rank_column p {
+  margin-bottom: 16px;
+}
+
+.t28px {
+  font-size: 28px;
+}
+
+.espacamento10px {
+  margin: 4px 0 8px 0;
+}
+
+.t36px {
+  font-size: 36px;
+}
+.blur {
+  -webkit-filter: url(#svg-blur);
+  filter: url(#svg-blur);
+  pointer-events: none;
+}
+
+/*RESUME.HTML*/
+
+.resume_janela {
+  -moz-box-shadow: 0 0 5px 5px var(--highlight-box);
+  -webkit-box-shadow: 0 0 5px 5px var(--highlight-box);
+  box-shadow: 0 0 20px 20px var(--highlight-box);
+  /*https://www.css3.info/preview/box-shadow/*/
+
+  margin: 5% 30% 5% 30%;
+  /*cima, direita, baixo, esquerda */
+  background-color: var(--box-color);
+  border-radius: 15px;
+  padding: 2% 2% 4% 2%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+}
+
+.botao_resume {
+  color: black;
+  text-decoration: none;
+
+  font-family: 'Press Start 2P', cursive;
+  font-size: 25px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 30px;
+
+  padding: 4%;
+  width: 350px;
+  background-color: #70d1db;
+}
+
+.botao_sair {
+  text-decoration: none;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 25px;
+  color: #d9d9d9;
+
+  display: flex;
+  justify-content: center;
+  border-radius: 30px;
+
+  padding: 4%;
+  width: 350px;
+  background-color: #bc3d31;
+}
+
+.botao_resume:hover {
+  color: #d9d9d9;
+  cursor: pointer;
+}
+
+.botao_sair:hover {
+  color: var(--background-color);
+  cursor: pointer;
+}
+
+.resume_titulo {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 60px;
+
+  padding: 5%;
+  color: #bc3d31;
+}
+
+.gameover_janela {
+  -moz-box-shadow: 0 0 5px 5px #bc3d31;
+  -webkit-box-shadow: 0 0 5px 5px #bc3d31;
+  box-shadow: 0 0 30px 30px #bc3d31;
+  /*https://www.css3.info/preview/box-shadow/*/
+
+  margin: 10% 25% 5% 25%;
+  /*cima, direita, baixo, esquerda */
+  background-color: var(--box-color);
+  border-radius: 15px;
+  padding: 2%;
+
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  position: fixed;
+  width: 40%;
+  z-index: 9;
+}
+
+.gameover {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 55px;
+
+  padding: 2%;
+  text-align: left;
+
+  display: flex;
+  flex-direction: row;
+}
+
+/* JOGO */
+
+.celula {
+  background-color: var(--background-color);
+  width: auto;
+  font-size: 100%;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.tabuleiro_div a {
+  cursor: pointer;
+}
+
+#tabuleiroDinamico {
+  font-size: 16px;
+  color: black;
+  width: 100%;
+  background-color: #5465942c;
+  display: grid;
+  gap: 1.5px;
+  margin-top: 5%;
+  /*margin-bottom: 5%;*/
+  border-radius: 5px;
+  border: 3px #70d1db solid;
+}
+
+.div_inipause {
+  display: flex;
+  flex-direction: row;
+  width: auto;
+}
+
+#botao_pause {
+  background-color: #5ab72c;
+  font-family: 'Press Start 2P', sans-serif;
+  font-size: 20px;
+  padding: 15px 20px;
+  border: none;
+  cursor: pointer;
+  margin: 5%;
+  border-radius: 8px;
+
+  display: flex;
+  flex-direction: row;
+}
+
+#botao_pause:hover {
+  color: #bc3d31;
+  cursor: pointer;
+}
+
+#botao_iniciar {
+  background-color: #5ab72c;
+  font-family: 'Press Start 2P', sans-serif;
+  font-size: 20px;
+  padding: 15px 20px;
+  border: none;
+  cursor: pointer;
+  margin: 5%;
+  border-radius: 8px;
+
+  display: flex;
+  flex-direction: row;
+}
+
+#botao_iniciar:hover {
+  color: #d9d9d9;
+  cursor: pointer;
+}
+
+.jogo_victor {
+  display: flex;
+  flex-direction: row;
+  background-color: red;
+  width: 80%;
+  margin: auto;
+  border: 2px solid black;
+}
+
+#container_jogo {
+  display: flex;
+  align-items: center;
+}
+
+body_jogo {
+  margin-bottom: 20%;
+  background: linear-gradient(
+    45deg,
+    var(--highlight-box),
+    var(--background-color),
+    var(--background-color),
+    var(--highlight-box)
+  );
+  background-attachment: fixed;
+}
+
+/* Seletor para a data */
+input[type='date'] {
+  font-size: 16px;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+/* Seletor para a seta do calendário no campo de data (alguns navegadores) */
+input[type='date']::-webkit-inner-spin-button,
+input[type='date']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Seletor para a data no campo de data (alguns navegadores) */
+input[type='date']::-webkit-datetime-edit {
+  font-size: 16px; /* Tamanho da fonte */
+}
+
+/* Estilize o placeholder para o campo de entrada */
+input::placeholder {
+  font-size: 16px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-style: normal;
+  color: #999; /* Cor do placeholder */
+}
+
+#input_nome::placeholder {
+  font-style: italic;
+}
+
+.image {
+  margin-bottom: 20%;
+  margin-top: 20%;
+}
+
+.roxoQ {
+  color: #6c496f;
+  background-color: #6c496f;
+}
+.amareloQ {
+  color: #dbc630;
+  background-color: #dbc630;
+}
+.verdeQ {
+  color: #5ab72c;
+  background-color: #5ab72c;
+}
+.rosaQ {
+  color: #db86b4;
+  background-color: #db86b4;
+}
+.laranjaQ {
+  color: #ff5e00;
+  background-color: #ff5e00;
+}
+.vermelhoQ {
+  color: #bc3d31;
+  background-color: #bc3d31;
+}
+.cianoQ {
+  color: #00e5ff;
+  background-color: #00e5ff;
+}
+
+.prox_peca_botoes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.peca_titulo {
+  /*nao consigo alinhar*/
+  text-align: center;
+  font-size: 30px;
+  margin-left: 17%;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.quadrado_peca {
+  width: 250px;
+  background: var(--box-color);
+  padding: 10%;
+  text-align: center;
+  border-radius: 15px;
+}
+
+#proximaPeca {
+  height: 250px;
+}

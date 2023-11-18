@@ -1,0 +1,175 @@
+<?php
+  session_start()
+?>
+
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>TETRIS</title>
+  </head>
+  <body class="jogobody">
+    <div class="gameover_janela" id="gameover">
+      <div class="gameover">
+        <p class="gameover">
+          <span class="roxo">G</span><span class="amarelo">A</span
+          ><span class="verde">M</span><span class="azul">E</span>
+        </p>
+        <p class="gameover">
+          <span class="vermelho">O</span><span class="roxo">V</span
+          ><span class="roxo">E</span><span class="amarelo">R</span>
+        </p>
+      </div>
+      <a onclick="iniciarJogo()"
+        ><div class="botao_resume">NOVA PARTIDA</div></a
+      >
+      <a href="index.php"><div class="botao_sair">SAIR DO JOGO</div></a>
+    </div>
+    <div>
+      <header>
+        <div class="icones_header">
+          <a class="icone" href="resume.php">
+            <img src="assets/menu.png" alt="Imagem menu" />
+          </a>
+          <a
+            class="icone"
+            href="ranking_global.php"
+            onclick="preencherRanking()"
+          >
+            <img src="assets/trophy-01.png" alt="Imagem ranking" />
+          </a>
+          <a class="icone" href="atualizar_dados.php">
+            <img src="assets/user-circle.png" alt="Imagem perfil" />
+          </a>
+          <a class="icone" href="index.php">
+            <img src="assets/user-minus-02.png" alt="Imagem sair" />
+          </a>
+          <p class="titulo">
+            <span class="roxo">T</span><span class="amarelo">E</span
+            ><span class="verde">T</span><span class="rosa">R</span
+            ><span class="azul">I</span><span class="vermelho">S</span>
+          </p>
+        </div>
+      </header>
+
+      <section class="tela_jogo" id="jogo">
+        <div class="estat_rank">
+          <h1 class="estatistica">
+            <span class="roxo">E</span><span class="amarelo">S</span
+            ><span class="verde">T</span><span class="rosa">A</span
+            ><span class="azul">T</span><span class="vermelho">Í</span
+            ><span class="amarelo">S</span><span class="verde">T</span
+            ><span class="rosa">I</span><span class="azul">C</span
+            ><span class="roxo">A</span>
+          </h1>
+          <div class="estat">
+            <h1 class="tempo">TEMPO</h1>
+            <p class="tempo_num" id="tempo">00:00</p>
+            <h2 id="pontos" class="est">
+              PONTOS:⠀<span id="pontuacao" class="vermelho"></span>
+            </h2>
+            <h2 id="linhas" class="est">
+              LINHAS:⠀<span id="linhasEliminadas" class="vermelho"></span>
+            </h2>
+            <h2 id="dificuldade" class="est">
+              DIFICULDADE:⠀<span id="nivel" class="vermelho"></span>
+            </h2>
+          </div>
+
+          <section class="ranking_teste">
+            <h1 class="ranking">
+              <span class="vermelho">H</span><span class="amarelo">I</span
+              ><span class="verde">S</span><span class="rosa">T</span
+              ><span class="azul">Ó</span><span class="amarelo">R</span
+              ><span class="roxo">I</span><span class="verde">C</span
+              ><span class="rosa">O</span>
+            </h1>
+            <br />
+            <div class="ranking_pessoal">
+              <div class="ranking_pessoal_column amarelo">
+                <p class="branco">RANK</p>
+                <div class="espacamento8px"></div>
+                <p class="rosa">1º</p>
+                <p class="verde">2º</p>
+                <p class="azul">3º</p>
+                <p class="">4º</p>
+                <p class="">5º</p>
+              </div>
+              <div class="ranking_pessoal_column vermelho">
+                <p class="branco">PONTOS</p>
+                <div class="espacamento8px"></div>
+                <p id="pontos1">-</p>
+                <p id="pontos2">-</p>
+                <p id="pontos3">-</p>
+                <p id="pontos4">-</p>
+                <p id="pontos5">-</p>
+              </div>
+              <div class="ranking_pessoal_column vermelho">
+                <p class="branco">NÍVEL</p>
+                <div class="espacamento8px"></div>
+                <p id="nivel1">-</p>
+                <p id="nivel2">-</p>
+                <p id="nivel3">-</p>
+                <p id="nivel4">-</p>
+                <p id="nivel5">-</p>
+              </div>
+              <div class="ranking_pessoal_column vermelho">
+                <p class="branco">TEMPO</p>
+                <div class="espacamento8px"></div>
+                <p id="tempo1">-</p>
+                <p id="tempo2">-</p>
+                <p id="tempo3">-</p>
+                <p id="tempo4">-</p>
+                <p id="tempo5">-</p>
+              </div>
+            </div>
+          </section>
+        </div>
+        <!-- <div class="jogo"> -->
+        <div id="container_jogo">
+          <!-- <div class="jogo"> -->
+          <div id="tabuleiroDinamico"></div>
+          <!-- </div> -->
+          <!-- </div> -->
+          <!-- </div> -->
+        </div>
+
+        <section class="prox_peca_botoes">
+          <div class="prox_peca">
+            <h1 class="peca_titulo">
+              <span class="roxo">P</span><span class="amarelo">R</span
+              ><span class="verde">Ó</span><span class="rosa">X</span
+              ><span class="azul">I</span><span class="vermelho">M</span
+              ><span class="amarelo">A</span> <br /><span class="verde">P</span
+              ><span class="rosa">E</span><span class="azul">Ç</span
+              ><span class="roxo">A</span>
+            </h1>
+
+            <div class="quadrado_peca">
+              <img
+                id="proximaPeca"
+                src="assets/peca_rosa.png"
+                alt="quadrado"
+              />
+            </div>
+          </div>
+
+          <div class="div_inipause">
+            <button id="botao_iniciar">JOGAR</button>
+            <button id="botao_pause" onclick="pausar()">PAUSAR</button>
+          </div>
+        </section>
+      </section>
+    </div>
+    <footer><div id="nomeUsuario">⠀</div></footer>
+    <script src="js/script.js"></script>
+  </body>
+  <svg id="svg-filter">
+    <!-- PEGAMO DO SEGUINTE LINK: https://jsfiddle.net/rijokpaul/1k5x6dgm/ , só dicionar a classe blur que fica borrado -->
+    <filter id="svg-blur">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="4"></feGaussianBlur>
+    </filter>
+  </svg>
+</html>
