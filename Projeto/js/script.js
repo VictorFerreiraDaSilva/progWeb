@@ -711,8 +711,6 @@ function gameover() {
 
 document.addEventListener('keydown', controles);
 
-const botaoIniciar = document.getElementById('botao_iniciar');
-botaoIniciar.addEventListener('click', function () {
 // window.addEventListener('load', iniciarJogo);
 
 const botaoIniciar = document.getElementById('botao_iniciar');
@@ -762,7 +760,6 @@ iniciarButton.addEventListener('click', () => {
     cronometroEmExecucao = true;
   }
 });
-
 
 // Função para registrar a pontuação do jogador
 function registrarPontuacaoDoJogador() {
@@ -849,4 +846,5 @@ function carregarDadosRanking() {
 // Função para salvar o histórico e ranking no Armazenamento Local
 function salvarDadosLocais() {
   localStorage.setItem('historico', JSON.stringify(historico));
-  localStorage.setItem('ranking', JSON.stringify(ranking)); }
+  localStorage.setItem('ranking', JSON.stringify(ranking));
+}
