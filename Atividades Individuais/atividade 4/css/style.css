@@ -1,0 +1,117 @@
+* {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  background: #e3f6f5;
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  padding: 0;
+}
+
+#menu {
+  color: white;
+  background: #272343;
+  text-decoration: none;
+  height: 100vh;
+  width: 17%;
+  display: flex;
+  flex-direction: column;
+}
+
+#menu a {
+  color: white;
+  background: #272343;
+  text-decoration: none;
+  padding: 16px;
+  font-size: 20px;
+}
+
+#menu h1 {
+  text-align: center;
+  margin: 16px;
+}
+#menu hr {
+  margin-left: 16px;
+  margin-right: 16px;
+  border-color: white;
+}
+
+#menu a:hover {
+  background: white;
+  color: #272343;
+  transition: 0.35s;
+}
+
+#formulario {
+  margin: auto;
+  text-align: center;
+  padding: 48px;
+  border: 2px black solid;
+}
+
+#formulario p {
+  margin-top: 20px;
+}
+
+#formulario h1 {
+  margin-bottom: 32px;
+}
+
+.btnCadastrar {
+  margin-top: 32px;
+  font-weight: bold;
+  padding: 12px;
+  font-size: 16px;
+}
+
+#alunos {
+  margin: 10vh auto 0 auto;
+  width: 60%;
+}
+
+#alunos h1 {
+  text-align: center;
+}
+
+table.tabela {
+  border: 1px solid #1c6ea4;
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+}
+table.tabela td,
+table.tabela th {
+  border: 1px solid #aaaaaa;
+  padding: 4px 4px;
+}
+table.tabela tbody td {
+  font-size: 14px;
+}
+table.tabela tr:nth-child(even) {
+  background: #ebfaf9;
+}
+table.tabela thead {
+  background: #272343;
+}
+table.tabela thead th {
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffffff;
+  text-align: left;
+}
+table.tabela tfoot td {
+  font-size: 14px;
+}
+table.tabela tfoot .links {
+  text-align: right;
+}
+table.tabela tfoot .links a {
+  display: inline-block;
+  background: #1c6ea4;
+  color: #ffffff;
+  padding: 2px 8px;
+  border-radius: 5px;
+}
