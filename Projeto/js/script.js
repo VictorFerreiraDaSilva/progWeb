@@ -1,4 +1,52 @@
 'use strict';
+//localStorage
+const caractereInvisivel = '⠀';
+
+let ln = localStorage.getItem('ln');
+let cl = localStorage.getItem('cl');
+let linhasEliminadas = 0;
+let pontuacao = 0;
+let nivel = 1;
+let pecaInserida = false;
+let pecaEspecial = false;
+let pecaAtual;
+let proximaPeca = 0;
+let pausado = false;
+let jogo = inicailizarMatriz(ln, cl);
+document.getElementById('linhasEliminadas').innerHTML = linhasEliminadas;
+document.getElementById('pontuacao').innerHTML = pontuacao;
+document.getElementById('nivel').innerHTML = nivel;
+const usuario = localStorage.getItem('nomeUsuario');
+const ranking = [];
+const historico = [];
+
+criarTabuleiro();
+
+function criarTabuleiro() {
+  let tamanhoCelula = '0.9rem';
+  document.getElementById('tabuleiroDinamico').style.gridTemplateColumns =
+    'repeat(' + cl + ', 1fr)';
+  let divs = '';
+  for (let i = 0; i < ln; i++)
+    for (let j = 0; j < cl; j++) {
+      divs += '<div class="celula" id="' + i + '_' + j + '">⠀</div>';
+    }
+  document.getElementById('tabuleiroDinamico').innerHTML = divs;
+  if (cl == 10) {
+    tamanhoCelula = '1.9rem';
+  }
+  var celulas = document.getElementsByClassName('celula');
+  for (let i = 0; i < celulas.length; i++) {
+    celulas[i].style.width = tamanhoCelula;
+    celulas[i].style.height = tamanhoCelula;
+  }
+  document.getElementById('0_0').style.borderTopLeftRadius = '12px';
+  document.getElementById('0_' + (cl - 1)).style.borderTopRightRadius = '12px';
+  document.getElementById(ln - 1 + '_0').style.borderBottomLeftRadius = '12px';
+  document.getElementById(
+    ln - 1 + '_' + (cl - 1)
+  ).style.borderBottomRightRadius = '12px';
+}
 
 function armazenarDados() {
   var nomeUsuario = document.getElementById('nome').value;
@@ -135,6 +183,50 @@ class Peca {
     this.coordenadas = [];
   }
   construirPeca(grid) {
+    let errosDireita = 0;
+    let errosEsquerda = 0;
+    let errosCima = 0;
+    let errosBaixo = 0;
+    let erros = 0;
+    do {
+      errosDireita = 0;
+      errosEsquerda = 0;
+      errosCima = 0;
+      errosBaixo = 0;
+      erros = 0;
+      let linhaCentral = this.pontoCentral.getLinha();
+      let colunaCentral = this.pontoCentral.getColuna();
+      if (linhaCentral - this.direcoes.getCima() < 0) errosCima++;
+      if (linhaCentral + this.direcoes.getBaixo() > ln - 1) errosBaixo++;
+      if (colunaCentral - this.direcoes.getEsquerda() < 0) errosEsquerda++;
+      if (colunaCentral + this.direcoes.getDireita() > cl - 1) errosDireita++;
+      if (linhaCentral - this.direcoes.getES() < 0) errosCima++;
+      if (colunaCentral - this.direcoes.getES() < 0) errosEsquerda++;
+      if (linhaCentral - this.direcoes.getDS() < 0) errosCima++;
+      if (colunaCentral + this.direcoes.getDS() > cl - 1) errosDireita++;
+      if (linhaCentral + this.direcoes.getEI() > ln - 1) errosBaixo++;
+      if (colunaCentral - this.direcoes.getEI() < 0) errosEsquerda++;
+      if (linhaCentral + this.direcoes.getDI() > ln - 1) errosBaixo++;
+      if (colunaCentral + this.direcoes.getDI() > cl - 1) errosDireita++;
+
+      if (errosDireita > 0) {
+        this.pontoCentral.coluna -= errosDireita;
+        erros++;
+      }
+      if (errosEsquerda > 0) {
+        this.pontoCentral.coluna += errosEsquerda;
+        erros++;
+      }
+      if (errosCima > 0) {
+        this.pontoCentral.linha += errosCima;
+        erros++;
+      }
+      if (errosBaixo > 0) {
+        this.pontoCentral.linha -= errosBaixo;
+        erros++;
+      }
+    } while (erros != 0);
+
     this.coordenadas.push(
       new Coordenada(
         this.pontoCentral.getLinha(),
@@ -205,6 +297,7 @@ class Peca {
         )
       );
     }
+
     this.coordenadas.forEach((c) => {
       if (c != undefined && c != null)
         grid[c.getLinha()][c.getColuna()] = this.cor;
@@ -223,20 +316,6 @@ class Peca {
     this.direcoes.pecasDiagonalDI = aux;
   }
 }
-
-const caractereInvisivel = '⠀';
-
-let ln = 20;
-let cl = 10;
-let linhasEliminadas = 0;
-document.getElementById("linhasEliminadas").innerHTML = linhasEliminadas;
-let pontuacao = 0;
-document.getElementById("pontuacao").innerHTML = pontuacao;
-let nivel = 1;
-document.getElementById("nivel").innerHTML = nivel;
-let pecaInserida = false;
-let pecaEspecial = false;
-let pecaAtual;
 
 function peca1() {
   let p = new Coordenada(0, 5);
@@ -306,9 +385,6 @@ function pecaE() {
 let velocidade = 7000;
 let dropStart = Date.now();
 
-let jogo = inicailizarMatriz(ln, cl);
-console.log(jogo);
-
 function inicializarArray(tamanho, vazio) {
   var array = [];
   for (let i = 0; i < tamanho; i++) {
@@ -376,20 +452,23 @@ function limparLinhasEGerarPontuacao() {
   pontuacao += p;
   linhasEliminadas += contadorLinhas;
   nivel = Math.floor(pontuacao / 300 + 1);
-  document.getElementById("linhasEliminadas").innerHTML = linhasEliminadas;
-  document.getElementById("pontuacao").innerHTML = pontuacao;
-  document.getElementById("nivel").innerHTML = nivel;
+  document.getElementById('linhasEliminadas').innerHTML = linhasEliminadas;
+  document.getElementById('pontuacao').innerHTML = pontuacao;
+  document.getElementById('nivel').innerHTML = nivel;
 }
+
+const partialReverse = (arr = [], num = 0) => {
+  const partialArr = arr.slice(0, num);
+  partialArr.reverse();
+  arr.splice(0, num, ...partialArr);
+};
 
 function espelhar() {
   jogo.forEach((linha) => {
-    linha.reverse();
+    //linha.reverse();
+    partialReverse(linha, cl);
   });
   atualizaJogo();
-}
-
-function perdeu() {
-  window.location.href = 'gameover.html';
 }
 
 function roda() {
@@ -513,14 +592,57 @@ function controles(event) {
   movimentar();
 }
 
+function exibirProximaPeca() {
+  let src = '';
+  switch (proximaPeca) {
+    case 1:
+      src = 'peca_roxa.png';
+      break;
+    case 2:
+      src = 'peca_amarela.png';
+      break;
+    case 3:
+      src = 'peca_rosa.png';
+      break;
+    case 4:
+      src = 'peca_laranja.png';
+      break;
+    case 5:
+      src = 'peca_verde.png';
+      break;
+    case 6:
+      src = 'peca_vermelha.png';
+      break;
+    case 7:
+      src = 'especial.png';
+      break;
+  }
+  document.getElementById('proximaPeca').src = 'assets/' + src;
+  //document.getElementById('proximaPeca').style.height = '250px';
+}
+
+function pausar() {
+  cronometroEmExecucao = !cronometroEmExecucao;
+  pausado = !pausado;
+}
+
 const timer = (seconds) => {
   let time = seconds * 1100 - nivel * 100;
   if (time <= 0) time = 10;
   return new Promise((res) => setTimeout(res, time));
 };
 
+const timerPausa = (seconds) => {
+  let time = seconds * 1000;
+  if (time <= 0) time = 10;
+  return new Promise((res) => setTimeout(res, time));
+};
+
 async function queda() {
   while (pecaInserida === false) {
+    while (pausado) {
+      await timerPausa(0.5);
+    }
     await timer(1);
     tacarParaBaixo();
     atualizaJogo();
@@ -529,38 +651,42 @@ async function queda() {
 }
 
 async function iniciarJogo() {
+  document.getElementById('gameover').style.display = 'none';
+  document.getElementById('jogo').classList.remove('blur');
+  jogo = inicailizarMatriz(ln, cl);
+  atualizaJogo();
+  limparLinhasEGerarPontuacao();
+  tempoDecorrido = 0;
+  pausado = false;
   linhasEliminadas = 0;
   pontuacao = 0;
   nivel = 1;
   pecaInserida = false;
   pecaEspecial = false;
+  proximaPeca = Math.floor(Math.random() * 7) + 1;
   do {
-    let numero = Math.floor(Math.random() * 8) + 1;
+    let numero = proximaPeca;
+    proximaPeca = Math.floor(Math.random() * 7) + 1;
+    exibirProximaPeca();
     switch (numero) {
       case 1:
         peca1();
         break;
-
       case 2:
         peca2();
         break;
-
       case 3:
         peca3();
         break;
-
       case 4:
         peca4();
         break;
-
       case 5:
         peca5();
         break;
-
       case 6:
         peca6();
         break;
-
       case 7:
         pecaE();
         break;
@@ -570,26 +696,37 @@ async function iniciarJogo() {
     pecaEspecial = false;
     limparLinhasEGerarPontuacao();
   } while (verificarDerrota() === false);
-  window.location.href = 'gameover.html';
+  gameover();
+}
+
+function gameover() {
+  cronometroEmExecucao = false;
+  registrarPontuacaoDoJogador();
+  document.getElementById('gameover').style.display = 'flex';
+  document.getElementById('jogo').classList.add('blur');
+  salvarDadosLocais(historico, ranking);
+  //preencherRanking();
+  preencherHistorico();
 }
 
 document.addEventListener('keydown', controles);
 
-// Botão Iniciar e Função Sumir
+const botaoIniciar = document.getElementById('botao_iniciar');
+botaoIniciar.addEventListener('click', function () {
+// window.addEventListener('load', iniciarJogo);
 
 const botaoIniciar = document.getElementById('botao_iniciar');
 botaoIniciar.addEventListener('click', function () {
   iniciarJogo();
-  botaoIniciar.style.display = 'none';
 });
 
-function sumirBotao() {
+/*function sumirBotao() {
   const botao = document.getElementById('botao_iniciar');
   botao.remove();
-}
+}*/
 
-const disappearButton = document.getElementById('botao_iniciar');
-disappearButton.addEventListener('click', sumirBotao);
+/*const disappearButton = document.getElementById('botao_iniciar');
+disappearButton.addEventListener('click', sumirBotao);*/
 
 window.addEventListener('keydown', function (e) {
   //(esquerda, direita, cima, baixo)
@@ -600,25 +737,116 @@ window.addEventListener('keydown', function (e) {
 
 //Cronômetro
 let tempoDecorrido = 0;
-  let cronometroEmExecucao = false;
-  let intervalID;
+let cronometroEmExecucao = false;
+let intervalID;
 
-  let tempoElement = document.getElementById("tempo");
-  let iniciarButton = document.getElementById("botao_iniciar");
-        
+let tempoElement = document.getElementById('tempo');
+let iniciarButton = document.getElementById('botao_iniciar');
 
 function atualizarCronometro() {
-  tempoDecorrido++;
+  if (!pausado) {
+    tempoDecorrido++;
     const segundos = tempoDecorrido % 60;
     const minutos = Math.floor((tempoDecorrido / 60) % 60);
-            
-  const formatoTempo = `${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+
+    const formatoTempo = `${minutos.toString().padStart(2, '0')}:${segundos
+      .toString()
+      .padStart(2, '0')}`;
     tempoElement.textContent = formatoTempo;
   }
+}
 
-  iniciarButton.addEventListener("click", () => {
-    if (!cronometroEmExecucao) {
-      intervalID = setInterval(atualizarCronometro, 1000);
-      cronometroEmExecucao = true;
-    }
+iniciarButton.addEventListener('click', () => {
+  if (!cronometroEmExecucao) {
+    intervalID = setInterval(atualizarCronometro, 1000);
+    cronometroEmExecucao = true;
+  }
 });
+
+
+// Função para registrar a pontuação do jogador
+function registrarPontuacaoDoJogador() {
+  const dataAtual = new Date();
+  const dia = dataAtual.getDate();
+  const mes = dataAtual.getMonth() + 1; // Mês começa em 0 (janeiro é 0, fevereiro é 1, etc.)
+  const ano = dataAtual.getFullYear();
+  const dataFormatada = `${dia}/${mes}/${ano}`;
+
+  ranking.push({
+    usuario: usuario,
+    data: dataFormatada,
+    pontos: pontuacao,
+    nivel: nivel,
+    tempo: tempoDecorrido,
+  });
+
+  historico.unshift({
+    usuario: usuario,
+    data: dataFormatada,
+    pontos: pontuacao,
+    nivel: nivel,
+    tempo: tempoDecorrido,
+  });
+
+  ordenarRankingPorPontuacao(ranking);
+}
+
+function ordenarRankingPorPontuacao(ranking) {
+  if (ranking.length > 1) ranking.sort((a, b) => b.pontos - a.pontos);
+}
+
+function preencherRanking() {
+  let rank = carregarDadosRanking();
+  ordenarRankingPorPontuacao(rank);
+  const numeroDeUsuarios = 14; // Número total de usuários no seu ranking
+
+  for (let i = 1; i <= numeroDeUsuarios; i++) {
+    const elementoUsuarios = document.getElementById(`rankinguser${i}`);
+    const elementoData = document.getElementById(`rankingdata${i}`);
+    const elementoPontos = document.getElementById(`rankingpontos${i}`);
+    const elementoNivel = document.getElementById(`rankingnivel${i}`);
+    const elementoTempo = document.getElementById(`rankingtempo${i}`);
+
+    //if (elementoPontos) {
+    // Verifique se o elemento com o ID existe
+    elementoUsuarios.textContent = rank[i - 1].usuario;
+    elementoData.textContent = rank[i - 1].data;
+    elementoPontos.textContent = rank[i - 1].pontos;
+    elementoNivel.textContent = rank[i - 1].nivel;
+    elementoTempo.textContent = rank[i - 1].tempo;
+    //elementoPontos.textContent = "teste";
+    //}
+  }
+}
+
+function preencherHistorico() {
+  const numeroDePartidas = 5; // Número total de usuários no seu ranking
+
+  for (let i = 1; i <= numeroDePartidas; i++) {
+    const elementoPontos = document.getElementById(`pontos${i}`);
+    const elementoNivel = document.getElementById(`nivel${i}`);
+    const elementoTempo = document.getElementById(`tempo${i}`);
+
+    //if (elementoPontos) {
+    // Verifique se o elemento com o ID existe
+    elementoPontos.textContent = historico[i - 1].pontos;
+    elementoNivel.textContent = historico[i - 1].nivel;
+    elementoTempo.textContent = historico[i - 1].tempo;
+    //elementoPontos.textContent = "teste";
+    //}
+  }
+}
+
+// Função para carregar o histórico e ranking do Armazenamento Local
+function carregarDadosRanking() {
+  const rankingArmazenado = localStorage.getItem('ranking');
+
+  const ranking = rankingArmazenado ? JSON.parse(rankingArmazenado) : [];
+
+  return ranking;
+}
+
+// Função para salvar o histórico e ranking no Armazenamento Local
+function salvarDadosLocais() {
+  localStorage.setItem('historico', JSON.stringify(historico));
+  localStorage.setItem('ranking', JSON.stringify(ranking)); }

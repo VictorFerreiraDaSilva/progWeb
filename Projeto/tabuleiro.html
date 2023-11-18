@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tabuleiro</title>
     <link rel="stylesheet" href="css/style.css" />
-    <script src="script.js"></script>
+    <script src="js/scriptTabuleiro.js"></script>
   </head>
   <body>
     <header>
@@ -13,7 +13,11 @@
         <a class="icone" href="resume.html">
           <img src="assets/menu.png" />
         </a>
-        <a class="icone" href="ranking_global.html">
+        <a
+          class="icone"
+          href="ranking_global.html"
+          onclick="preencherRanking()"
+        >
           <img src="assets/trophy-01.png" />
         </a>
         <a class="icone" href="atualizar_dados.html">
@@ -33,19 +37,17 @@
     <h1 class="titulo_tabuleiro">ESCOLHA O TABULEIRO</h1>
     <section class="tabuleiro_row">
       <div class="tabuleiro_div">
-          <a href="jogo_10x20.html"><img src="assets/peca_amarela.png" class="image">
+        <a onclick="setTabuleiro(20, 10)"
+          ><img src="assets/peca_amarela.png" class="image" />
           <h2 class="tamanho">10 X 20</h2>
         </a>
       </div>
       <div class="tabuleiro_div">
-            <a href="jogo_22x44.html"><img src="assets/peca_verde.png" class="image">
+        <a onclick="setTabuleiro(44, 22)"
+          ><img src="assets/peca_rosa.png" class="image" />
           <h2 class="tamanho">22 X 44</h2>
         </a>
       </div>
     </section>
-
-    <footer>
-      <div id="nomeUsuario">⠀</div>
-    </footer>
   </body>
 </html>

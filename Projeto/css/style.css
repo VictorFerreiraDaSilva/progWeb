@@ -151,6 +151,7 @@ body {
 
 .link-registro:hover {
   color: #bc3d31;
+  cursor: pointer;
 }
 
 .botao_jogar {
@@ -167,6 +168,7 @@ body {
 
 .botao_jogar:hover {
   color: #d9d9d9;
+  cursor: pointer;
 }
 
 /*JOGO.HTML CSS */
@@ -209,7 +211,8 @@ body {
 
   display: flex;
   flex-direction: row;
-  margin: 0 10% 0 10%;
+
+  margin: 0 5% 0 10%;
   /*cima, direita, baixo, esquerda */
 
   gap: 125px;
@@ -237,7 +240,7 @@ body {
   padding: 5%;
 
   background-color: var(--box-color);
-  border-radius: 30px;
+  border-radius: 15px;
   width: 100%;
 }
 
@@ -245,7 +248,7 @@ body {
   display: flex;
   justify-content: center;
 
-  font-size: 35px;
+  font-size: 1.6rem;
   color: #d9d9d9;
 }
 
@@ -253,19 +256,19 @@ body {
   display: flex;
   justify-content: center;
 
-  font-size: 35px;
+  font-size: 2rem;
   color: #bc3d31;
 }
 
 .est {
-  font-size: 20px;
+  font-size: 1.2rem;
   color: #d9d9d9;
 }
 
 .ranking {
   display: flex;
   justify-content: center;
-  padding-top: 100px;
+  padding-top: 20px;
   margin-left: 10%;
   font-size: 30px;
 }
@@ -278,9 +281,9 @@ body {
   gap: 30px;
 
   background-color: var(--box-color);
-  border-radius: 30px;
+  border-radius: 15px;
 
-  font-size: 16px;
+  font-size: 1.2rem;
   color: #d9d9d9;
   width: 100%;
 }
@@ -288,7 +291,7 @@ body {
 .ranking_pessoal_column {
   display: flex;
   flex-direction: column;
-  font-size: 16px;
+  font-size: 1.2rem;
   flex: 1 1 0px;
   text-align: center;
 }
@@ -386,6 +389,7 @@ footer {
 
 .botao_submeter:hover {
   color: #d9d9d9;
+  cursor: pointer;
 }
 
 /* PEDRO */
@@ -527,8 +531,9 @@ a {
   color: #d9d9d9;
 }
 
-.tamanho:hover {
+.tabuleiro_div a .tamanho:hover {
   color: #5ab72c;
+  cursor: pointer;
 }
 
 .ranking_global {
@@ -577,6 +582,7 @@ a {
 .blur {
   -webkit-filter: url(#svg-blur);
   filter: url(#svg-blur);
+  pointer-events: none;
 }
 
 /*RESUME.HTML*/
@@ -587,11 +593,11 @@ a {
   box-shadow: 0 0 20px 20px var(--highlight-box);
   /*https://www.css3.info/preview/box-shadow/*/
 
-  margin: 5% 25% 5% 25%;
+  margin: 5% 30% 5% 30%;
   /*cima, direita, baixo, esquerda */
   background-color: var(--box-color);
-  border-radius: 30px;
-  padding: 3%;
+  border-radius: 15px;
+  padding: 2% 2% 4% 2%;
 
   display: flex;
   flex-direction: column;
@@ -633,10 +639,12 @@ a {
 
 .botao_resume:hover {
   color: #d9d9d9;
+  cursor: pointer;
 }
 
 .botao_sair:hover {
   color: var(--background-color);
+  cursor: pointer;
 }
 
 .resume_titulo {
@@ -656,21 +664,24 @@ a {
   margin: 10% 25% 5% 25%;
   /*cima, direita, baixo, esquerda */
   background-color: var(--box-color);
-  border-radius: 30px;
-  padding: 3%;
+  border-radius: 15px;
+  padding: 2%;
 
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
   gap: 25px;
+  position: fixed;
+  width: 40%;
+  z-index: 9;
 }
 
 .gameover {
   font-family: 'Press Start 2P', cursive;
   font-size: 55px;
 
-  padding: 3%;
-  text-align: center;
+  padding: 2%;
+  text-align: left;
 
   display: flex;
   flex-direction: row;
@@ -679,41 +690,72 @@ a {
 /* JOGO */
 
 .celula {
-  background-color: white;
-  width: 70px;
+  background-color: var(--background-color);
+  width: auto;
   font-size: 100%;
   font-weight: bold;
   cursor: pointer;
 }
 
-.tabuleiro {
+.tabuleiro_div a {
+  cursor: pointer;
+}
+
+#tabuleiroDinamico {
   font-size: 16px;
   color: black;
   width: 100%;
-  height: 90vh;
-  margin: auto -25%;
-  background-color: var(--box-color);
+  background-color: #5465942c;
   display: grid;
-  gap: 2px;
-  grid-template-columns: repeat(10, 1fr);
+  gap: 1.5px;
   margin-top: 5%;
-  margin-bottom: 5%;
+  /*margin-bottom: 5%;*/
+  border-radius: 5px;
+  border: 3px #70d1db solid;
+}
+
+.div_inipause {
+  display: flex;
+  flex-direction: row;
+  width: auto;
+}
+
+#botao_pause {
+  background-color: #5ab72c;
+  font-family: 'Press Start 2P', sans-serif;
+  font-size: 20px;
+  padding: 15px 20px;
+  border: none;
+  cursor: pointer;
+  margin: 5%;
+  border-radius: 8px;
+
+  display: flex;
+  flex-direction: row;
+}
+
+#botao_pause:hover {
+  color: #bc3d31;
+  cursor: pointer;
 }
 
 #botao_iniciar {
   background-color: #5ab72c;
-  font-family: 'Press Start 2P', cursive;
-  font-size: 15px;
-  padding: 10px 20px;
+  font-family: 'Press Start 2P', sans-serif;
+  font-size: 20px;
+  padding: 15px 20px;
   border: none;
   cursor: pointer;
-  margin-left: 35%;
-  margin-top: 16px;
+  margin: 5%;
   border-radius: 8px;
+
+  display: flex;
+  flex-direction: row;
 }
 
 #botao_iniciar:hover {
-  color: white;
+  color: #d9d9d9;
+  cursor: pointer;
 }
 
 .jogo_victor {
@@ -726,9 +768,8 @@ a {
 }
 
 #container_jogo {
-  margin: auto;
-  padding: 4px;
-  text-align: center;
+  display: flex;
+  align-items: center;
 }
 
 body_jogo {
@@ -805,4 +846,31 @@ input::placeholder {
 .cianoQ {
   color: #00e5ff;
   background-color: #00e5ff;
+}
+
+.prox_peca_botoes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.peca_titulo {
+  /*nao consigo alinhar*/
+  text-align: center;
+  font-size: 30px;
+  margin-left: 17%;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.quadrado_peca {
+  width: 250px;
+  background: var(--box-color);
+  padding: 10%;
+  text-align: center;
+  border-radius: 15px;
+}
+
+#proximaPeca {
+  height: 250px;
 }
