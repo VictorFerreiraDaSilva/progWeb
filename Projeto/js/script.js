@@ -618,7 +618,7 @@ function exibirProximaPeca() {
       break;
   }
   document.getElementById('proximaPeca').src = 'assets/' + src;
-  document.getElementById('proximaPeca').style.height = '250px';
+  //document.getElementById('proximaPeca').style.height = '250px';
 }
 
 function pausar() {
