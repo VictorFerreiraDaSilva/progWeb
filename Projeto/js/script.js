@@ -1,9 +1,9 @@
-"use strict";
+'use strict';
 //localStorage
-const caractereInvisivel = "⠀";
+const caractereInvisivel = '⠀';
 
-let ln = localStorage.getItem("ln");
-let cl = localStorage.getItem("cl");
+let ln = localStorage.getItem('ln');
+let cl = localStorage.getItem('cl');
 let linhasEliminadas = 0;
 let pontuacao = 0;
 let nivel = 1;
@@ -13,91 +13,91 @@ let pecaAtual;
 let proximaPeca = 0;
 let pausado = false;
 let jogo = inicailizarMatriz(ln, cl);
-document.getElementById("linhasEliminadas").innerHTML = linhasEliminadas;
-document.getElementById("pontuacao").innerHTML = pontuacao;
-document.getElementById("nivel").innerHTML = nivel;
-const usuario = localStorage.getItem("nomeUsuario");
+document.getElementById('linhasEliminadas').innerHTML = linhasEliminadas;
+document.getElementById('pontuacao').innerHTML = pontuacao;
+document.getElementById('nivel').innerHTML = nivel;
+const usuario = localStorage.getItem('nomeUsuario');
 const ranking = [];
 const historico = [];
 
 criarTabuleiro();
 
 function criarTabuleiro() {
-  let tamanhoCelula = "0.9rem";
-  document.getElementById("tabuleiroDinamico").style.gridTemplateColumns =
-    "repeat(" + cl + ", 1fr)";
-  let divs = "";
+  let tamanhoCelula = '0.9rem';
+  document.getElementById('tabuleiroDinamico').style.gridTemplateColumns =
+    'repeat(' + cl + ', 1fr)';
+  let divs = '';
   for (let i = 0; i < ln; i++)
     for (let j = 0; j < cl; j++) {
-      divs += '<div class="celula" id="' + i + "_" + j + '">⠀</div>';
+      divs += '<div class="celula" id="' + i + '_' + j + '">⠀</div>';
     }
-  document.getElementById("tabuleiroDinamico").innerHTML = divs;
+  document.getElementById('tabuleiroDinamico').innerHTML = divs;
   if (cl == 10) {
-    tamanhoCelula = "1.9rem";
+    tamanhoCelula = '1.9rem';
   }
-  var celulas = document.getElementsByClassName("celula");
+  var celulas = document.getElementsByClassName('celula');
   for (let i = 0; i < celulas.length; i++) {
     celulas[i].style.width = tamanhoCelula;
     celulas[i].style.height = tamanhoCelula;
   }
-  document.getElementById("0_0").style.borderTopLeftRadius = "12px";
-  document.getElementById("0_" + (cl - 1)).style.borderTopRightRadius = "12px";
-  document.getElementById(ln - 1 + "_0").style.borderBottomLeftRadius = "12px";
+  document.getElementById('0_0').style.borderTopLeftRadius = '12px';
+  document.getElementById('0_' + (cl - 1)).style.borderTopRightRadius = '12px';
+  document.getElementById(ln - 1 + '_0').style.borderBottomLeftRadius = '12px';
   document.getElementById(
-    ln - 1 + "_" + (cl - 1)
-  ).style.borderBottomRightRadius = "12px";
+    ln - 1 + '_' + (cl - 1)
+  ).style.borderBottomRightRadius = '12px';
 }
 
 function armazenarDados() {
-  var nomeUsuario = document.getElementById("nome").value;
-  var senhaUsuario = document.getElementById("senha").value;
+  var nomeUsuario = document.getElementById('nome').value;
+  var senhaUsuario = document.getElementById('senha').value;
 
   // Verifica se os campos estão preenchidos
-  if (nomeUsuario === "" || senhaUsuario === "") {
-    alert("Por favor, preencha todos os campos.");
+  if (nomeUsuario === '' || senhaUsuario === '') {
+    alert('Por favor, preencha todos os campos.');
     return; // Evita continuar se algum campo estiver em branco
   }
 
   // Armazena os valores no localStorage
-  localStorage.setItem("nomeUsuario", nomeUsuario);
-  localStorage.setItem("senhaUsuario", senhaUsuario);
+  localStorage.setItem('nomeUsuario', nomeUsuario);
+  localStorage.setItem('senhaUsuario', senhaUsuario);
 
   // Redireciona para a página "tabuleiro.html"
-  window.location.href = "tabuleiro.html";
+  window.location.href = 'tabuleiro.html';
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-  var nomeUsuario = localStorage.getItem("nomeUsuario");
+document.addEventListener('DOMContentLoaded', function () {
+  var nomeUsuario = localStorage.getItem('nomeUsuario');
   //var senhaUsuario = localStorage.getItem("senhaUsuario");
 
   // Exibe os valores onde desejado na página
-  document.getElementById("nomeUsuario").innerText = nomeUsuario + " JOGANDO";
+  document.getElementById('nomeUsuario').innerText = nomeUsuario + ' JOGANDO';
   //document.getElementById("senhaUsuario").innerText = "Senha: " + senhaUsuario;
 });
 
 function validaRegistro() {
-  var nome = document.getElementById("input_nome").value;
-  var cpf = document.getElementById("input_cpf").value;
-  var telefone = document.getElementById("input_telefone").value;
+  var nome = document.getElementById('input_nome').value;
+  var cpf = document.getElementById('input_cpf').value;
+  var telefone = document.getElementById('input_telefone').value;
 
   // Verifica se os campos estão preenchidos
-  if (nome === "" || cpf === "" || telefone === "") {
-    alert("Por favor, preencha todos os campos.");
+  if (nome === '' || cpf === '' || telefone === '') {
+    alert('Por favor, preencha todos os campos.');
     return; // Evita continuar se algum campo estiver em branco
   }
   let validado = validarEmail();
-  if (validado) window.location.href = "index.html";
+  if (validado) window.location.href = 'index.html';
 }
 
 function validarEmail() {
-  var emailInput = document.getElementById("input_email");
+  var emailInput = document.getElementById('input_email');
   var email = emailInput.value;
 
   // Expressão regular para validar o formato do e-mail
   var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   if (!emailPattern.test(email)) {
-    alert("Por favor, insira um endereço de e-mail válido.");
+    alert('Por favor, insira um endereço de e-mail válido.');
     return false;
   }
   return true;
@@ -178,7 +178,7 @@ class Peca {
   apagarPeca(grid) {
     this.coordenadas.forEach((coo) => {
       if (coo != undefined && coo != null)
-        grid[coo.getLinha()][coo.getColuna()] = "⠀";
+        grid[coo.getLinha()][coo.getColuna()] = '⠀';
     });
     this.coordenadas = [];
   }
@@ -320,7 +320,7 @@ class Peca {
 function peca1() {
   let p = new Coordenada(0, 5);
   let dir = new Direcoes(0, 0, 0, 3, 0, 0, 0, 0);
-  let pec = new Peca(p, "roxoQ", dir);
+  let pec = new Peca(p, 'roxoQ', dir);
   pecaAtual = pec;
   pecaAtual.construirPeca(jogo);
   atualizaJogo();
@@ -328,7 +328,7 @@ function peca1() {
 function peca2() {
   let p = new Coordenada(0, 5);
   let dir = new Direcoes(0, 1, 0, 1, 0, 0, 0, 1);
-  let pec = new Peca(p, "amareloQ", dir);
+  let pec = new Peca(p, 'amareloQ', dir);
   pec.adicionarCoordenada();
   pecaAtual = pec;
   pecaAtual.construirPeca(jogo);
@@ -338,7 +338,7 @@ function peca2() {
 function peca3() {
   let p = new Coordenada(2, 5);
   let dir = new Direcoes(0, 1, 2, 0, 0, 0, 0, 0);
-  let pec = new Peca(p, "rosaQ", dir);
+  let pec = new Peca(p, 'rosaQ', dir);
   pecaAtual = pec;
   pecaAtual.construirPeca(jogo);
   atualizaJogo();
@@ -347,7 +347,7 @@ function peca3() {
 function peca4() {
   let p = new Coordenada(2, 5);
   let dir = new Direcoes(1, 0, 2, 0, 0, 0, 0, 0);
-  let pec = new Peca(p, "laranjaQ", dir);
+  let pec = new Peca(p, 'laranjaQ', dir);
   pecaAtual = pec;
   pecaAtual.construirPeca(jogo);
   atualizaJogo();
@@ -356,7 +356,7 @@ function peca4() {
 function peca5() {
   let p = new Coordenada(1, 5);
   let dir = new Direcoes(1, 1, 1, 0);
-  let pec = new Peca(p, "verdeQ", dir);
+  let pec = new Peca(p, 'verdeQ', dir);
   pecaAtual = pec;
   pecaAtual.construirPeca(jogo);
   atualizaJogo();
@@ -365,7 +365,7 @@ function peca5() {
 function peca6() {
   let p = new Coordenada(1, 5);
   let dir = new Direcoes(1, 1, 0, 0, 1, 0, 1, 0);
-  let pec = new Peca(p, "vermelhoQ", dir);
+  let pec = new Peca(p, 'vermelhoQ', dir);
   pecaAtual = pec;
   pecaAtual.construirPeca(jogo);
   atualizaJogo();
@@ -374,7 +374,7 @@ function peca6() {
 function pecaE() {
   let p = new Coordenada(0, 5);
   let dir = new Direcoes(0, 0, 0, 0, 0, 0, 0, 0);
-  let pec = new Peca(p, "cianoQ", dir);
+  let pec = new Peca(p, 'cianoQ', dir);
   pecaAtual = pec;
   pecaEspecial = true;
   pecaAtual.construirPeca(jogo);
@@ -388,7 +388,7 @@ let dropStart = Date.now();
 function inicializarArray(tamanho, vazio) {
   var array = [];
   for (let i = 0; i < tamanho; i++) {
-    array[i] = vazio === 1 ? caractereInvisivel : "vermelho";
+    array[i] = vazio === 1 ? caractereInvisivel : 'vermelho';
   }
   return array;
 }
@@ -427,10 +427,10 @@ function verificarDerrota() {
 function atualizaJogo() {
   for (var i = 0; i < ln; i++) {
     for (var j = 0; j < cl; j++) {
-      let celula = i.toString() + "_" + j.toString();
+      let celula = i.toString() + '_' + j.toString();
       document.getElementById(celula).innerHTML = jogo[i][j].charAt(0);
-      document.getElementById(celula).className = "";
-      document.getElementById(celula).classList.add("celula");
+      document.getElementById(celula).className = '';
+      document.getElementById(celula).classList.add('celula');
       document.getElementById(celula).classList.add(jogo[i][j]);
     }
   }
@@ -452,9 +452,9 @@ function limparLinhasEGerarPontuacao() {
   pontuacao += p;
   linhasEliminadas += contadorLinhas;
   nivel = Math.floor(pontuacao / 300 + 1);
-  document.getElementById("linhasEliminadas").innerHTML = linhasEliminadas;
-  document.getElementById("pontuacao").innerHTML = pontuacao;
-  document.getElementById("nivel").innerHTML = nivel;
+  document.getElementById('linhasEliminadas').innerHTML = linhasEliminadas;
+  document.getElementById('pontuacao').innerHTML = pontuacao;
+  document.getElementById('nivel').innerHTML = nivel;
 }
 
 const partialReverse = (arr = [], num = 0) => {
@@ -593,38 +593,32 @@ function controles(event) {
 }
 
 function exibirProximaPeca() {
-  let src = "";
+  let src = '';
   switch (proximaPeca) {
     case 1:
-      src = "peca_roxa.png";
+      src = 'peca_roxa.png';
       break;
     case 2:
-      src = "peca_amarela.png";
+      src = 'peca_amarela.png';
       break;
     case 3:
-      src = "peca_rosa.png";
+      src = 'peca_rosa.png';
       break;
     case 4:
-      src = "peca_laranja.png";
+      src = 'peca_laranja.png';
       break;
     case 5:
-      src = "peca_verde.png";
+      src = 'peca_verde.png';
       break;
     case 6:
-      src = "peca_vermelha.png";
+      src = 'peca_vermelha.png';
       break;
     case 7:
-      src = "especial.png";
+      src = 'especial.png';
       break;
   }
-
   document.getElementById('proximaPeca').src = 'assets/' + src;
-  document.getElementById('proximaPeca').style.height = '250px';
-  
-
-  document.getElementById("proximaPeca").src = "assets/" + src;
-  document.getElementById("proximaPeca").style.height = "250px";
-
+  //document.getElementById('proximaPeca').style.height = '250px';
 }
 
 function pausar() {
@@ -657,8 +651,8 @@ async function queda() {
 }
 
 async function iniciarJogo() {
-  document.getElementById("gameover").style.display = "none";
-  document.getElementById("jogo").classList.remove("blur");
+  document.getElementById('gameover').style.display = 'none';
+  document.getElementById('jogo').classList.remove('blur');
   jogo = inicailizarMatriz(ln, cl);
   atualizaJogo();
   limparLinhasEGerarPontuacao();
@@ -708,21 +702,21 @@ async function iniciarJogo() {
 function gameover() {
   cronometroEmExecucao = false;
   registrarPontuacaoDoJogador();
-  document.getElementById("gameover").style.display = "flex";
-  document.getElementById("jogo").classList.add("blur");
+  document.getElementById('gameover').style.display = 'flex';
+  document.getElementById('jogo').classList.add('blur');
   salvarDadosLocais(historico, ranking);
   //preencherRanking();
   preencherHistorico();
 }
 
-document.addEventListener("keydown", controles);
+document.addEventListener('keydown', controles);
 
 const botaoIniciar = document.getElementById('botao_iniciar');
 botaoIniciar.addEventListener('click', function () {
 // window.addEventListener('load', iniciarJogo);
 
-const botaoIniciar = document.getElementById("botao_iniciar");
-botaoIniciar.addEventListener("click", function () {
+const botaoIniciar = document.getElementById('botao_iniciar');
+botaoIniciar.addEventListener('click', function () {
   iniciarJogo();
 });
 
@@ -734,7 +728,7 @@ botaoIniciar.addEventListener("click", function () {
 /*const disappearButton = document.getElementById('botao_iniciar');
 disappearButton.addEventListener('click', sumirBotao);*/
 
-window.addEventListener("keydown", function (e) {
+window.addEventListener('keydown', function (e) {
   //(esquerda, direita, cima, baixo)
   if ([37, 38, 39, 40].includes(e.keyCode)) {
     e.preventDefault();
@@ -745,23 +739,23 @@ let tempoDecorrido = 0;
 let cronometroEmExecucao = false;
 let intervalID;
 
-let tempoElement = document.getElementById("tempo");
-let iniciarButton = document.getElementById("botao_iniciar");
+let tempoElement = document.getElementById('tempo');
+let iniciarButton = document.getElementById('botao_iniciar');
 
 function atualizarCronometro() {
-  if (cronometroEmExecucao) {
+  if (!pausado) {
     tempoDecorrido++;
     const segundos = tempoDecorrido % 60;
     const minutos = Math.floor((tempoDecorrido / 60) % 60);
 
-    const formatoTempo = `${minutos.toString().padStart(2, "0")}:${segundos
+    const formatoTempo = `${minutos.toString().padStart(2, '0')}:${segundos
       .toString()
-      .padStart(2, "0")}`;
+      .padStart(2, '0')}`;
     tempoElement.textContent = formatoTempo;
   }
 }
 
-iniciarButton.addEventListener("click", () => {
+iniciarButton.addEventListener('click', () => {
   if (!cronometroEmExecucao) {
     intervalID = setInterval(atualizarCronometro, 1000);
     cronometroEmExecucao = true;
@@ -844,7 +838,7 @@ function preencherHistorico() {
 
 // Função para carregar o histórico e ranking do Armazenamento Local
 function carregarDadosRanking() {
-  const rankingArmazenado = localStorage.getItem("ranking");
+  const rankingArmazenado = localStorage.getItem('ranking');
 
   const ranking = rankingArmazenado ? JSON.parse(rankingArmazenado) : [];
 
@@ -853,6 +847,5 @@ function carregarDadosRanking() {
 
 // Função para salvar o histórico e ranking no Armazenamento Local
 function salvarDadosLocais() {
-  localStorage.setItem("historico", JSON.stringify(historico));
-  localStorage.setItem("ranking", JSON.stringify(ranking));
-}
+  localStorage.setItem('historico', JSON.stringify(historico));
+  localStorage.setItem('ranking', JSON.stringify(ranking)); }
