@@ -1,7 +1,13 @@
 <?php
-$servername = "localhost"; //muda aqui para as infos do teu mySQL
-$username = "root";
-$password = "root";
+
+include 'db.php';
+
+$dbi = new DataBaseInfo();
+
+$servername = $dbi->getServerName(); 
+$username = $dbi->getUsername();
+$password = $dbi->getPassword();
+$db = $dbi->getDB();
 
 //conectando
 $conn = new mysqli($servername, $username, $password);
@@ -10,14 +16,14 @@ if ($conn->connect_error) {
 }
 
 //criando a database pro tetris
-$sql = "CREATE DATABASE IF NOT EXISTS SI401_tetris_gp03";
+$sql = "CREATE DATABASE IF NOT EXISTS $db";
 if ($conn->query($sql) != TRUE) {
   echo "erro criando database: " . $conn->error;
 }
 
 //fechando a conexao e abrindo dnv conectado ja na database
 $conn->close();
-$conn = new mysqli($servername, $username, $password, "SI401_tetris_gp03");
+$conn = new mysqli($servername, $username, $password, $db);
 
 //criando a tabela do usuario
 $sql = "CREATE TABLE IF NOT EXISTS usuario (
