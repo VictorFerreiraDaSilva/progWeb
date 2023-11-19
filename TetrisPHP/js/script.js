@@ -622,6 +622,14 @@ function exibirProximaPeca() {
 }
 
 function pausar() {
+  if(!pausado){
+    document.getElementById("resume").style.display = "flex";
+    document.getElementById("jogo").classList.add("blur");
+  }
+  else {
+    document.getElementById("resume").style.display = "none";
+    document.getElementById("jogo").classList.remove("blur");
+  }
   cronometroEmExecucao = !cronometroEmExecucao;
   pausado = !pausado;
 }
@@ -652,6 +660,7 @@ async function queda() {
 
 async function iniciarJogo() {
   document.getElementById("gameover").style.display = "none";
+  document.getElementById("resume").style.display = "none";
   document.getElementById("jogo").classList.remove("blur");
   jogo = inicailizarMatriz(ln, cl);
   atualizaJogo();

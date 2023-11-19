@@ -27,6 +27,19 @@
       >
       <a href="index.php"><div class="botao_sair">SAIR DO JOGO</div></a>
     </div>
+    <div class="resume_janela" id="resume">
+      <div class="resume_titulo">
+        <p class="resume_titulo">
+          <span class="roxo">R</span><span class="amarelo">E</span
+          ><span class="verde">S</span><span class="azul">U</span
+          ><span class="vermelho">M</span><span class="roxo">E</span>
+        </p>
+      </div>
+
+      <a href="#" onclick="pausar()"><div class="botao_resume">RESUME</div></a>
+      <a href="tabuleiro.php"><div class="botao_resume">NOVA PARTIDA</div></a>
+      <a href="index.php"><div class="botao_sair">SAIR DO JOGO</div></a>
+    </div>
     <div>
       <header>
         <div class="icones_header">
@@ -74,7 +87,7 @@
               LINHAS:⠀<span id="linhasEliminadas" class="vermelho"></span>
             </h2>
             <h2 id="dificuldade" class="est">
-              DIFICULDADE:⠀<span id="nivel" class="vermelho"></span>
+              NIVEL:⠀<span id="nivel" class="vermelho"></span>
             </h2>
           </div>
 
