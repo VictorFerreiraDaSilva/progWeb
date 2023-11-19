@@ -56,6 +56,10 @@ if ($conn->query($sql) != TRUE) {
   echo "Erro criando tabela jogo: " . $conn->error;
 }
 
+$sql = "SELECT pontuacao, nivel, tempo, data, username FROM jogo ORDER BY username ASC, data ASC, nivel ASC, pontuacao DESC, tempo ASC";
+$result = $conn->query($sql);
+
+
 //se deu bom fecha a conexao
 echo "Tudo certo!";
 $conn->close();

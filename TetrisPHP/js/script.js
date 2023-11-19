@@ -786,6 +786,7 @@ function registrarPontuacaoDoJogador() {
   });
 
   ordenarRankingPorPontuacao(ranking);
+
 }
 
 function ordenarRankingPorPontuacao(ranking) {
