@@ -843,8 +843,3 @@ function carregarDadosRanking() {
   return ranking;
 }
 
-// Função para salvar o histórico e ranking no Armazenamento Local
-function salvarDadosLocais() {
-  localStorage.setItem("historico", JSON.stringify(historico));
-  localStorage.setItem("ranking", JSON.stringify(ranking));
-}

@@ -24,6 +24,7 @@
         </p>
       </div>
       <a href="tabuleiro.php"><div class="botao_resume">NOVA PARTIDA</div></a>
+      <a href="ranking_global.php"><div class="botao_resume">RANKING GLOBAL</div></a>
       <a href="index.php"><div class="botao_sair">SAIR DO JOGO</div></a>
     </div>
   </body>

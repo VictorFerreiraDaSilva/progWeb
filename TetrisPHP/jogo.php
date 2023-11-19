@@ -22,9 +22,8 @@
           ><span class="roxo">E</span><span class="amarelo">R</span>
         </p>
       </div>
-      <a onclick="iniciarJogo()"
-        ><div class="botao_resume">NOVA PARTIDA</div></a
-      >
+      <a onclick="iniciarJogo()"><div class="botao_resume">NOVA PARTIDA</div></a>
+      <a href="ranking_global.php"><div class="botao_resume">RANKING GLOBAL</div></a>
       <a href="index.php"><div class="botao_sair">SAIR DO JOGO</div></a>
     </div>
     <div>

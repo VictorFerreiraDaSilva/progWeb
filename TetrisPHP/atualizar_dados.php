@@ -11,6 +11,33 @@
     <link rel="stylesheet" href="css/style.css">
     <script src="script.js"></script>
 </head>
+
+<header>
+        <div class="icones_header">
+          <a class="icone" href="resume.php">
+            <img src="assets/menu.png" alt="Imagem menu" />
+          </a>
+          <a
+            class="icone"
+            href="ranking_global.php"
+            onclick="preencherRanking()"
+          >
+            <img src="assets/trophy-01.png" alt="Imagem ranking" />
+          </a>
+          <a class="icone" href="atualizar_dados.php">
+            <img src="assets/user-circle.png" alt="Imagem perfil" />
+          </a>
+          <a class="icone" href="index.php">
+            <img src="assets/user-minus-02.png" alt="Imagem sair" />
+          </a>
+          <p class="titulo">
+            <span class="roxo">T</span><span class="amarelo">E</span
+            ><span class="verde">T</span><span class="rosa">R</span
+            ><span class="azul">I</span><span class="vermelho">S</span>
+          </p>
+        </div>
+      </header> 
+
 <body>
     <section class="caixa_register">
         <div id="container_register">
