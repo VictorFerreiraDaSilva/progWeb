@@ -12,7 +12,7 @@
     <script src="js/script.js"></script>
   </head>
   <body>
-  <form action="index.php" method="post">
+  <form action="registro.php" method="post">
     <section class="caixa_register">
       <div id="container_register">
         <p class="register_titulo">
@@ -27,27 +27,25 @@
 
       <h1 class="texto_registro">DADOS PESSOAIS</h1>
       <br/>
-
+      
+      <form action="index.php" method="post">
       <p class="texto_titulo_register">NOME COMPLETO</p>
-      <input class="input_register" id="input_nome" placeholder="Insira seu nome aqui" type="text" name="nome_completo"/>
-
+      <input class="input_register" id="input_nome" placeholder="Insira seu nome aqui" type="text" name="nome"/>
       <br/>
-
       <div id="row">
         <p class="texto_titulo_register">
           <span>DATA DE NASC.</span><span>CPF</span>
         </p>
       </div>
       <div>
-        <input class="input_register" id="input_data" type="date" /><input
+        <input class="input_register" id="input_data" type="date"name="data" /><input
           class="input_register"
           id="input_cpf"
           placeholder="123.456.789-10"
+          name="cpf"
         />
       </div>
-
       <br />
-
       <div class="texto_titulo_register">
         <p>TELEFONE</p>
         <p>E-MAIL</p>
@@ -57,20 +55,18 @@
           class="input_register"
           id="input_telefone"
           placeholder="(XX) 91234-5678"
+          name="telefone"
         /><input
           class="input_register"
           id="input_email"
           placeholder="seu@email.aqui"
+          name="email"
         />
       </div>
-
       <br />
       <br />
-
       <h1 class="texto_registro">CONTA</h1>
-
       <br />
-
       <div class="registro_login">
         <p>USUÁRIO</p>
         <p>SENHA</p>
@@ -79,9 +75,56 @@
         <input class="input_register" id="input_usuario" type="text" name="usuario"/>
         <input class="input_register" id="input_senha" type="password" name="senha"/>
       </div>      
-      <input type="submit" name="submeter" value="SUBMETER" class="botao_submeter">
+      <input type="submit" name="registrar" value="SUBMETER" class="botao_submeter">
+    </form>
     </section>
     </form>
   </body>
 </html>
 
+<?php
+  include 'System/db.php';
+
+  $dbi = new DataBaseInfo();
+  
+  $servername = $dbi->getServerName(); 
+  $username = $dbi->getUsername();
+  $password = $dbi->getPassword();
+  $db = $dbi->getDB();
+
+  if(isset($_POST["registrar"])){
+    /*echo $_POST["nome"];
+    echo $_POST["data"];
+    echo $_POST["cpf"];
+    echo $_POST["telefone"];
+    echo $_POST["email"];
+    echo $_POST["usuario"];
+    echo $_POST["senha"];*/
+    if(!empty($_POST["nome"]) && !empty($_POST["data"]) && !empty($_POST["cpf"]) && !empty($_POST["telefone"]) && !empty($_POST["email"]) && !empty($_POST["usuario"]) && !empty($_POST["senha"])){
+
+      $conn = new mysqli($servername, $username, $password, $db);
+      // Check connection
+      if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+      }
+
+      $sql = "INSERT INTO usuario 
+      VALUES ('" . $_POST["usuario"] . "', '" . $_POST["nome"] . "', '" . $_POST["data"] . "', '" . $_POST["cpf"] . "', '" . $_POST["telefone"] . "', '" . $_POST["email"] . "', md5('" . $_POST["senha"] . "') )";
+
+      if ($conn->query($sql) === TRUE) {
+        echo "<script>
+        alert('Registrado com sucesso');
+        window.location.href='index.php';
+        </script>";
+      } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+      }
+
+      $conn->close();
+
+    }
+    else{
+        echo"Está faltando usuário/senha <br>";
+    }
+  }
+?>
