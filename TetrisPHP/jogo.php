@@ -155,9 +155,6 @@
             <button id="botao_iniciar">JOGAR</button>
             <button id="botao_pause" onclick="pausar()">PAUSAR</button>
           </div>
-          <div>
-          <h3 class="vermelho">AVISO:</h3><h4 class="rosa">Se quiser reiniciar o jogo antes de perder, recarregue a página.</h4>
-          </div>
         </section>
       </section>
     </div>
