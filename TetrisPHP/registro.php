@@ -28,7 +28,7 @@
       <h1 class="texto_registro">DADOS PESSOAIS</h1>
       <br/>
       
-      <form action="index.php" method="post">
+      <form action="#" method="post">
       <p class="texto_titulo_register">NOME COMPLETO</p>
       <input class="input_register" id="input_nome" placeholder="Insira seu nome aqui" type="text" name="nome"/>
       <br/>
@@ -112,15 +112,16 @@
       VALUES ('" . $_POST["usuario"] . "', '" . $_POST["nome"] . "', '" . $_POST["data"] . "', '" . $_POST["cpf"] . "', '" . $_POST["telefone"] . "', '" . $_POST["email"] . "', md5('" . $_POST["senha"] . "') )";
 
       if ($conn->query($sql) === TRUE) {
+        $conn->close();
         echo "<script>
         alert('Registrado com sucesso');
         window.location.href='index.php';
         </script>";
       } else {
+        $conn->close();
         echo "Error: " . $sql . "<br>" . $conn->error;
       }
 
-      $conn->close();
 
     }
     else{

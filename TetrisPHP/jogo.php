@@ -43,7 +43,7 @@
     <div>
       <header>
         <div class="icones_header">
-          <a class="icone" href="resume.php">
+          <a class="icone" href="#" onclick="pausar()">
             <img src="assets/menu.png" alt="Imagem menu" />
           </a>
           <a
