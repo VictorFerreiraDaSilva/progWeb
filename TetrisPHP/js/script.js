@@ -742,7 +742,7 @@ let tempoElement = document.getElementById("tempo");
 let iniciarButton = document.getElementById("botao_iniciar");
 
 function atualizarCronometro() {
-  if (cronometroEmExecucao) {
+  if (!pausado) {
     tempoDecorrido++;
     const segundos = tempoDecorrido % 60;
     const minutos = Math.floor((tempoDecorrido / 60) % 60);
