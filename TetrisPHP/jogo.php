@@ -147,17 +147,16 @@
             </h1>
 
             <div class="quadrado_peca">
-              <img
-                id="proximaPeca"
-                src="assets/peca_rosa.png"
-                alt="quadrado"
-              />
+              <img id="proximaPeca" src="assets/peca_roxa.png" alt="peça"/>
             </div>
           </div>
 
           <div class="div_inipause">
             <button id="botao_iniciar">JOGAR</button>
             <button id="botao_pause" onclick="pausar()">PAUSAR</button>
+          </div>
+          <div>
+          <h3 class="vermelho">AVISO:</h3><h4 class="rosa">Se quiser reiniciar o jogo antes de perder, recarregue a página.</h4>
           </div>
         </section>
       </section>

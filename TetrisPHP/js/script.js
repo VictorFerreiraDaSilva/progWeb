@@ -663,7 +663,7 @@ async function iniciarJogo() {
   nivel = 1;
   pecaInserida = false;
   pecaEspecial = false;
-  proximaPeca = Math.floor(Math.random() * 7) + 1;
+  proximaPeca = 1;
   do {
     let numero = proximaPeca;
     proximaPeca = Math.floor(Math.random() * 7) + 1;
@@ -843,4 +843,3 @@ function carregarDadosRanking() {
 
   return ranking;
 }
-
