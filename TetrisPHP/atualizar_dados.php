@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Atualizar dados</title>
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/scriptAtualizarDados.js"></script>
+    <script src="js/scriptBlur.js"></script>
 </head>
 
 <body>
@@ -96,6 +96,12 @@
       </form>
     </section>
 </body>
+  <svg id="svg-filter">
+    <!-- PEGAMO DO SEGUINTE LINK: https://jsfiddle.net/rijokpaul/1k5x6dgm/ , só dicionar a classe blur que fica borrado -->
+    <filter id="svg-blur">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="4"></feGaussianBlur>
+    </filter>
+  </svg>
 </html>
 
 <?php

@@ -65,9 +65,7 @@
         <input class="input" id="Ftempo" name="Ftempo" style="display: none"/>
         <input class="input" id="Flinhas" name="Flinhas" style="display: none"/>
         <input type="submit" name="novaPartida" value="NOVA PARTIDA" class="botao_resume">
-        <br>
-        <a href="ranking_global.php"><div class="botao_resume">RANKING GLOBAL</div></a>
-        <br>
+        <input type="submit" name="rankingGlobal" value="RANKING GLOBAL" class="botao_resume">
         <input type="submit" name="sair" value="SAIR DO JOGO" class="botao_sair">
       </form>
     </div>

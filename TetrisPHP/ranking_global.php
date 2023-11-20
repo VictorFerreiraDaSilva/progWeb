@@ -45,7 +45,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/style.css" />
-    <script src="js/script.js"></script>
+    <script src="js/scriptBlur.js"></script>
     <title>TETRIS</title>
   </head>
   <body class="jogobody">
@@ -92,7 +92,7 @@
         </p>
         </div>
       </header>
-    <div class="ranking_global">
+    <div class="ranking_global" id="jogo">
       <div class="rank">
         <div class="rank_column amarelo">
           <p class="branco">RANK</p>
@@ -180,4 +180,10 @@
     </div>
     <footer><div id="nomeUsuario">⠀</div></footer>
   </body>
+  <svg id="svg-filter">
+    <!-- PEGAMO DO SEGUINTE LINK: https://jsfiddle.net/rijokpaul/1k5x6dgm/ , só dicionar a classe blur que fica borrado -->
+    <filter id="svg-blur">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="4"></feGaussianBlur>
+    </filter>
+  </svg>
 </html>
