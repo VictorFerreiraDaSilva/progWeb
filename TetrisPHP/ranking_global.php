@@ -2,6 +2,43 @@
   session_start()
 ?>
 
+<?php
+  include 'System/db.php';
+
+  $dbi = new DataBaseInfo();
+  
+  $servername = $dbi->getServerName(); 
+  $username = $dbi->getUsername();
+  $password = $dbi->getPassword();
+  $db = $dbi->getDB();
+
+  $jogos = array();
+  $dbi = new DataBaseInfo();
+  
+  $servername = $dbi->getServerName(); 
+  $username = $dbi->getUsername();
+  $password = $dbi->getPassword();
+  $db = $dbi->getDB();
+
+  $conn = new mysqli($servername, $username, $password, $db);
+  if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+  }
+
+  $sql = "SELECT username, dt, pontuacao, nivel, tempo FROM jogo ORDER BY pontuacao DESC";
+  $result = $conn->query($sql);
+  
+  if ($result->num_rows > 0) {
+      while($row = $result->fetch_assoc()) {
+          //echo $row["pontuacao"] . "|" . $row["nivel"] . "|" . $row["linhas_apagadas"] . "|" . $row["tempo"] . "|" . $row["username"];
+          $jogos[] = ['username' => $row["username"], 'data' => $row["dt"], 'pontuacao' => $row["pontuacao"], 'nivel' => $row["nivel"], 'tempo' => $row["tempo"]];
+      }
+      //echo json_encode($jogos);
+  }
+  $conn->close();
+  $_SESSION["jogos"] = $jogos;
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
@@ -70,108 +107,77 @@
           <p>8º</p>
           <p>9º</p>
           <p>10º</p>
-          <p>11º</p>
-          <p>12º</p>
-          <p>13º</p>
         </div>
         <div class="rank_column t28px amarelo">
           <p class="branco t36px">USUARIO</p>
           <div class="espacamento8px"></div>
-          <p class="espacamento10px rosa" id="rankinguser1">-</p>
-          <p class="espacamento10px verde" id="rankinguser2">-</p>
-          <p class="espacamento10px azul" id="rankinguser3">-</p>
-          <p class="espacamento10px" id="rankinguser4">-</p>
-          <p class="espacamento10px" id="rankinguser5">-</p>
-          <p class="espacamento10px" id="rankinguser6">-</p>
-          <p class="espacamento10px" id="rankinguser7">-</p>
-          <p class="espacamento10px" id="rankinguser8">-</p>
-          <p class="espacamento10px" id="rankinguser9">-</p>
-          <p class="espacamento10px" id="rankinguser10">-</p>
-          <p class="espacamento10px" id="rankinguser11">-</p>
-          <p class="espacamento10px" id="rankinguser12">-</p>
-          <p class="espacamento10px" id="rankinguser13">-</p>
-          <p class="espacamento10px" id="rankinguser14">-</p>
-        </div>
-        <div class="rank_column t28px amarelo">
-          <p class="branco t36px">DATA</p>
-          <div class="espacamento8px"></div>
-          <p class="espacamento10px rosa" id="rankingdata1">-</p>
-          <p class="espacamento10px verde" id="rankingdata2">-</p>
-          <p class="espacamento10px azul" id="rankingdata3">-</p>
-          <p class="espacamento10px" id="rankingdata4">-</p>
-          <p class="espacamento10px" id="rankingdata5">-</p>
-          <p class="espacamento10px" id="rankingdata6">-</p>
-          <p class="espacamento10px" id="rankingdata7">-</p>
-          <p class="espacamento10px" id="rankingdata8">-</p>
-          <p class="espacamento10px" id="rankingdata9">-</p>
-          <p class="espacamento10px" id="rankingdata10">-</p>
-          <p class="espacamento10px" id="rankingdata11">-</p>
-          <p class="espacamento10px" id="rankingdata12">-</p>
-          <p class="espacamento10px" id="rankingdata13">-</p>
-          <p class="espacamento10px" id="rankingdata14">-</p>
+          <?php
+            $jogos = $_SESSION["jogos"];
+            $i = 1;
+            if($jogos != null){
+              foreach ($jogos as $jogo) {
+                echo "<p class='espacamento10px' id='ranking". $i . "'>";
+                echo $jogo["username"] == null ? "-" : $jogo["username"];
+                echo "</p>";
+                $i++;
+                if($i > 10) break;
+              }
+            }
+          ?>
         </div>
         <div class="rank_column t28px amarelo">
           <p class="branco t36px">PONTOS</p>
           <div class="espacamento8px"></div>
-          <p class="espacamento10px rosa" id="rankingpontos1">-</p>
-          <p class="espacamento10px verde" id="rankingpontos2">-</p>
-          <p class="espacamento10px azul" id="rankingpontos3">-</p>
-          <p class="espacamento10px" id="rankingpontos4">-</p>
-          <p class="espacamento10px" id="rankingpontos5">-</p>
-          <p class="espacamento10px" id="rankingpontos6">-</p>
-          <p class="espacamento10px" id="rankingpontos7">-</p>
-          <p class="espacamento10px" id="rankingpontos8">-</p>
-          <p class="espacamento10px" id="rankingpontos9">-</p>
-          <p class="espacamento10px" id="rankingpontos10">-</p>
-          <p class="espacamento10px" id="rankingpontos11">-</p>
-          <p class="espacamento10px" id="rankingpontos12">-</p>
-          <p class="espacamento10px" id="rankingpontos13">-</p>
-          <p class="espacamento10px" id="rankingpontos14">-</p>
+          <?php
+            $jogos = $_SESSION["jogos"];
+            $i = 1;
+            if($jogos != null){
+              foreach ($jogos as $jogo) {
+                echo "<p class='espacamento10px' id='ranking". $i . "'>";
+                echo $jogo["pontuacao"] == null ? "-" : $jogo["pontuacao"];
+                echo "</p>";
+                $i++;
+                if($i > 10) break;
+              }
+            }
+          ?>
         </div>
         <div class="rank_column t28px amarelo">
           <p class="branco t36px">NÍVEL</p>
           <div class="espacamento8px"></div>
-          <p class="espacamento10px rosa" id="rankingnivel1">-</p>
-          <p class="espacamento10px verde" id="rankingnivel2">-</p>
-          <p class="espacamento10px azul" id="rankingnivel3">-</p>
-          <p class="espacamento10px" id="rankingnivel4">-</p>
-          <p class="espacamento10px" id="rankingnivel5">-</p>
-          <p class="espacamento10px" id="rankingnivel6">-</p>
-          <p class="espacamento10px" id="rankingnivel7">-</p>
-          <p class="espacamento10px" id="rankingnivel8">-</p>
-          <p class="espacamento10px" id="rankingnivel9">-</p>
-          <p class="espacamento10px" id="rankingnivel10">-</p>
-          <p class="espacamento10px" id="rankingnivel11">-</p>
-          <p class="espacamento10px" id="rankingnivel12">-</p>
-          <p class="espacamento10px" id="rankingnivel13">-</p>
-          <p class="espacamento10px" id="rankingnivel14">-</p>
+          <?php
+            $jogos = $_SESSION["jogos"];
+            $i = 1;
+            if($jogos != null){
+              foreach ($jogos as $jogo) {
+                echo "<p class='espacamento10px' id='ranking". $i . "'>";
+                echo $jogo["nivel"] == null ? "-" : $jogo["nivel"];
+                echo "</p>";
+                $i++;
+                if($i > 10) break;
+              }
+            }
+          ?>
         </div>
         <div class="rank_column t28px amarelo">
           <p class="branco t36px">TEMPO</p>
           <div class="espacamento8px"></div>
-          <p class="espacamento10px rosa" id="rankingtempo1">-</p>
-          <p class="espacamento10px verde" id="rankingtempo2">-</p>
-          <p class="espacamento10px azul" id="rankingtempo3">-</p>
-          <p class="espacamento10px" id="rankingtempo4">-</p>
-          <p class="espacamento10px" id="rankingtempo5">-</p>
-          <p class="espacamento10px" id="rankingtempo6">-</p>
-          <p class="espacamento10px" id="rankingtempo7">-</p>
-          <p class="espacamento10px" id="rankingtempo8">-</p>
-          <p class="espacamento10px" id="rankingtempo9">-</p>
-          <p class="espacamento10px" id="rankingtempo10">-</p>
-          <p class="espacamento10px" id="rankingtempo11">-</p>
-          <p class="espacamento10px" id="rankingtempo12">-</p>
-          <p class="espacamento10px" id="rankingtempo13">-</p>
-          <p class="espacamento10px" id="rankingtempo14">-</p>
+          <?php
+            $jogos = $_SESSION["jogos"];
+            $i = 1;
+            if($jogos != null){
+              foreach ($jogos as $jogo) {
+                echo "<p class='espacamento10px' id='ranking". $i . "'>";
+                echo $jogo["tempo"] == null ? "-" : $jogo["tempo"];
+                echo "</p>";
+                $i++;
+                if($i > 10) break;
+              }
+            }
+          ?>
         </div>
       </div>
     </div>
     <footer><div id="nomeUsuario">⠀</div></footer>
-    <script>
-      // Função a ser executada quando a página for carregada
-      document.addEventListener("DOMContentLoaded", function () {
-        preencherRanking();
-      });
-    </script>
   </body>
 </html>
