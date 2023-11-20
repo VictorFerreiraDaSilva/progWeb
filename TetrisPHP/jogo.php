@@ -60,10 +60,10 @@
         </p>
       </div>
       <a onclick="iniciarJogo()">
-        <form action="#" method="post">
+        <form action="System/inserirDados.php" method="post">
           <input class="input" id="Fpontuacao" name="Fpontuacao" style="display: none"/>
           <input class="input" id="Fnivel" name="Fnivel" style="display: none"/>
-          <input class="input" id="Ftempo" name="Ftempo" style="display: hidden"/>
+          <input class="input" id="Ftempo" name="Ftempo" style="display: none"/>
           <input class="input" id="Flinhas" name="Flinhas" style="display: none"/>
           <input type="submit" name="novaPartida" value="NOVA PARTIDA" class="botao_resume">
         </form>
@@ -252,34 +252,3 @@
     </filter>
   </svg>
 </html>
-
-<?php
-
-  $dbi = new DataBaseInfo();
-  
-  $servername = $dbi->getServerName(); 
-  $username = $dbi->getUsername();
-  $password = $dbi->getPassword();
-  $db = $dbi->getDB();
-
-  if(isset($_POST["novaPartida"])){
-    if($_POST["Fpontuacao"] != NULL && $_POST["Fnivel"] != NULL && $_POST["Flinhas"] != NULL && $_POST["Ftempo"] != NULL){
-      echo "tem";
-      $conn = new mysqli($servername, $username, $password, $db);
-      if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-      }
-
-      $sql = "INSERT INTO jogo (pontuacao, nivel, linhas_apagadas, tempo, dt, username) VALUES (" . $_POST["Fpontuacao"] . ", " . $_POST["Fnivel"] . ", " . $_POST["Flinhas"] . ", '" . $_POST["Ftempo"] . "', curdate(), '" . $_SESSION["usuario"] . "')";
-      
-      if ($conn->query($sql) === TRUE) {
-        $conn->close();
-      } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-        $conn->close();
-      }      
-    }
-    else { echo "nçao";}
-  }
-  else echo "nem chegou"; 
-?>
