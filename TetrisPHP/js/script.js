@@ -2,6 +2,7 @@
 //localStorage
 const caractereInvisivel = "⠀";
 
+let espelhado = false;
 let ln = localStorage.getItem("ln");
 let cl = localStorage.getItem("cl");
 let linhasEliminadas = 0;
@@ -394,6 +395,7 @@ function inicializarArray(tamanho, vazio) {
   for (let i = 0; i < tamanho; i++) {
     array[i] = vazio === 1 ? caractereInvisivel : "vermelho";
   }
+  array[tamanho] = false;
   return array;
 }
 
@@ -420,7 +422,7 @@ function completaLinha(linha) {
 }
 
 function verificarDerrota() {
-  for (let i = 0; i < jogo[0].length; i++) {
+  for (let i = 0; i < cl; i++) {
     if (jogo[0][i] != caractereInvisivel) {
       return true;
     }
@@ -442,13 +444,18 @@ function atualizaJogo() {
 
 function limparLinhasEGerarPontuacao() {
   let contadorLinhas = 0;
+  let vaiInverter = false;
   for (let i = 0; i < ln; i++) {
     if (verificarLinhaCompleta(jogo[i])) {
+      if(jogo[i][cl] === true){
+        vaiInverter = true;
+      }
       contadorLinhas++;
       jogo.splice(i, 1);
       jogo.unshift(inicializarArray(cl, 1));
     }
   }
+  if(vaiInverter) espelhar();
   atualizaJogo();
   let p = 0;
   for (let i = 0; i < contadorLinhas; i++) p += 10;
@@ -468,6 +475,7 @@ const partialReverse = (arr = [], num = 0) => {
 };
 
 function espelhar() {
+  espelhado = !espelhado;
   jogo.forEach((linha) => {
     //linha.reverse();
     partialReverse(linha, cl);
@@ -562,25 +570,32 @@ function tacarParaBaixo() {
       return 0;
     } else {
       pecaInserida = true;
-      if (pecaEspecial) espelhar();
+      if (pecaEspecial) atualizarLinhasComPecaEspecial();
       return 1;
     }
   } catch (error) {
     pecaInserida = true;
-    if (pecaEspecial) espelhar();
+    if (pecaEspecial) atualizarLinhasComPecaEspecial();
     return 1;
   }
 }
 
+function atualizarLinhasComPecaEspecial(){
+  let linhaComPecaEspecial = pecaAtual.direcoes.getBaixo() + pecaAtual.pontoCentral.getLinha();
+  jogo[linhaComPecaEspecial][cl] = true;
+}
+
 // RIAN
 function controles(event) {
-  const movimentos = {
+  let movimentos = {
     ArrowLeft() {
-      tacarParaEsquerda();
+      if(!espelhado) tacarParaEsquerda();
+      else tacarParaDireita();
     },
 
     ArrowRight() {
-      tacarParaDireita();
+      if(!espelhado) tacarParaDireita();
+      else tacarParaEsquerda();
     },
 
     ArrowUp() {
