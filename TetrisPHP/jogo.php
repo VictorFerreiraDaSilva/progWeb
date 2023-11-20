@@ -59,13 +59,14 @@
           ><span class="roxo">E</span><span class="amarelo">R</span>
         </p>
       </div>
-      <a href="ranking_global.php"><div class="botao_resume">RANKING GLOBAL</div></a>
       <form action="System/inserirDados.php" method="post">
         <input class="input" id="Fpontuacao" name="Fpontuacao" style="display: none"/>
         <input class="input" id="Fnivel" name="Fnivel" style="display: none"/>
         <input class="input" id="Ftempo" name="Ftempo" style="display: none"/>
         <input class="input" id="Flinhas" name="Flinhas" style="display: none"/>
         <input type="submit" name="novaPartida" value="NOVA PARTIDA" class="botao_resume">
+        <br>
+        <a href="ranking_global.php"><div class="botao_resume">RANKING GLOBAL</div></a>
         <br>
         <input type="submit" name="sair" value="SAIR DO JOGO" class="botao_sair">
       </form>
