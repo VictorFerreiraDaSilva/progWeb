@@ -77,7 +77,7 @@
     }
   }
   else{
-    echo"Está faltando usuário/senha <br>";
+    echo"<script>alert('Usuario e/ou Senha inválidos');</script>";
   }
 
 ?>
