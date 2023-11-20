@@ -9,10 +9,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Atualizar dados</title>
     <link rel="stylesheet" href="css/style.css">
-    <script src="script.js"></script>
+    <script src="js/scriptAtualizarDados.js"></script>
 </head>
 <body>
-    <section class="caixa_register">
+    <div class="resume_janela" id="resume">
+      <div class="resume_titulo">
+        <p class="resume_titulo">
+          <span class="roxo">R</span><span class="amarelo">E</span
+          ><span class="verde">S</span><span class="azul">U</span
+          ><span class="vermelho">M</span><span class="roxo">E</span>
+        </p>
+      </div>
+      <a href="tabuleiro.php"><div class="botao_resume">NOVA PARTIDA</div></a>
+      <a href="index.php"><div class="botao_sair">SAIR DO JOGO</div></a>
+    </div>  
+    <header>
+        <div class="icones_header">
+          <a class="icone" href="#" onclick="pausar()">
+            <img src="assets/menu.png" alt="Imagem menu" />
+          </a>
+          <a
+            class="icone"
+            href="ranking_global.php"
+          >
+            <img src="assets/trophy-01.png" alt="Imagem ranking" />
+          </a>
+          <a class="icone" href="atualizar_dados.php">
+            <img src="assets/user-circle.png" alt="Imagem perfil" />
+          </a>
+          <a class="icone" href="index.php">
+            <img src="assets/user-minus-02.png" alt="Imagem sair" />
+          </a>
+          <p class="titulo">
+            <span class="roxo">T</span><span class="amarelo">E</span
+            ><span class="verde">T</span><span class="rosa">R</span
+            ><span class="azul">I</span><span class="vermelho">S</span>
+          </p>
+        </div>
+      </header>
+    <section class="caixa_register" id="jogo">
         <div id="container_register">
             <p class="atualizar_titulo"><span class="roxo">A</span><span class="amarelo">T</span><span class="verde">U</span><span class="azul">A</span><span class="vermelho">L</span><span class="roxo">I</span><span class="rosa">Z</span><span class="amarelo">A</span><span class="verde">R</span>
             <span class="azul">D</span><span class="vermelho">A</span><span class="amarelo">D</span><span class="rosa">O</span><span class="verde">S</span></p> 
