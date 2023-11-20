@@ -153,7 +153,7 @@
                 <p class="">4º</p>
                 <p class="">5º</p>
               </div>
-              <div class="ranking_pessoal_column vermelho">
+              <div class="ranking_pessoal_column amarelo">
                 <p class="branco">PONTOS</p>
                 <div class="espacamento8px"></div>
                 <?php
@@ -161,7 +161,7 @@
                 $i = 1;
                 if($jogos != null){
                   foreach ($jogos as $jogo) {
-                    echo "<p id='pontos" . $i . "'>";
+                    echo "<p id='ranking" . $i . "'>";
                     echo $jogo["pontuacao"] == null ? "-" : $jogo["pontuacao"];
                     echo "</p>";
                     $i++;
@@ -170,7 +170,7 @@
                 }
                 ?>
               </div>
-              <div class="ranking_pessoal_column vermelho">
+              <div class="ranking_pessoal_column amarelo">
                 <p class="branco">NÍVEL</p>
                 <div class="espacamento8px"></div>
                 <?php
@@ -178,7 +178,7 @@
                 $i = 1;
                 if($jogos != null){
                   foreach ($jogos as $jogo) {
-                    echo "<p id='nivel" . $i . "'>";
+                    echo "<p id='ranking" . $i . "'>";
                     echo $jogo["nivel"] == null ? "-" : $jogo["nivel"];
                     echo "</p>";
                     $i++;
@@ -187,7 +187,7 @@
                 }
                 ?>
               </div>
-              <div class="ranking_pessoal_column vermelho">
+              <div class="ranking_pessoal_column amarelo">
                 <p class="branco">TEMPO</p>
                 <div class="espacamento8px"></div>
                 <?php
@@ -195,7 +195,7 @@
                 $i = 1;
                 if($jogos != null){
                   foreach ($jogos as $jogo) {
-                    echo "<p id='tempo" . $i . "'>";
+                    echo "<p id='ranking" . $i . "'>";
                     echo $jogo["tempo"] == null ? "-" : $jogo["tempo"];
                     echo "</p>";
                     $i++;

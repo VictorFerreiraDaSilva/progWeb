@@ -559,7 +559,7 @@ a {
 .rank_column {
   display: flex;
   flex-direction: column;
-
+  font-size: 32px;
   flex: 1 1 0px;
   text-align: center;
 }
@@ -850,6 +850,18 @@ input::placeholder {
 .cianoQ {
   color: #00e5ff;
   background-color: #00e5ff;
+}
+
+#ranking1{
+  color: #db86b4;
+}
+
+#ranking2{
+  color: #5ab72c;
+}
+
+#ranking3{
+  color: #00e5ff;
 }
 
 .prox_peca_botoes {
