@@ -26,7 +26,7 @@
     die("Connection failed: " . $conn->connect_error);
   }
 
-  $sql = "SELECT pontuacao, nivel, linhas_apagadas, tempo, username FROM jogo WHERE username = 'vito'";
+  $sql = "SELECT pontuacao, nivel, linhas_apagadas, tempo, username FROM jogo WHERE username = 'vito' ORDER BY pontuacao DESC";
   $result = $conn->query($sql);
   
   if ($result->num_rows > 0) {
@@ -66,9 +66,9 @@
           <input class="input" id="Ftempo" name="Ftempo" style="display: none"/>
           <input class="input" id="Flinhas" name="Flinhas" style="display: none"/>
           <input type="submit" name="novaPartida" value="NOVA PARTIDA" class="botao_resume">
+          <input type="submit" name="sair" value="SAIR DO JOGO" class="botao_sair">
         </form>
       </a>
-      <a href="index.php"><div class="botao_sair">SAIR DO JOGO</div></a>
     </div>
     <div class="resume_janela" id="resume">
       <div class="resume_titulo">
