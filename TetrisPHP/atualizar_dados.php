@@ -17,10 +17,7 @@
           <a class="icone" href="resume.php">
             <img src="assets/menu.png" alt="Imagem menu" />
           </a>
-          <a
-            class="icone"
-            href="ranking_global.php"
-            onclick="preencherRanking()"
+          <a class="icone" href="ranking_global.php" onclick="preencherRanking()"
           >
             <img src="assets/trophy-01.png" alt="Imagem ranking" />
           </a>

@@ -38,11 +38,7 @@
         </p>
       </div>
       <div>
-        <input class="input_register" id="input_data" type="date"name="data" /><input
-          class="input_register"
-          id="input_cpf"
-          placeholder="123.456.789-10"
-          name="cpf"
+        <input class="input_register" id="input_data" type="date"name="data" /><input class="input_register" id="input_cpf" placeholder="123.456.789-10" name="cpf"
         />
       </div>
       <br />
@@ -51,16 +47,8 @@
         <p>E-MAIL</p>
       </div>
       <div>
-        <input
-          class="input_register"
-          id="input_telefone"
-          placeholder="(XX) 91234-5678"
-          name="telefone"
-        /><input
-          class="input_register"
-          id="input_email"
-          placeholder="seu@email.aqui"
-          name="email"
+        <input class="input_register" id="input_telefone" placeholder="(XX) 91234-5678" name="telefone"
+        /><input class="input_register" id="input_email" placeholder="seu@email.aqui" name="email"
         />
       </div>
       <br />
