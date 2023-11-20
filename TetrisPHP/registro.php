@@ -93,17 +93,9 @@
   $db = $dbi->getDB();
 
   if(isset($_POST["registrar"])){
-    /*echo $_POST["nome"];
-    echo $_POST["data"];
-    echo $_POST["cpf"];
-    echo $_POST["telefone"];
-    echo $_POST["email"];
-    echo $_POST["usuario"];
-    echo $_POST["senha"];*/
     if(!empty($_POST["nome"]) && !empty($_POST["data"]) && !empty($_POST["cpf"]) && !empty($_POST["telefone"]) && !empty($_POST["email"]) && !empty($_POST["usuario"]) && !empty($_POST["senha"])){
 
       $conn = new mysqli($servername, $username, $password, $db);
-      // Check connection
       if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
       }

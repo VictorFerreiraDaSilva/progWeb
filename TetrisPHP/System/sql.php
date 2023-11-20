@@ -15,8 +15,14 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
+//dropando a database se tiver alguma com o msm nome
+$sql = "DROP DATABASE IF EXISTS $db";
+if ($conn->query($sql) != TRUE) {
+  echo "erro dropando database: " . $conn->error;
+}
+
 //criando a database pro tetris
-$sql = "CREATE DATABASE IF NOT EXISTS $db";
+$sql = "CREATE DATABASE $db";
 if ($conn->query($sql) != TRUE) {
   echo "erro criando database: " . $conn->error;
 }
@@ -41,12 +47,12 @@ if ($conn->query($sql) != TRUE) {
 
 //criando a tabela para os jogos
 $sql = "CREATE TABLE IF NOT EXISTS jogo (
-  id BIGINT PRIMARY KEY NOT NULL,
+  id BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   pontuacao INT NOT NULL,
   nivel INT NOT NULL,
   linhas_apagadas INT NOT NULL,
-  tempo timestamp NOT NULL,
-  data DATE NOT NULL,
+  tempo TIME NOT NULL,
+  dt DATE NOT NULL,
   username VARCHAR(100) NOT NULL,
   FOREIGN KEY (username)
         REFERENCES usuario (username)

@@ -3,6 +3,43 @@
 ?>
 
 <!DOCTYPE html>
+<?php
+  include 'System/db.php';
+
+  $dbi = new DataBaseInfo();
+  
+  $servername = $dbi->getServerName(); 
+  $username = $dbi->getUsername();
+  $password = $dbi->getPassword();
+  $db = $dbi->getDB();
+
+  $jogos = array();
+  $dbi = new DataBaseInfo();
+  
+  $servername = $dbi->getServerName(); 
+  $username = $dbi->getUsername();
+  $password = $dbi->getPassword();
+  $db = $dbi->getDB();
+
+  $conn = new mysqli($servername, $username, $password, $db);
+  if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+  }
+
+  $sql = "SELECT pontuacao, nivel, linhas_apagadas, tempo, username FROM jogo WHERE username = 'vito'";
+  $result = $conn->query($sql);
+  
+  if ($result->num_rows > 0) {
+      while($row = $result->fetch_assoc()) {
+          //echo $row["pontuacao"] . "|" . $row["nivel"] . "|" . $row["linhas_apagadas"] . "|" . $row["tempo"] . "|" . $row["username"];
+          $jogos[] = ['username' => $row["username"], 'pontuacao' => $row["pontuacao"], 'nivel' => $row["nivel"],'linhas' => $row["linhas_apagadas"], 'tempo' => $row["tempo"]];
+      }
+      //echo json_encode($jogos);
+  }
+  $conn->close();
+  $_SESSION["jogos"] = $jogos;
+?>
+
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
@@ -22,9 +59,15 @@
           ><span class="roxo">E</span><span class="amarelo">R</span>
         </p>
       </div>
-      <a onclick="iniciarJogo()"
-        ><div class="botao_resume">NOVA PARTIDA</div></a
-      >
+      <a onclick="iniciarJogo()">
+        <form action="#" method="post">
+          <input class="input" id="Fpontuacao" name="Fpontuacao" style="display: none"/>
+          <input class="input" id="Fnivel" name="Fnivel" style="display: none"/>
+          <input class="input" id="Ftempo" name="Ftempo" style="display: hidden"/>
+          <input class="input" id="Flinhas" name="Flinhas" style="display: none"/>
+          <input type="submit" name="novaPartida" value="NOVA PARTIDA" class="botao_resume">
+        </form>
+      </a>
       <a href="index.php"><div class="botao_sair">SAIR DO JOGO</div></a>
     </div>
     <div class="resume_janela" id="resume">
@@ -49,7 +92,6 @@
           <a
             class="icone"
             href="ranking_global.php"
-            onclick="preencherRanking()"
           >
             <img src="assets/trophy-01.png" alt="Imagem ranking" />
           </a>
@@ -113,29 +155,53 @@
               <div class="ranking_pessoal_column vermelho">
                 <p class="branco">PONTOS</p>
                 <div class="espacamento8px"></div>
-                <p id="pontos1">-</p>
-                <p id="pontos2">-</p>
-                <p id="pontos3">-</p>
-                <p id="pontos4">-</p>
-                <p id="pontos5">-</p>
+                <?php
+                $jogos = $_SESSION["jogos"];
+                $i = 1;
+                if($jogos != null){
+                  foreach ($jogos as $jogo) {
+                    echo "<p id='pontos" . $i . "'>";
+                    echo $jogo["pontuacao"] == null ? "-" : $jogo["pontuacao"];
+                    echo "</p>";
+                    $i++;
+                    if($i > 5) break;
+                  }
+                }
+                ?>
               </div>
               <div class="ranking_pessoal_column vermelho">
                 <p class="branco">NÍVEL</p>
                 <div class="espacamento8px"></div>
-                <p id="nivel1">-</p>
-                <p id="nivel2">-</p>
-                <p id="nivel3">-</p>
-                <p id="nivel4">-</p>
-                <p id="nivel5">-</p>
+                <?php
+                $jogos = $_SESSION["jogos"];
+                $i = 1;
+                if($jogos != null){
+                  foreach ($jogos as $jogo) {
+                    echo "<p id='nivel" . $i . "'>";
+                    echo $jogo["nivel"] == null ? "-" : $jogo["nivel"];
+                    echo "</p>";
+                    $i++;
+                    if($i > 5) break;
+                  }
+                }
+                ?>
               </div>
               <div class="ranking_pessoal_column vermelho">
                 <p class="branco">TEMPO</p>
                 <div class="espacamento8px"></div>
-                <p id="tempo1">-</p>
-                <p id="tempo2">-</p>
-                <p id="tempo3">-</p>
-                <p id="tempo4">-</p>
-                <p id="tempo5">-</p>
+                <?php
+                $jogos = $_SESSION["jogos"];
+                $i = 1;
+                if($jogos != null){
+                  foreach ($jogos as $jogo) {
+                    echo "<p id='tempo" . $i . "'>";
+                    echo $jogo["tempo"] == null ? "-" : $jogo["tempo"];
+                    echo "</p>";
+                    $i++;
+                    if($i > 5) break;
+                  }
+                }
+                ?>
               </div>
             </div>
           </section>
@@ -186,3 +252,34 @@
     </filter>
   </svg>
 </html>
+
+<?php
+
+  $dbi = new DataBaseInfo();
+  
+  $servername = $dbi->getServerName(); 
+  $username = $dbi->getUsername();
+  $password = $dbi->getPassword();
+  $db = $dbi->getDB();
+
+  if(isset($_POST["novaPartida"])){
+    if($_POST["Fpontuacao"] != NULL && $_POST["Fnivel"] != NULL && $_POST["Flinhas"] != NULL && $_POST["Ftempo"] != NULL){
+      echo "tem";
+      $conn = new mysqli($servername, $username, $password, $db);
+      if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+      }
+
+      $sql = "INSERT INTO jogo (pontuacao, nivel, linhas_apagadas, tempo, dt, username) VALUES (" . $_POST["Fpontuacao"] . ", " . $_POST["Fnivel"] . ", " . $_POST["Flinhas"] . ", '" . $_POST["Ftempo"] . "', curdate(), '" . $_SESSION["usuario"] . "')";
+      
+      if ($conn->query($sql) === TRUE) {
+        $conn->close();
+      } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+        $conn->close();
+      }      
+    }
+    else { echo "nçao";}
+  }
+  else echo "nem chegou"; 
+?>

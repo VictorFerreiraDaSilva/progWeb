@@ -710,12 +710,23 @@ async function iniciarJogo() {
 
 function gameover() {
   cronometroEmExecucao = false;
-  registrarPontuacaoDoJogador();
+  //registrarPontuacaoDoJogador();
+  document.getElementById("Fpontuacao").value = pontuacao;
+  document.getElementById("Fnivel").value = nivel;
+  document.getElementById("Flinhas").value = linhasEliminadas;
+  let tempo = tempoElement.textContent;
+  if(tempo.length === 5){
+    document.getElementById("Ftempo").value = "00:" + tempoElement.textContent;
+  }
+  else{
+    document.getElementById("Ftempo").value = tempoElement.textContent;
+  }
   document.getElementById("gameover").style.display = "flex";
   document.getElementById("jogo").classList.add("blur");
-  salvarDadosLocais(historico, ranking);
+
+  //salvarDadosLocais(historico, ranking);
   //preencherRanking();
-  preencherHistorico();
+  //preencherHistorico();
 }
 
 document.addEventListener("keydown", controles);
