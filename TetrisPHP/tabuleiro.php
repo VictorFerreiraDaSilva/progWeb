@@ -35,13 +35,13 @@
     <section class="tabuleiro_row">
       <div class="tabuleiro_div">
         <a onclick="setTabuleiro(20, 10)">
-        <img src="assets/peca_amarela.png" class="image" />
+        <img src="assets/peca_amarela_tabuleiro.png" class="image" />
           <h2 class="tamanho">10 X 20</h2>
         </a>
       </div>
       <div class="tabuleiro_div">
         <a onclick="setTabuleiro(44, 22)">
-        <img src="assets/peca_rosa.png" class="image" />
+        <img src="assets/peca_rosa_tabuleiro.png" class="image" />
           <h2 class="tamanho">22 X 44</h2>
         </a>
       </div>

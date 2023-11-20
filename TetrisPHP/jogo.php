@@ -236,7 +236,7 @@
           <br>
           <div class="div_inipause">
             <h3 class="vermelho">AVISO:</h3>
-            <h4 class="rosa">Se precisar reiniciar o jogo, pressione F5</h4>
+            <h4 class="rosa" style="line-height: 1.5em;">Caso precise reiniciar o jogo, pressione F5</h4>
           </div>  
         </section>
       </section>
