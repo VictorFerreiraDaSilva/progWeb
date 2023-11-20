@@ -48,7 +48,7 @@
         <p>E-MAIL</p>
       </div>
       <div>
-        <input type="tel" class="input_register" id="input_telefone" name="telefone" pattern="[0-9]{10}"  placeholder="(XX) 91234-5678" required/>
+        <input type="tel" class="input_register" id="input_telefone" name="telefone" placeholder="(XX) 91234-5678" required/>
         <input class="input_register" id="input_email" placeholder="seu@email.aqui" name="email"
         />
       </div>

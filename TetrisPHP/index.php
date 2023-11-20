@@ -67,17 +67,13 @@
           $_SESSION["telefone"] = $row["telefone"];
           $_SESSION["email"] = $row["email"];
         }
-        $conn->close();   
-    
+        $conn->close();       
         header("Location: tabuleiro.php");
       } else {
         $conn->close();   
         echo "<script>alert('Usuario e/ou Senha inválidos');</script>";
       }
     }
-  }
-  else{
-    echo"<script>alert('Usuario e/ou Senha inválidos');</script>";
   }
 
 ?>

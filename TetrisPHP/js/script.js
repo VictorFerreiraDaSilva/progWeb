@@ -85,8 +85,13 @@ function validaRegistro() {
     alert("Por favor, preencha todos os campos.");
     return; // Evita continuar se algum campo estiver em branco
   }
-  if(cpf.length != 11){
+  if(cpf.length > 11){
     alert("CPF inválido.")
+    cpfInput.value = cpf.slice(0, 11);
+  }
+
+  if(telefone.length != 11){
+    alert("Telefone inválido.")
   }
 
   let validado = validarEmail();
