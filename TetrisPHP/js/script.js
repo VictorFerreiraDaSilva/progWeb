@@ -711,26 +711,19 @@ function gameover() {
 
 document.addEventListener("keydown", controles);
 
-// window.addEventListener('load', iniciarJogo);
-
 const botaoIniciar = document.getElementById("botao_iniciar");
 botaoIniciar.addEventListener("click", function () {
   iniciarJogo();
   var botao = document.getElementById('botao_iniciar');
-  // Verifica o texto atual do botão
-    if (botao.innerHTML === 'JOGAR') {
-        botao.innerHTML = 'REINICIAR';
-    }
-  //botaoIniciar.style.display = 'none';
 });
 
-/*function sumirBotao() {
+function sumirBotao() {
   const botao = document.getElementById('botao_iniciar');
   botao.remove();
-}*/
+}
 
-/*const disappearButton = document.getElementById('botao_iniciar');
-disappearButton.addEventListener('click', sumirBotao);*/
+const disappearButton = document.getElementById('botao_iniciar');
+disappearButton.addEventListener('click', sumirBotao);
 
 window.addEventListener("keydown", function (e) {
   //(esquerda, direita, cima, baixo)
