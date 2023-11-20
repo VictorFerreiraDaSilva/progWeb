@@ -14,14 +14,7 @@
   <body>
     <header>
       <section class="icones_header">
-        <a class="icone" href="resume.php">
-          <img src="assets/menu.png" />
-        </a>
-        <a
-          class="icone"
-          href="ranking_global.php"
-          onclick="preencherRanking()"
-        >
+        <a class="icone" href="ranking_global.php" onclick="preencherRanking()">
           <img src="assets/trophy-01.png" />
         </a>
         <a class="icone" href="atualizar_dados.php">

@@ -12,21 +12,32 @@
     <title>TETRIS</title>
   </head>
   <body class="jogobody">
+  <div class="resume_janela" id="resume">
+      <div class="resume_titulo">
+        <p class="resume_titulo">
+          <span class="roxo">R</span><span class="amarelo">E</span
+          ><span class="verde">S</span><span class="azul">U</span
+          ><span class="vermelho">M</span><span class="roxo">E</span>
+        </p>
+      </div>
+      <a href="tabuleiro.php"><div class="botao_resume">NOVA PARTIDA</div></a>
+      <a href="index.php"><div class="botao_sair">SAIR DO JOGO</div></a>
+    </div>
     <header>
-      <div class="icones_header">
-        <a class="icone" href="resume.php">
-          <img src="assets/menu.png" alt="Imagem do menu" />
-        </a>
-        <a class="icone" href="ranking_global.php">
-          <img src="assets/trophy-01.png" alt="Imagem do ranking" />
-        </a>
-        <a class="icone" href="atualizar_dados.php">
-          <img src="assets/user-circle.png" alt="Imagem do perfil" />
-        </a>
-        <a class="icone" href="index.php">
-          <img src="assets/user-minus-02.png" alt="Imagem saída" />
-        </a>
-        <p class="titulo">
+        <div class="icones_header">
+          <a class="icone" href="#" onclick="pausar()">
+            <img src="assets/menu.png" alt="Imagem menu" />
+          </a>
+          <a class="icone" href="ranking_global.php">
+            <img src="assets/trophy-01.png" alt="Imagem ranking" />
+          </a>
+          <a class="icone" href="atualizar_dados.php">
+            <img src="assets/user-circle.png" alt="Imagem perfil" />
+          </a>
+          <a class="icone" href="index.php">
+            <img src="assets/user-minus-02.png" alt="Imagem sair" />
+          </a>
+          <p class="titulo">
           <span class="vermelho">R</span>
           <span class="rosa">A</span>
           <span class="azul">N</span>
@@ -42,8 +53,8 @@
           <span class="azul">A</span>
           <span class="vermelho">L</span>
         </p>
-      </div>
-    </header>
+        </div>
+      </header>
     <div class="ranking_global">
       <div class="rank">
         <div class="rank_column amarelo">

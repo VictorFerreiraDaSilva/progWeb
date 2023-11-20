@@ -34,12 +34,13 @@
       <br/>
       <div id="row">
         <p class="texto_titulo_register">
-          <span>DATA DE NASC.</span><span>CPF</span>
+          <span>DATA DE NASC.</span>
+          <span>CPF</span>
         </p>
       </div>
       <div>
-        <input class="input_register" id="input_data" type="date"name="data" /><input class="input_register" id="input_cpf" placeholder="123.456.789-10" name="cpf"
-        />
+        <input class="input_register" id="input_data" type="date"name="data" />
+        <input type="number" class="input_register" id="input_cpf" placeholder="123.456.789-10" name="cpf"/>
       </div>
       <br />
       <div class="texto_titulo_register">
@@ -47,8 +48,8 @@
         <p>E-MAIL</p>
       </div>
       <div>
-        <input class="input_register" id="input_telefone" placeholder="(XX) 91234-5678" name="telefone"
-        /><input class="input_register" id="input_email" placeholder="seu@email.aqui" name="email"
+        <input type="tel" class="input_register" id="input_telefone" name="telefone" pattern="[0-9]{10}"  placeholder="(XX) 91234-5678" required/>
+        <input class="input_register" id="input_email" placeholder="seu@email.aqui" name="email"
         />
       </div>
       <br />

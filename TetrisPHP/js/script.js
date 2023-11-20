@@ -85,6 +85,10 @@ function validaRegistro() {
     alert("Por favor, preencha todos os campos.");
     return; // Evita continuar se algum campo estiver em branco
   }
+  if(cpf.length != 11){
+    alert("CPF inválido.")
+  }
+
   let validado = validarEmail();
   if (validado) window.location.href = "index.php";
 }
