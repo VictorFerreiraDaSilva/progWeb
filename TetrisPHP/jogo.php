@@ -26,7 +26,7 @@
     die("Connection failed: " . $conn->connect_error);
   }
 
-  $sql = "SELECT pontuacao, nivel, linhas_apagadas, tempo, username FROM jogo WHERE username = 'vito' ORDER BY pontuacao DESC";
+  $sql = "SELECT pontuacao, nivel, linhas_apagadas, tempo, username FROM jogo WHERE username = '" . $_SESSION["usuario"] . "' ORDER BY pontuacao DESC";
   $result = $conn->query($sql);
   
   if ($result->num_rows > 0) {
