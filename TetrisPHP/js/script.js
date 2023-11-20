@@ -715,6 +715,7 @@ const botaoIniciar = document.getElementById("botao_iniciar");
 botaoIniciar.addEventListener("click", function () {
   iniciarJogo();
   var botao = document.getElementById('botao_iniciar');
+  
 });
 
 function sumirBotao() {

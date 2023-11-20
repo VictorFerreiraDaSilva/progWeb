@@ -155,6 +155,11 @@
             <button id="botao_iniciar">JOGAR</button>
             <button id="botao_pause" onclick="pausar()">PAUSAR</button>
           </div>
+          <br>
+          <div class="div_inipause">
+            <h3 class="vermelho">AVISO:</h3>
+            <h4 class="rosa">Se precisar reinciar o jogo, pressione F5</h4>
+          </div>  
         </section>
       </section>
     </div>

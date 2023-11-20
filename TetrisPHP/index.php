@@ -72,7 +72,7 @@
         header("Location: tabuleiro.php");
       } else {
         $conn->close();   
-        echo "Usuario e/ou Senha inválidos";
+        echo "<script>alert('Usuario e/ou Senha inválidos');</script>";
       }
     }
   }
