@@ -3,6 +3,43 @@
 ?>
 
 <!DOCTYPE html>
+<?php
+  include 'System/db.php';
+
+  $dbi = new DataBaseInfo();
+  
+  $servername = $dbi->getServerName(); 
+  $username = $dbi->getUsername();
+  $password = $dbi->getPassword();
+  $db = $dbi->getDB();
+
+  $jogos = array();
+  $dbi = new DataBaseInfo();
+  
+  $servername = $dbi->getServerName(); 
+  $username = $dbi->getUsername();
+  $password = $dbi->getPassword();
+  $db = $dbi->getDB();
+
+  $conn = new mysqli($servername, $username, $password, $db);
+  if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+  }
+
+  $sql = "SELECT pontuacao, nivel, linhas_apagadas, tempo, username FROM jogo WHERE username = 'vito' ORDER BY pontuacao DESC";
+  $result = $conn->query($sql);
+  
+  if ($result->num_rows > 0) {
+      while($row = $result->fetch_assoc()) {
+          //echo $row["pontuacao"] . "|" . $row["nivel"] . "|" . $row["linhas_apagadas"] . "|" . $row["tempo"] . "|" . $row["username"];
+          $jogos[] = ['username' => $row["username"], 'pontuacao' => $row["pontuacao"], 'nivel' => $row["nivel"],'linhas' => $row["linhas_apagadas"], 'tempo' => $row["tempo"]];
+      }
+      //echo json_encode($jogos);
+  }
+  $conn->close();
+  $_SESSION["jogos"] = $jogos;
+?>
+
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
@@ -22,20 +59,39 @@
           ><span class="roxo">E</span><span class="amarelo">R</span>
         </p>
       </div>
-      <a onclick="iniciarJogo()"><div class="botao_resume">NOVA PARTIDA</div></a>
       <a href="ranking_global.php"><div class="botao_resume">RANKING GLOBAL</div></a>
+      <form action="System/inserirDados.php" method="post">
+        <input class="input" id="Fpontuacao" name="Fpontuacao" style="display: none"/>
+        <input class="input" id="Fnivel" name="Fnivel" style="display: none"/>
+        <input class="input" id="Ftempo" name="Ftempo" style="display: none"/>
+        <input class="input" id="Flinhas" name="Flinhas" style="display: none"/>
+        <input type="submit" name="novaPartida" value="NOVA PARTIDA" class="botao_resume">
+        <br>
+        <input type="submit" name="sair" value="SAIR DO JOGO" class="botao_sair">
+      </form>
+    </div>
+    <div class="resume_janela" id="resume">
+      <div class="resume_titulo">
+        <p class="resume_titulo">
+          <span class="roxo">R</span><span class="amarelo">E</span
+          ><span class="verde">S</span><span class="azul">U</span
+          ><span class="vermelho">M</span><span class="roxo">E</span>
+        </p>
+      </div>
+
+      <a href="#" onclick="pausar()"><div class="botao_resume">RESUME</div></a>
+      <a href="tabuleiro.php"><div class="botao_resume">NOVA PARTIDA</div></a>
       <a href="index.php"><div class="botao_sair">SAIR DO JOGO</div></a>
     </div>
     <div>
       <header>
         <div class="icones_header">
-          <a class="icone" href="resume.php">
+          <a class="icone" href="#" onclick="pausar()">
             <img src="assets/menu.png" alt="Imagem menu" />
           </a>
           <a
             class="icone"
             href="ranking_global.php"
-            onclick="preencherRanking()"
           >
             <img src="assets/trophy-01.png" alt="Imagem ranking" />
           </a>
@@ -73,7 +129,7 @@
               LINHAS:⠀<span id="linhasEliminadas" class="vermelho"></span>
             </h2>
             <h2 id="dificuldade" class="est">
-              DIFICULDADE:⠀<span id="nivel" class="vermelho"></span>
+              NIVEL:⠀<span id="nivel" class="vermelho"></span>
             </h2>
           </div>
 
@@ -99,29 +155,53 @@
               <div class="ranking_pessoal_column vermelho">
                 <p class="branco">PONTOS</p>
                 <div class="espacamento8px"></div>
-                <p id="pontos1">-</p>
-                <p id="pontos2">-</p>
-                <p id="pontos3">-</p>
-                <p id="pontos4">-</p>
-                <p id="pontos5">-</p>
+                <?php
+                $jogos = $_SESSION["jogos"];
+                $i = 1;
+                if($jogos != null){
+                  foreach ($jogos as $jogo) {
+                    echo "<p id='pontos" . $i . "'>";
+                    echo $jogo["pontuacao"] == null ? "-" : $jogo["pontuacao"];
+                    echo "</p>";
+                    $i++;
+                    if($i > 5) break;
+                  }
+                }
+                ?>
               </div>
               <div class="ranking_pessoal_column vermelho">
                 <p class="branco">NÍVEL</p>
                 <div class="espacamento8px"></div>
-                <p id="nivel1">-</p>
-                <p id="nivel2">-</p>
-                <p id="nivel3">-</p>
-                <p id="nivel4">-</p>
-                <p id="nivel5">-</p>
+                <?php
+                $jogos = $_SESSION["jogos"];
+                $i = 1;
+                if($jogos != null){
+                  foreach ($jogos as $jogo) {
+                    echo "<p id='nivel" . $i . "'>";
+                    echo $jogo["nivel"] == null ? "-" : $jogo["nivel"];
+                    echo "</p>";
+                    $i++;
+                    if($i > 5) break;
+                  }
+                }
+                ?>
               </div>
               <div class="ranking_pessoal_column vermelho">
                 <p class="branco">TEMPO</p>
                 <div class="espacamento8px"></div>
-                <p id="tempo1">-</p>
-                <p id="tempo2">-</p>
-                <p id="tempo3">-</p>
-                <p id="tempo4">-</p>
-                <p id="tempo5">-</p>
+                <?php
+                $jogos = $_SESSION["jogos"];
+                $i = 1;
+                if($jogos != null){
+                  foreach ($jogos as $jogo) {
+                    echo "<p id='tempo" . $i . "'>";
+                    echo $jogo["tempo"] == null ? "-" : $jogo["tempo"];
+                    echo "</p>";
+                    $i++;
+                    if($i > 5) break;
+                  }
+                }
+                ?>
               </div>
             </div>
           </section>

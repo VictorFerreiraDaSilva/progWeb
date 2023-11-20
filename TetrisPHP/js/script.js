@@ -622,6 +622,14 @@ function exibirProximaPeca() {
 }
 
 function pausar() {
+  if(!pausado){
+    document.getElementById("resume").style.display = "flex";
+    document.getElementById("jogo").classList.add("blur");
+  }
+  else {
+    document.getElementById("resume").style.display = "none";
+    document.getElementById("jogo").classList.remove("blur");
+  }
   cronometroEmExecucao = !cronometroEmExecucao;
   pausado = !pausado;
 }
@@ -652,6 +660,7 @@ async function queda() {
 
 async function iniciarJogo() {
   document.getElementById("gameover").style.display = "none";
+  document.getElementById("resume").style.display = "none";
   document.getElementById("jogo").classList.remove("blur");
   jogo = inicailizarMatriz(ln, cl);
   atualizaJogo();
@@ -701,12 +710,23 @@ async function iniciarJogo() {
 
 function gameover() {
   cronometroEmExecucao = false;
-  registrarPontuacaoDoJogador();
+  //registrarPontuacaoDoJogador();
+  document.getElementById("Fpontuacao").value = pontuacao;
+  document.getElementById("Fnivel").value = nivel;
+  document.getElementById("Flinhas").value = linhasEliminadas;
+  let tempo = tempoElement.textContent;
+  if(tempo.length === 5){
+    document.getElementById("Ftempo").value = "00:" + tempoElement.textContent;
+  }
+  else{
+    document.getElementById("Ftempo").value = tempoElement.textContent;
+  }
   document.getElementById("gameover").style.display = "flex";
   document.getElementById("jogo").classList.add("blur");
-  salvarDadosLocais(historico, ranking);
+
+  //salvarDadosLocais(historico, ranking);
   //preencherRanking();
-  preencherHistorico();
+  //preencherHistorico();
 }
 
 document.addEventListener("keydown", controles);
