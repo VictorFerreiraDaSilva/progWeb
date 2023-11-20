@@ -16,9 +16,8 @@
     <div class="resume_janela" id="resume">
       <div class="resume_titulo">
         <p class="resume_titulo">
-          <span class="roxo">R</span><span class="amarelo">E</span
-          ><span class="verde">S</span><span class="azul">U</span
-          ><span class="vermelho">M</span><span class="roxo">E</span>
+          <span class="azul">M</span><span class="verde">E</span
+          ><span class="vermelho">N</span><span class="roxo">U</span>
         </p>
       </div>
       <a href="tabuleiro.php"><div class="botao_resume">NOVA PARTIDA</div></a>
