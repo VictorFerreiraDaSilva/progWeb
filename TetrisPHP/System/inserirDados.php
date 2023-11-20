@@ -20,7 +20,7 @@
             
             if ($conn->query($sql) === TRUE) {
                 $conn->close();
-                header("Location: ../jogo.php");
+                header("Location: ../tabuleiro.php");
             } else {
                 echo "Error: " . $sql . "<br>" . $conn->error;
                 $conn->close();
