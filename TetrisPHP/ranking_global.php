@@ -13,12 +13,6 @@
   $db = $dbi->getDB();
 
   $jogos = array();
-  $dbi = new DataBaseInfo();
-  
-  $servername = $dbi->getServerName(); 
-  $username = $dbi->getUsername();
-  $password = $dbi->getPassword();
-  $db = $dbi->getDB();
 
   $conn = new mysqli($servername, $username, $password, $db);
   if ($conn->connect_error) {
