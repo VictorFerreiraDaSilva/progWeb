@@ -72,7 +72,6 @@ document.addEventListener("DOMContentLoaded", function () {
   //var senhaUsuario = localStorage.getItem("senhaUsuario");
 
   // Exibe os valores onde desejado na página
-  document.getElementById("nomeUsuario").innerText = nomeUsuario + " JOGANDO";
   //document.getElementById("senhaUsuario").innerText = "Senha: " + senhaUsuario;
 });
 

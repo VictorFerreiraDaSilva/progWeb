@@ -235,7 +235,13 @@
         </section>
       </section>
     </div>
-    <footer><div id="nomeUsuario">⠀</div></footer>
+    <footer>
+      <div id="nomeUsuario">
+        <?php
+          echo $_SESSION["nome"] . " JOGANDO";
+        ?>
+      </div>
+    </footer>
     <script src="js/script.js"></script>
   </body>
   <svg id="svg-filter">

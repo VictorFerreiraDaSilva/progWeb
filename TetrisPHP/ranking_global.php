@@ -171,7 +171,14 @@
         </div>
       </div>
     </div>
-    <footer><div id="nomeUsuario">⠀</div></footer>
+    
+    <footer>
+      <div id="nomeUsuario">
+        <?php
+          echo $_SESSION["nome"];
+        ?>
+      </div>
+    </footer>
   </body>
   <svg id="svg-filter">
     <!-- PEGAMO DO SEGUINTE LINK: https://jsfiddle.net/rijokpaul/1k5x6dgm/ , só dicionar a classe blur que fica borrado -->
